@@ -1,10 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
+import NavBar from "./components/navbar/NavBar";
+import ApplicationViews from './components/ApplicationView';
 
 function App() {
   return (
-    <h1>Hello World!</h1>
+    <Router>
+      <NavBar />
+      <ApplicationViews />
+    </Router>
+    
   );
 }
 
