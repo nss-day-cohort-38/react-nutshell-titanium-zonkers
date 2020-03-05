@@ -1,0 +1,8 @@
+#user-icon {
+    opacity: 1 !important;
+}
+
+#navbar-container {
+    display: flex;
+    justify-content: space-between;
+}
