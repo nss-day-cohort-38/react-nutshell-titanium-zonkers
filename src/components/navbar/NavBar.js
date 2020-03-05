@@ -8,7 +8,7 @@ const NavBar = ({}) => {
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
-  
+
   return (
     <Segment inverted id="navbar-container">
       <Menu inverted pointing secondary>
@@ -75,7 +75,6 @@ const NavBar = ({}) => {
           circular
           id="user-icon"
           disabled
-          color="white"
           icon="user circle outline"
         />
       </div>
