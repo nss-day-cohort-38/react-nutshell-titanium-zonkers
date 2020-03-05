@@ -8,7 +8,7 @@ const ApplicationViews = ({}) => {
     <div id="application-views-container">
       <Route
         exact
-        path="/home"
+        path="/"
         render={props =>
          <h1>This is Home</h1>
         }

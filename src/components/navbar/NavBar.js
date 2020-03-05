@@ -8,12 +8,13 @@ const NavBar = ({}) => {
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
+  
   return (
     <Segment inverted id="navbar-container">
       <Menu inverted pointing secondary>
         <Menu.Item>
             <img src="https://emoji.slack-edge.com/T03F2SDTJ/handyandy/8378d8b808441ab4.jpg" />
-          <Link className="nav-link" to="/home" activeClassName="active-link">
+          <Link className="nav-link" to="/">
             <h1>Handy Andy</h1>
           </Link>
         </Menu.Item>
@@ -22,7 +23,7 @@ const NavBar = ({}) => {
           active={activeItem === "news"}
           onClick={handleItemClick}
         >
-          <Link className="nav-link" to="/news" activeClassName="active-link">
+          <Link className="nav-link" to="/news">
             News
           </Link>
         </Menu.Item>
@@ -34,7 +35,6 @@ const NavBar = ({}) => {
           <Link
             className="nav-link"
             to="/messages"
-            activeClassName="active-link"
           >
             Messages
           </Link>
@@ -47,7 +47,6 @@ const NavBar = ({}) => {
           <Link
             className="nav-link"
             to="/friends"
-            activeClassName="active-link"
           >
             Friends
           </Link>
@@ -57,7 +56,7 @@ const NavBar = ({}) => {
           active={activeItem === "tasks"}
           onClick={handleItemClick}
         >
-          <Link className="nav-link" to="/tasks" activeClassName="active-link">
+          <Link className="nav-link" to="/tasks">
             Tasks
           </Link>
         </Menu.Item>
@@ -66,7 +65,7 @@ const NavBar = ({}) => {
           active={activeItem === "events"}
           onClick={handleItemClick}
         >
-          <Link className="nav-link" to="/events" activeClassName="active-link">
+          <Link className="nav-link" to="/events" >
             Events
           </Link>
         </Menu.Item>
