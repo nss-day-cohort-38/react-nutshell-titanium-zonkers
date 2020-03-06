@@ -1,0 +1,11 @@
+#firstCard {
+    background-color: #5c788e2e;
+    width: 100%;
+}
+
+#firstCard .content{
+    /* text-align: center; */
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+}
