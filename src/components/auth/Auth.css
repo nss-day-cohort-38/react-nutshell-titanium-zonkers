@@ -1,0 +1,21 @@
+
+#login-form-card {
+    min-width: 500px !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+
+#signup-modal{
+    max-width: 600px !important;
+}
+
+.login-form-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+}
+
+#login-form-buttons button{
+    height: 36px !important;
+}

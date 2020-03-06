@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import "./ApplicationView.css"
-// import {} from "react-router-dom";
+import LoginPage from "./auth/Auth"
 
 const ApplicationViews = () => {
   return (
@@ -10,7 +10,9 @@ const ApplicationViews = () => {
         exact
         path="/"
         render={props =>
-         <h1>This is Home</h1>
+          sessionStorage.getItem('userId') === null
+            ? <LoginPage {...props}/>
+            : <h1>This is Home</h1>
         }
       />
     </div>
