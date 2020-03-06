@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const NewsArticleCard = () => {
+const NewsArticleCard = (props) => {
     return (
         <div className="news-card-container">
-            <h1>{news.title}</h1>
-            <h3>{news.url}</h3>
-            <p>{news.synopsis}</p>
+            <h1>{props.news.title}</h1>
+            <h3>{props.news.url}</h3>
+            <p>{props.news.synopsis}</p>
         </div>
     )
 }

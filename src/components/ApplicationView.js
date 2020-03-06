@@ -4,6 +4,7 @@ import "./ApplicationView.css"
 import { } from "react-router-dom";
 
 import NewsArticleList from './news/NewsArticleList';
+import NewsArticleForm from './news/NewsArticleForm';
 
 const ApplicationViews = ({ }) => {
   return (

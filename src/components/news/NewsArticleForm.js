@@ -13,7 +13,7 @@ const NewsArticleForm = (props) => {
 
     const constructNewNewsArticle = evt => {
         evt.preventDefault();
-        if (news.title === "" || news.url === "" || news.synopsis === "") {
+        if (newsArticle.title === "" || newsArticle.url === "" || newsArticle.synopsis === "") {
             window.alert("Please fill out all fields");
         } else {
             setIsLoading(true);
@@ -22,10 +22,10 @@ const NewsArticleForm = (props) => {
 
             const newNewsArticle = {
                 id: props.match.params.newsArticleId,
-                userId: news.userId,
-                title: news.title,
-                url: news.url,
-                synopsis: news.synopsis,
+                userId: newsArticle.userId,
+                title: newsArticle.title,
+                url: newsArticle.url,
+                synopsis: newsArticle.synopsis,
                 created_at: currentDateTime
             };
 
