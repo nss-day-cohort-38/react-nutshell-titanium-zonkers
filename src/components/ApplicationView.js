@@ -23,6 +23,14 @@ const ApplicationViews = ({ }) => {
         }}
       >
       </Route>
+      <Route
+        exact
+        path="/news/new"
+        render={() => {
+          return <NewsArticleForm />
+        }}
+      >
+      </Route>
     </div>
   );
 };
