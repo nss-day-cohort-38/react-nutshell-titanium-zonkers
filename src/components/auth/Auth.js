@@ -33,9 +33,9 @@ const LoginPage = (props) => {
         await dbAPI.getUsers().then(users => {
             const userObject = users.filter(user => (credentials.email === user.email && credentials.password === user.password));
             if(userObject.length !== 1) {
-                window.alert('Wrong email or password! Please try again.');
+                window.alert('Wrong email or password. Please try again. If you do not have an account, click the sign up button to create one.');
             } else {
-                sessionStorage.setItem('user', JSON.stringify(userObject[0]));
+                sessionStorage.setItem('userId', JSON.stringify(userObject[0].id));
                 // dbAPI.patchObjectByResource('users', userObject[0].id, { "is_active": true })
             };
         });
@@ -44,6 +44,9 @@ const LoginPage = (props) => {
 
     async function handleSignup(e) {
         e.preventDefault();
+        const password1 = document.getElementById('password').value
+        const password2 = document.getElementById('password-2').value
+
         await dbAPI.getUsers().then(users => {
             const emails = users.filter(user => (newCredentials.email === user.email));
             const usernames = users.filter(user => (newCredentials.username === user.username));
@@ -52,16 +55,20 @@ const LoginPage = (props) => {
             } else if (usernames.length !== 0)  {
                 window.alert('Username already taken! Please try again.');
             } else if (newCredentials.first_name.length < 2 ){
-                window.alert('First name must be at least two characters')
+                window.alert('First name must be at least two characters.')
             } else if (newCredentials.last_name.length < 1 ){
                 window.alert('Please enter last name or initial.')
             } else if (newCredentials.username.length < 3 ){
                 window.alert('Username must be at least 3 characters long.')
+            } else if (newCredentials.username.includes('@' || ':' || ';' || '#' || ',' || '/' || '%' || '^' || '&' ) === true ){
+                window.alert('Username cannot include any special characters.')
             } else if (newCredentials.password.length < 3 ){
                 window.alert('Password must be at least 3 characters long.')
             } else if (newCredentials.email.includes("@") === false ||
             newCredentials.email.includes(".com" || ".net" || ".org") === false){
                 window.alert('Please enter valid email address.')
+            } else if (password1 !== password2) {
+                window.alert('Please make sure the passwords match.')
             } else {
                 dbAPI.postObjectByResource('users', newCredentials)
                     .then(window.alert('Account creation successful! Now, please login.'))
@@ -98,7 +105,7 @@ const LoginPage = (props) => {
                         <label>Password</label>
                         <Input id="password" type='password' placeholder="password" onChange={handleFieldChange}/>
                     </Form.Field>
-                    <div id="login-form-buttons">
+                    <div className="login-form-buttons">
                         <Form.Field
                             id='form-button-control-public'
                             control={Button}

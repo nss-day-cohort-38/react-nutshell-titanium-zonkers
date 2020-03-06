@@ -48,7 +48,10 @@ const SignUpModal = (props) => {
                         <Input id="password-2" type='password' />
                     </Form.Field>
                 </Form>
+                <div className="login-form=buttons">
                 <Button onClick={props.handleSignup}>Create Account</Button>
+                <Button onClick={props.toggleModal}>Cancel</Button>
+                </div>
             </Modal.Content >
         </Modal>
     );

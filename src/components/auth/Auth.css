@@ -10,10 +10,10 @@
     max-width: 600px !important;
 }
 
-#login-form-buttons{
+.login-form-buttons{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between !important;
 }
 
 #login-form-buttons button{
