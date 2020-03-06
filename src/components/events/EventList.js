@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import APIManager from "../../modules/dbAPI"
+import EventCard from "./EventCard";
+import APIManager from "../../modules/dbAPI";
 
 const EventList = () => {
-    const [events, setEvents] = useState([]);
-
-    const getEvents = () => {
-        APIManager.getObjectByResource("events", 1).then((data) => {
-            console.log(data)
-        })
+  const [events, setEvents] = useState([
+    {
+      name: "Project Report - April",
+      date: "01/02/90",
+      location: "Nashville, TN"
     }
+  ]);
 
+
+  const getEvents = () => {
+    APIManager.getObjectByResourceNoExpand("events", 1).then(setEvents);
+  };
 
   useEffect(() => {
     getEvents();
@@ -17,7 +22,9 @@ const EventList = () => {
 
   return (
     <>
-      <p>These are the events</p>
+      {events.map((item, i) => (
+        <EventCard key={i} item={item} />
+      ))}
     </>
   );
 };
