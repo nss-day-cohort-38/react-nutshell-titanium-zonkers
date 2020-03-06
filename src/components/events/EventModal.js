@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form, Modal, Input } from "semantic-ui-react";
+import React from "react";
+import { Button, Form, Modal } from "semantic-ui-react";
 
 const EventModal = ({
-  isOpen,
+  modalIsOpen,
   updateEvents,
-  header,
   isEditing,
   locationError,
   dateError,
@@ -15,8 +14,8 @@ const EventModal = ({
   isLoading
 }) => {
   return (
-    <Modal open={isOpen}>
-      <Modal.Header>{header}</Modal.Header>
+    <Modal open={modalIsOpen}>
+      <Modal.Header>{isEditing ? "Edit Event" : "Create Event"}</Modal.Header>
       <Modal.Content>
         <Form loading={isLoading}>
           <Form.Input
@@ -46,12 +45,8 @@ const EventModal = ({
             value={values.location}
             error={locationError}
           />
-          <Button onClick={updateEvents}>
-            {isEditing ? "Edit Event" : "Add Event"}
-          </Button>
-          <Button onClick={cancelEvent}>
-            Cancel
-          </Button>
+          <Button onClick={updateEvents}>{isEditing ? "Edit" : "Add"}</Button>
+          <Button onClick={cancelEvent}>Cancel</Button>
         </Form>
       </Modal.Content>
     </Modal>

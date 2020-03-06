@@ -3,13 +3,14 @@ import EventCard from "./EventCard";
 import APIManager from "../../modules/dbAPI";
 import EventModal from "./EventModal";
 import { Button } from "semantic-ui-react";
+import './EventList.css'
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const [isEditing, setIsEditing] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const [locationError, setLocationError] = useState(false);
   const [dateError, setDateError] = useState(false);
@@ -20,15 +21,14 @@ const EventList = () => {
     name: "",
     date: "",
     location: "",
-    userId: sessionStorage.getItem("userId")
+    userId: Number(sessionStorage.getItem("userId"))
   });
-
   const [formIsValid, setFormIsValid] = useState(false, () => formIsValid);
 
   const getEvents = () => {
     APIManager.getObjectByResourceNoExpand(
       "events",
-      sessionStorage.getItem("userId")
+      Number(sessionStorage.getItem("userId"))
     ).then(setEvents);
   };
 
@@ -39,10 +39,17 @@ const EventList = () => {
   const handleFormSubmit = () => {
     if (values.location !== "" && values.date !== "" && values.name !== "") {
       setFormIsValid(true);
-      APIManager.postObjectByResource("events", values).then(() => {
-        getEvents();
-        toggleModal();
-      });
+      if (!isEditing) {
+        APIManager.postObjectByResource("events", values).then(() => {
+          getEvents();
+          toggleModal();
+        });
+      } else if (isEditing) {
+        APIManager.editResource("events", values).then(() => {
+          getEvents();
+          toggleModal();
+        });
+      }
     } else {
       if (values.name === "") {
         setNameError({
@@ -72,7 +79,7 @@ const EventList = () => {
     const fieldId = evt.target.id;
     const fieldValue = evt.target.value;
     changeValue[fieldId] = fieldValue;
-    if (fieldId == "name") {
+    if (fieldId === "name") {
       if (fieldValue.length < 1) {
         setFormIsValid(false);
 
@@ -83,7 +90,7 @@ const EventList = () => {
       } else {
         setNameError(false);
       }
-    } else if (fieldId == "location") {
+    } else if (fieldId === "location") {
       setFormIsValid(false);
 
       if (fieldValue.length < 1) {
@@ -96,7 +103,7 @@ const EventList = () => {
       } else {
         setLocationError(false);
       }
-    } else if (fieldId == "date") {
+    } else if (fieldId === "date") {
       if (fieldValue.length < 1) {
         setFormIsValid(false);
         setDateError({
@@ -115,25 +122,24 @@ const EventList = () => {
       name: "",
       date: "",
       location: "",
-      userId: sessionStorage.getItem("userId")
+      userId: Number(sessionStorage.getItem("userId"))
     });
+    setIsEditing(false);
     toggleModal();
   };
 
   const deleteEvent = id => {
-
-    console.log(id)
-    // APIManager.deleteObjectByResource("events", id);
+    APIManager.deleteObjectByResource("events", id).then(getEvents);
   };
 
   const editEvent = id => {
     setIsLoading(true);
+    setIsEditing(true);
     toggleModal();
-      APIManager.fetchObjectById("events", id).then((data) =>{
-        setValues(data);
-        setIsLoading(false);
-
-      })
+    APIManager.fetchObjectById("events", id).then(data => {
+      setValues(data);
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
@@ -142,11 +148,10 @@ const EventList = () => {
 
   return (
     <>
-      <Button onClick={toggleModal}>Show Modal</Button>
+      <Button onClick={toggleModal}>Add Event</Button>
       <EventModal
-        isOpen={modalIsOpen}
+        modalIsOpen={modalIsOpen}
         updateEvents={handleFormSubmit}
-        header={"Create Event"}
         isEditing={isEditing}
         locationError={locationError}
         nameError={nameError}
@@ -155,15 +160,19 @@ const EventList = () => {
         values={values}
         cancelEvent={cancelEvent}
         isLoading={isLoading}
+        setIsEditing={setIsEditing}
       />
-      {events.map((item, i) => (
-        <EventCard
-          key={i}
-          item={item}
-          editEvent={editEvent}
-          deleteEvent={deleteEvent}
-        />
-      ))}
+      <div id="events-card-container">
+        {events.map((item, i) => (
+          <EventCard
+            key={i}
+            cardNumber={i}
+            item={item}
+            editEvent={editEvent}
+            deleteEvent={deleteEvent}
+          />
+        ))}
+      </div>
     </>
   );
 };
