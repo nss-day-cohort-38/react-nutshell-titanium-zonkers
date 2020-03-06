@@ -1,13 +1,23 @@
-import React from "react"
+import React, { useState } from "react"
 import { Button, Header, Modal, Form, Input } from 'semantic-ui-react'
 
 const SignUpModal = ({handleFieldChange, handleSignup}, props) => {
 
+    const [ modalOpen, handleModal ] = useState(false);
+
+    const toggleModal = () => {
+        handleModal(!modalOpen)
+    };
+
+    const createAndClose = (e) => {
+        handleSignup(e)
+        toggleModal()
+    }
 
     return (
-        <Modal id="signup-modal" trigger={<Button>Sign Up</Button>}>
+        <Modal id="signup-modal" open={modalOpen} trigger={<Button onClick={toggleModal}>Sign Up</Button>}>
             <Modal.Header>Create a New Account!</Modal.Header>
-            <Modal.Content form>
+            <Modal.Content>
                 <Form>
                     <Form.Group widths='equal'>
                         <Form.Field
@@ -47,15 +57,9 @@ const SignUpModal = ({handleFieldChange, handleSignup}, props) => {
                         <label>Renter Password</label>
                         <Input id="password-2" type='password' />
                     </Form.Field>
-
-                    <Form.Field
-                        id='form-button-control-public'
-                        control={Button}
-                        content='Create Account'
-                        onClick={handleSignup}
-                    />
                 </Form>
-            </Modal.Content>
+                <Button onClick={createAndClose}>Create Account</Button>
+            </Modal.Content >
         </Modal>
     );
 };
