@@ -13,7 +13,6 @@ const ApplicationViews = (props) => {
         exact
         path="/"
         render={props =>
-          <h1>This is Home</h1>
           sessionStorage.getItem('userId') === null
             ? <LoginPage {...props}/>
             : <h1>This is Home</h1>
