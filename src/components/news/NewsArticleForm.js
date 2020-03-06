@@ -38,6 +38,7 @@ const NewsArticleForm = (props) => {
         <>
             <form>
                 <fieldset>
+
                     <div className="add-news-form'">
                         <input
                             type="text"
@@ -61,7 +62,9 @@ const NewsArticleForm = (props) => {
                             placeholder="Synopsis"
                         />
                     </div>
+
                 </fieldset>
+
                 <div className="save-new-news-button-container">
                     <button
                         className="save-new-news-button"
@@ -69,6 +72,13 @@ const NewsArticleForm = (props) => {
                         disabled={isLoading}
                         onClick={constructNewNewsArticle}
                     >Save News Article</button>
+
+                    <button type="button"
+                        className="news-cancel-button"
+                        onClick={() => {
+                            props.history.push("/newsArticles")
+                        }}
+                    >Cancel</button>
                 </div>
             </form>
         </>
