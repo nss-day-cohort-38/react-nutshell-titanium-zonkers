@@ -1,9 +1,9 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./ApplicationView.css"
-import {} from "react-router-dom";
+// import {} from "react-router-dom";
 
-const ApplicationViews = ({}) => {
+const ApplicationViews = () => {
   return (
     <div id="application-views-container">
       <Route
