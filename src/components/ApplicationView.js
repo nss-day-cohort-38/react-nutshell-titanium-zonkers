@@ -21,16 +21,16 @@ const ApplicationViews = (props) => {
       <Route
         exact
         path="/news"
-        render={() => {
-          return <NewsArticleList />
+        render={(props) => {
+          return <NewsArticleList {...props}/>
         }}
       >
       </Route>
       <Route
         exact
         path="/news/new"
-        render={() => {
-          return <NewsArticleForm />
+        render={(props) => {
+          return <NewsArticleForm {...props}/>
         }}
       >
       </Route>

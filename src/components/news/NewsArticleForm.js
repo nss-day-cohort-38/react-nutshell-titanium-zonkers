@@ -22,14 +22,14 @@ const NewsArticleForm = (props) => {
 
             const newNewsArticle = {
                 id: props.match.params.newsArticleId,
-                userId: newsArticle.userId,
+                userId: 1,
                 title: newsArticle.title,
                 url: newsArticle.url,
                 synopsis: newsArticle.synopsis,
                 created_at: currentDateTime
             };
 
-            dbAPI.postObjectByResource(newNewsArticle, 1)
+            dbAPI.postObjectByResource("newsArticles", newNewsArticle)
                 .then(() => props.history.push("/news"));
         }
     };

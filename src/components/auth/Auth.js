@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Card, Form, Input, Button } from 'semantic-ui-react'
 import SignUpModal from "./SignUpModal"
 import "./Auth.css"
