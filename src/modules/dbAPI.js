@@ -8,6 +8,7 @@ const dbAPI = {
     return fetch(`${baseUrl}/friends?active_userId=${currentUserId}&_expand=user`).then(resp => resp.json());
   },
   getObjectByResource(resource, userId) {
+    console.log(`${baseUrl}/${resource}/?userId=${userId}&_expand=user`)
     return fetch(
       `${baseUrl}/${resource}/?userId=${userId}&_expand=user`
     ).then(resp => resp.json());
