@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NewsArticleCard from './NewsArticleCard';
 import dbAPI from '../../modules/dbAPI';
 
-const NewsArticlesList = (props) => {
+const NewsArticleList = (props) => {
     const [newsArticles, setNewsArticles] = useState([]);
 
     // const activeUserId = 
@@ -41,4 +41,4 @@ const NewsArticlesList = (props) => {
     )
 }
 
-export default NewsArticlesList
+export default NewsArticleList;

@@ -3,6 +3,8 @@ import { Route, Redirect } from "react-router-dom";
 import "./ApplicationView.css"
 import { } from "react-router-dom";
 
+import NewsArticleList from './news/NewsArticleList';
+
 const ApplicationViews = ({ }) => {
   return (
     <div id="application-views-container">
@@ -17,7 +19,7 @@ const ApplicationViews = ({ }) => {
         exact
         path="/news"
         render={() => {
-          return <NewsList />
+          return <NewsArticleList />
         }}
       >
       </Route>
