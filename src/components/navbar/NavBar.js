@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, Segment, Button } from "semantic-ui-react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import "./NavBar.css";
 
 const NavBar = ({ history }) => {
@@ -13,10 +13,10 @@ const NavBar = ({ history }) => {
 
   return (
     <Segment inverted id="navbar-container">
-      <Menu inverted pointing secondary>
-        <Menu.Item name="" onClick={handleItemClick}>
-          <img src="https://emoji.slack-edge.com/T03F2SDTJ/handyandy/8378d8b808441ab4.jpg" />
-          <h1>Handy Andy</h1>
+      <Menu inverted pointing secondary id="menu-one">
+        <Menu.Item name="" onClick={handleItemClick} id="navbar-logo-title">
+          <img id="logo" src={require("./handyandy.svg") } alt="handyandy" />
+          <h1 id="navbar-title">Handy Andy</h1>
         </Menu.Item>
         <Menu.Item
           name="news"
@@ -54,9 +54,14 @@ const NavBar = ({ history }) => {
           Events
         </Menu.Item>
       </Menu>
-      <div>
-        <Button circular id="user-icon" disabled icon="user circle outline" />
-      </div>
+      <Menu inverted secondary>
+        <Menu.Item
+          // onClick={handleItemClick}
+          id="user-icon-container"
+        >
+          <Button circular id="user-icon" disabled icon="user circle outline" />
+        </Menu.Item>
+      </Menu>
     </Segment>
   );
 };
