@@ -11,13 +11,14 @@ const EventModal = ({
   nameError,
   handleFieldChange,
   values,
-  cancelEvent
+  cancelEvent,
+  isLoading
 }) => {
   return (
     <Modal open={isOpen}>
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content>
-        <Form>
+        <Form loading={isLoading}>
           <Form.Input
             placeholder="Name"
             id="name"

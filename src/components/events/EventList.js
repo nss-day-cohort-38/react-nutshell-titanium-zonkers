@@ -7,13 +7,14 @@ import { Button } from "semantic-ui-react";
 const EventList = () => {
   const [events, setEvents] = useState([]);
 
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [isEditing, setIsEditing] = useState(null);
 
   const [locationError, setLocationError] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [nameError, setNameError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [values, setValues] = useState({
     name: "",
@@ -120,12 +121,19 @@ const EventList = () => {
   };
 
   const deleteEvent = id => {
-    console.log("clicked delete", id);
+
+    console.log(id)
+    // APIManager.deleteObjectByResource("events", id);
   };
 
   const editEvent = id => {
-      APIManager.get
+    setIsLoading(true);
     toggleModal();
+      APIManager.fetchObjectById("events", id).then((data) =>{
+        setValues(data);
+        setIsLoading(false);
+
+      })
   };
 
   useEffect(() => {
@@ -146,6 +154,7 @@ const EventList = () => {
         handleFieldChange={handleFieldChange}
         values={values}
         cancelEvent={cancelEvent}
+        isLoading={isLoading}
       />
       {events.map((item, i) => (
         <EventCard
