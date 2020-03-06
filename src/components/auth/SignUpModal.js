@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Button, Header, Modal, Form, Input } from 'semantic-ui-react'
+import React from "react"
+import { Button, Modal, Form, Input } from 'semantic-ui-react'
 
 const SignUpModal = (props) => {
 
