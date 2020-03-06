@@ -7,7 +7,14 @@ import dbAPI from "../../modules/dbAPI"
 
 const LoginPage = (props) => {
 
-    const [credentials, setCredentials] = useState({is_active: false})
+    const [credentials, setCredentials] = useState({is_active: true})
+    const [newCredentials, setNewCredentials] = useState({ first_name: "", last_name: "", username: "", email: "", password: "", is_active: true })
+
+    const [ modalOpen, handleModal ] = useState(false);
+
+    const toggleModal = () => {
+        handleModal(!modalOpen)
+    };
 
     const handleFieldChange = (evt) => {
         const stateToChange = { ...credentials };
@@ -15,6 +22,12 @@ const LoginPage = (props) => {
         setCredentials(stateToChange);
       };
       
+      const handleSignupFieldChange = (evt) => {
+        const stateToChange = { ...newCredentials };
+        stateToChange[evt.target.id] = evt.target.value;
+        setNewCredentials(stateToChange);
+      };
+
     async function handleLogin(e) {
         e.preventDefault();
         await dbAPI.getUsers().then(users => {
@@ -23,7 +36,7 @@ const LoginPage = (props) => {
                 window.alert('Wrong email or password! Please try again.');
             } else {
                 sessionStorage.setItem('user', JSON.stringify(userObject[0]));
-                dbAPI.patchObjectByResource('users', userObject[0].id, { "is_active": true })
+                // dbAPI.patchObjectByResource('users', userObject[0].id, { "is_active": true })
             };
         });
         props.history.push('/')
@@ -32,14 +45,27 @@ const LoginPage = (props) => {
     async function handleSignup(e) {
         e.preventDefault();
         await dbAPI.getUsers().then(users => {
-            const emails = users.filter(user => (credentials.email === user.email));
-            const usernames = users.filter(user => (credentials.username === user.username));
+            const emails = users.filter(user => (newCredentials.email === user.email));
+            const usernames = users.filter(user => (newCredentials.username === user.username));
             if (emails.length !== 0) {
                 window.alert('Email already taken! Please try again.');
             } else if (usernames.length !== 0)  {
                 window.alert('Username already taken! Please try again.');
+            } else if (newCredentials.first_name.length < 2 ){
+                window.alert('First name must be at least two characters')
+            } else if (newCredentials.last_name.length < 1 ){
+                window.alert('Please enter last name or initial.')
+            } else if (newCredentials.username.length < 3 ){
+                window.alert('Username must be at least 3 characters long.')
+            } else if (newCredentials.password.length < 3 ){
+                window.alert('Password must be at least 3 characters long.')
+            } else if (newCredentials.email.includes("@") === false ||
+            newCredentials.email.includes(".com" || ".net" || ".org") === false){
+                window.alert('Please enter valid email address.')
             } else {
-                dbAPI.postObjectByResource('users', credentials)
+                dbAPI.postObjectByResource('users', newCredentials)
+                    .then(window.alert('Account creation successful! Now, please login.'))
+                    .then(toggleModal())
             };
         });
         console.log(props)
@@ -79,7 +105,7 @@ const LoginPage = (props) => {
                             content='Login'
                             onClick={handleLogin}
                         />
-                        <SignUpModal handleFieldChange={handleFieldChange} handleSignup={handleSignup} {...props} />
+                        <SignUpModal handleSignupFieldChange={handleSignupFieldChange} handleSignup={handleSignup} modalOpen={modalOpen} toggleModal={toggleModal} {...props} />
                     </div>
                 </Form>
             </Card.Content>

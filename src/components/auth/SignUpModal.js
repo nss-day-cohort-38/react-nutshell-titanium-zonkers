@@ -1,21 +1,11 @@
 import React, { useState } from "react"
 import { Button, Header, Modal, Form, Input } from 'semantic-ui-react'
 
-const SignUpModal = ({handleFieldChange, handleSignup}, props) => {
+const SignUpModal = (props) => {
 
-    const [ modalOpen, handleModal ] = useState(false);
-
-    const toggleModal = () => {
-        handleModal(!modalOpen)
-    };
-
-    const createAndClose = (e) => {
-        handleSignup(e)
-        toggleModal()
-    }
 
     return (
-        <Modal id="signup-modal" open={modalOpen} trigger={<Button onClick={toggleModal}>Sign Up</Button>}>
+        <Modal id="signup-modal" open={props.modalOpen} trigger={<Button onClick={props.toggleModal}>Sign Up</Button>}>
             <Modal.Header>Create a New Account!</Modal.Header>
             <Modal.Content>
                 <Form>
@@ -25,14 +15,14 @@ const SignUpModal = ({handleFieldChange, handleSignup}, props) => {
                             control={Input}
                             label='First name'
                             placeholder='First name'
-                            onChange={handleFieldChange}
+                            onChange={props.handleSignupFieldChange}
                         />
                         <Form.Field
                             id='last_name'
                             control={Input}
                             label='Last name'
                             placeholder='Last name'
-                            onChange={handleFieldChange}
+                            onChange={props.handleSignupFieldChange}
                         />
                     </Form.Group>
                     <Form.Field
@@ -40,25 +30,25 @@ const SignUpModal = ({handleFieldChange, handleSignup}, props) => {
                             control={Input}
                             label='Username'
                             placeholder='Username'
-                            onChange={handleFieldChange}
+                            onChange={props.handleSignupFieldChange}
                         />
                     <Form.Field
                         id='email'
                         control={Input}
                         label='Email'
                         placeholder='email'
-                        onChange={handleFieldChange}
+                        onChange={props.handleSignupFieldChange}
                     />
                     <Form.Field>
                         <label>Enter Password</label>
-                        <Input id="password" type='password' onChange={handleFieldChange}/>
+                        <Input id="password" type='password' onChange={props.handleSignupFieldChange}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Renter Password</label>
                         <Input id="password-2" type='password' />
                     </Form.Field>
                 </Form>
-                <Button onClick={createAndClose}>Create Account</Button>
+                <Button onClick={props.handleSignup}>Create Account</Button>
             </Modal.Content >
         </Modal>
     );
