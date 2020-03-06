@@ -5,6 +5,8 @@ const NewsArticleEditForm = (props) => {
     const [newsArticle, setNewsArticle] = useState({title: "", url: "", synopsis: ""});
     const [isLoading, setIsLoading] = useState(false);
 
+    const activeUserId = parseInt(sessionStorage.getItem("userId"));
+
     const handleFieldChange = evt => {
         const stateToChange = { ...newsArticle };
         stateToChange[evt.target.id] = evt.target.value;
@@ -23,7 +25,7 @@ const NewsArticleEditForm = (props) => {
             
             const editedNewsArticle = {
                 id: props.match.params.newsArticleId,
-                userId: 1,
+                userId: activeUserId,
                 title: newsArticle.title,
                 url: newsArticle.url,
                 synopsis: newsArticle.synopsis,

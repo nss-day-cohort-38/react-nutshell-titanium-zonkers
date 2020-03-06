@@ -6,8 +6,10 @@ const NewsArticleList = (props) => {
     const [newsArticles, setNewsArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(false); 
 
+    const activeUserId = parseInt(sessionStorage.getItem("userId"));
+
     const getNewsArticles = () => {
-        return dbAPI.getObjectByResource("newsArticles", 1).then(newsFromAPI => {
+        return dbAPI.getObjectByResource("newsArticles", activeUserId).then(newsFromAPI => {
             setNewsArticles(newsFromAPI)
         })
     }
@@ -16,7 +18,7 @@ const NewsArticleList = (props) => {
         if(window.confirm("Are you sure you want to delete this news article?")) {
             setIsLoading(true);
             dbAPI.deleteObjectByResource("newsArticles", id)
-                .then(() => dbAPI.getObjectByResource("newsArticles", 1).then(setNewsArticles))
+                .then(() => dbAPI.getObjectByResource("newsArticles", activeUserId).then(setNewsArticles))
         }
     }
 

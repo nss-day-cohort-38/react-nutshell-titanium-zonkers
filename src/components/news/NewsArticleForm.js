@@ -5,6 +5,8 @@ const NewsArticleForm = (props) => {
     const [newsArticle, setNewsArticle] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
+    const activeUserId = parseInt(sessionStorage.getItem("userId"));
+
     const handleFieldChange = evt => {
         const stateToChange = { ...newsArticle };
         stateToChange[evt.target.id] = evt.target.value;
@@ -21,7 +23,7 @@ const NewsArticleForm = (props) => {
             const currentDateTime = new Date();
 
             const newNewsArticle = {
-                userId: 1,
+                userId: activeUserId,
                 title: newsArticle.title,
                 url: newsArticle.url,
                 synopsis: newsArticle.synopsis,
