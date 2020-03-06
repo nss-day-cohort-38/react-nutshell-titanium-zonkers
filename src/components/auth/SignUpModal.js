@@ -41,11 +41,11 @@ const SignUpModal = (props) => {
                     />
                     <Form.Field>
                         <label>Enter Password</label>
-                        <Input id="password" type='password' onChange={props.handleSignupFieldChange}/>
+                        <Input id="password_1" type='password' onChange={props.handleSignupFieldChange}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Renter Password</label>
-                        <Input id="password-2" type='password' />
+                        <Input id="password_2" type='password' onChange={props.handleConfirmedPassword} />
                     </Form.Field>
                 </Form>
                 <div className="login-form=buttons">

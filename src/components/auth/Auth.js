@@ -9,7 +9,7 @@ const LoginPage = (props) => {
 
     const [credentials, setCredentials] = useState({is_active: true})
     const [newCredentials, setNewCredentials] = useState({ first_name: "", last_name: "", username: "", email: "", password: "", is_active: true })
-
+    const [ confirmedPassword, changeConfirmedPassword ] = useState({password_2: ""})
     const [ modalOpen, handleModal ] = useState(false);
 
     const toggleModal = () => {
@@ -21,11 +21,22 @@ const LoginPage = (props) => {
         stateToChange[evt.target.id] = evt.target.value;
         setCredentials(stateToChange);
       };
+
+    const handleConfirmedPassword = (evt) => {
+        const stateToChange = { ...confirmedPassword};
+        stateToChange[evt.target.id] = evt.target.value;
+        changeConfirmedPassword(stateToChange);
+    }
       
       const handleSignupFieldChange = (evt) => {
         const stateToChange = { ...newCredentials };
-        stateToChange[evt.target.id] = evt.target.value;
-        setNewCredentials(stateToChange);
+        if (evt.target.id.includes('password')){
+            stateToChange[evt.target.id.split('_')[0]] = evt.target.value;
+            setNewCredentials(stateToChange);
+        } else {
+            stateToChange[evt.target.id] = evt.target.value;
+            setNewCredentials(stateToChange);
+        };
       };
 
     async function handleLogin(e) {
@@ -44,17 +55,13 @@ const LoginPage = (props) => {
 
     async function handleSignup(e) {
         e.preventDefault();
-        const password1 = document.getElementById('password').value
-        const password2 = document.getElementById('password-2').value
+        const password1 = newCredentials.password
+        const password2 = confirmedPassword.password_2
 
         await dbAPI.getUsers().then(users => {
             const emails = users.filter(user => (newCredentials.email === user.email));
             const usernames = users.filter(user => (newCredentials.username === user.username));
-            if (emails.length !== 0) {
-                window.alert('Email already taken! Please try again.');
-            } else if (usernames.length !== 0)  {
-                window.alert('Username already taken! Please try again.');
-            } else if (newCredentials.first_name.length < 2 ){
+            if (newCredentials.first_name.length < 2 ){
                 window.alert('First name must be at least two characters.')
             } else if (newCredentials.last_name.length < 1 ){
                 window.alert('Please enter last name or initial.')
@@ -67,6 +74,10 @@ const LoginPage = (props) => {
             } else if (newCredentials.email.includes("@") === false ||
             newCredentials.email.includes(".com" || ".net" || ".org") === false){
                 window.alert('Please enter valid email address.')
+            } else if (emails.length !== 0) {
+                window.alert('Email already taken! Please try again.');
+            } else if (usernames.length !== 0)  {
+                window.alert('Username already taken! Please try again.');
             } else if (password1 !== password2) {
                 window.alert('Please make sure the passwords match.')
             } else {
@@ -74,16 +85,9 @@ const LoginPage = (props) => {
                     .then(window.alert('Account creation successful! Now, please login.'))
                     .then(toggleModal())
             };
-        });
-        console.log(props)
-        console.log('click!')
+        })
         props.history.push('/')
     }
-
-
-    useEffect(()=>{
-        console.log(credentials)
-    },[credentials])
 
     return (
 
@@ -112,7 +116,7 @@ const LoginPage = (props) => {
                             content='Login'
                             onClick={handleLogin}
                         />
-                        <SignUpModal handleSignupFieldChange={handleSignupFieldChange} handleSignup={handleSignup} modalOpen={modalOpen} toggleModal={toggleModal} {...props} />
+                        <SignUpModal handleSignupFieldChange={handleSignupFieldChange} handleSignup={handleSignup} modalOpen={modalOpen} toggleModal={toggleModal} handleConfirmedPassword={handleConfirmedPassword} {...props} />
                     </div>
                 </Form>
             </Card.Content>
