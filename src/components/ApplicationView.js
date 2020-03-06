@@ -1,6 +1,7 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import "./ApplicationView.css"
+import EventList from "./events/EventList"
 import LoginPage from "./auth/Auth"
 
 import NewsArticleList from './news/NewsArticleList';
@@ -42,6 +43,16 @@ const ApplicationViews = (props) => {
         render={(props) => {
           return <NewsArticleEditForm {...props} />
         }}
+      >
+      </Route>
+      <Route
+        exact
+        path="/events"
+        render={props =>
+          sessionStorage.getItem('userId') === null
+            ? <Redirect exact to="/" />
+            : <EventList />
+        }
       >
       </Route>
     </div>
