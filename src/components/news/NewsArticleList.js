@@ -6,7 +6,7 @@ const NewsArticleList = (props) => {
     const [newsArticles, setNewsArticles] = useState([]);
 
     const getNewsArticles = () => {
-        return dbAPI.getObjectByResource(newsArticles, 1).then(newsFromAPI => {
+        return dbAPI.getObjectByResource("newsArticles", 1).then(newsFromAPI => {
             setNewsArticles(newsFromAPI)
         })
     }
