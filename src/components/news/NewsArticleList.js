@@ -5,10 +5,8 @@ import dbAPI from '../../modules/dbAPI';
 const NewsArticleList = (props) => {
     const [newsArticles, setNewsArticles] = useState([]);
 
-    // const activeUserId = (JSON.parse(sessionStorage.getItem("user"))).id
-
     const getNewsArticles = () => {
-        return dbAPI.getObjectByResource(newsArticles, activeUserId).then(newsFromAPI => {
+        return dbAPI.getObjectByResource(newsArticles, 1).then(newsFromAPI => {
             setNewsArticles(newsFromAPI)
         })
     }

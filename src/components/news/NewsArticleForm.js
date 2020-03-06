@@ -29,7 +29,7 @@ const NewsArticleForm = (props) => {
                 created_at: currentDateTime
             };
 
-            dbAPI.postObjectByResource(newNewsArticle, activeUserId)
+            dbAPI.postObjectByResource(newNewsArticle, 1)
                 .then(() => props.history.push("/news"));
         }
     };
