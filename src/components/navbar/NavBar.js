@@ -19,8 +19,8 @@ const NavBar = ({ history }) => {
           <h1 id="navbar-title">Handy Andy</h1>
         </Menu.Item>
         <Menu.Item
-          name="news"
-          active={activeItem === "news"}
+          name="newsArticles"
+          active={activeItem === "newsArticles"}
           onClick={handleItemClick}
         >
           News
