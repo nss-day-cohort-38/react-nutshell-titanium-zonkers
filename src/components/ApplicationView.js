@@ -5,6 +5,7 @@ import LoginPage from "./auth/Auth"
 
 import NewsArticleList from './news/NewsArticleList';
 import NewsArticleForm from './news/NewsArticleForm';
+import NewsArticleEditForm from './news/NewsArticleEditForm';
 
 const ApplicationViews = (props) => {
   return (
@@ -32,6 +33,14 @@ const ApplicationViews = (props) => {
         path="/newsArticles/new"
         render={(props) => {
           return <NewsArticleForm {...props} />
+        }}
+      >
+      </Route>
+      <Route
+        exact
+        path="/newsArticles/:newsArticleId(\d+)/edit"
+        render={(props) => {
+          return <NewsArticleEditForm {...props} />
         }}
       >
       </Route>

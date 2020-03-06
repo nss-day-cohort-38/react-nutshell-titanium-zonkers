@@ -15,9 +15,18 @@ const NewsArticleCard = (props) => {
             </div>
             <div className="news-card-buttons-container">
 
-                <button 
-                type="button" 
-                onClick={() => props.handleDeleteNewsArticle(props.newsArticle.id)}
+                <button
+                    type="button"
+                    className="edit-news-button"
+                    onClick={() => {
+                        props.history.push(`/newsArticles/${props.newsArticle.id}/edit`)
+                    }}
+                >Edit</button>
+
+                <button
+                    type="button"
+                    className="delete-news-button"
+                    onClick={() => props.handleDeleteNewsArticle(props.newsArticle.id)}
                 >Delete</button>
 
             </div>

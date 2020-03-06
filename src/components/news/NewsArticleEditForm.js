@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dbAPI from '../../modules/dbAPI';
 
-const NewsArticleForm = (props) => {
-    const [newsArticle, setNewsArticle] = useState({});
+const NewsArticleEditForm = (props) => {
+    const [newsArticle, setNewsArticle] = useState({title: "", url: "", synopsis: ""});
     const [isLoading, setIsLoading] = useState(false);
 
     const handleFieldChange = evt => {
@@ -11,16 +11,18 @@ const NewsArticleForm = (props) => {
         setNewsArticle(stateToChange);
     };
 
-    const constructNewNewsArticle = evt => {
+    const updateExistingNewsArticle = evt => {
         evt.preventDefault();
         if (newsArticle.title === "" || newsArticle.url === "" || newsArticle.synopsis === "") {
             window.alert("Please fill out all fields");
         } else {
+
             setIsLoading(true);
 
             const currentDateTime = new Date();
-
-            const newNewsArticle = {
+            
+            const editedNewsArticle = {
+                id: props.match.params.newsArticleId,
                 userId: 1,
                 title: newsArticle.title,
                 url: newsArticle.url,
@@ -28,37 +30,47 @@ const NewsArticleForm = (props) => {
                 created_at: currentDateTime
             };
 
-            dbAPI.postObjectByResource("newsArticles", newNewsArticle)
-                .then(() => props.history.push("/newsArticles"));
+            dbAPI.putObjectByResource("newsArticles", editedNewsArticle)
+                .then(() => {
+                    props.history.push("/newsArticles")
+                });
         }
-    };
+    }
+
+    useEffect(() => {
+        dbAPI.fetchObjectById("newsArticles", props.match.params.newsArticleId)
+          .then(newsArticle => {
+            setNewsArticle(newsArticle);
+            setIsLoading(false);
+          });
+      }, []);
 
     return (
         <>
             <form>
                 <fieldset>
 
-                    <div className="news-form'">
+                    <div className="news-form">
                         <input
                             type="text"
                             required
                             onChange={handleFieldChange}
                             id="title"
-                            placeholder="News Article Title"
+                            value={newsArticle.title}
                         />
                         <input
                             type="text"
                             required
                             onChange={handleFieldChange}
                             id="url"
-                            placeholder="URL"
+                            value={newsArticle.url}
                         />
                         <input
                             type="text"
                             required
                             onChange={handleFieldChange}
                             id="synopsis"
-                            placeholder="Synopsis"
+                            value={newsArticle.synopsis}
                         />
                     </div>
 
@@ -66,10 +78,10 @@ const NewsArticleForm = (props) => {
 
                 <div className="save-new-news-button-container">
                     <button
-                        className="save-new-news-button"
+                        className="save-news-button"
                         type="button"
                         disabled={isLoading}
-                        onClick={constructNewNewsArticle}
+                        onClick={updateExistingNewsArticle}
                     >Save News Article</button>
 
                     <button type="button"
@@ -84,4 +96,4 @@ const NewsArticleForm = (props) => {
     )
 }
 
-export default NewsArticleForm;
+export default NewsArticleEditForm;

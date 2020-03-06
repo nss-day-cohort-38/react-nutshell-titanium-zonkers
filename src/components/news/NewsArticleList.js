@@ -43,6 +43,7 @@ const NewsArticleList = (props) => {
                         newsArticle={newsArticle}
                         handleDeleteNewsArticle={handleDeleteNewsArticle}
                         disabled={isLoading}
+                        {...props}
                         />)}
                 </div>
             </section>
