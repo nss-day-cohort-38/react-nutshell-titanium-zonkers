@@ -8,7 +8,7 @@ import ApplicationViews from './components/ApplicationView';
 function App() {
   return (
     <Router>
-      <NavBar />
+      <NavBar/>
       <ApplicationViews />
     </Router>
     
