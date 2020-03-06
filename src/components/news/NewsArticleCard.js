@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewsArticleCard.css';
 
 const NewsArticleCard = (props) => {
     return (
