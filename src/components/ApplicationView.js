@@ -1,6 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import "./ApplicationView.css"
+
+import EventList from "./events/EventList"
 // import {} from "react-router-dom";
 
 const ApplicationViews = () => {
@@ -11,6 +13,13 @@ const ApplicationViews = () => {
         path="/"
         render={props =>
          <h1>This is Home</h1>
+        }
+      />
+      <Route
+        exact
+        path="/events"
+        render={props =>
+         <EventList />
         }
       />
     </div>

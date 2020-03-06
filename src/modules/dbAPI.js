@@ -12,6 +12,11 @@ const dbAPI = {
       `${baseUrl}/${resource}/?userId=${userId}&_expand=user`
     ).then(resp => resp.json());
   },
+  getObjectByResourceNoExpand(resource, userId) {
+    return fetch(
+      `${baseUrl}/${resource}/?userId=${userId}`
+    ).then(resp => resp.json());
+  },
   postObjectByResource(resource, resourceObject) {
     return fetch(`${baseUrl}/${resource}`, {
       method: "POST",
