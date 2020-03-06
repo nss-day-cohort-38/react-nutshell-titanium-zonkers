@@ -4,11 +4,20 @@ import dbAPI from '../../modules/dbAPI';
 
 const NewsArticleList = (props) => {
     const [newsArticles, setNewsArticles] = useState([]);
+    const [isLoading, setIsLoading] = useState(false); 
 
     const getNewsArticles = () => {
         return dbAPI.getObjectByResource("newsArticles", 1).then(newsFromAPI => {
             setNewsArticles(newsFromAPI)
         })
+    }
+
+    const handleDeleteNewsArticle = (id) => {
+        if(window.confirm("Are you sure you want to delete this news article?")) {
+            setIsLoading(true);
+            dbAPI.deleteObjectByResource("newsArticles", id)
+                .then(() => dbAPI.getObjectByResource("newsArticles", 1).then(setNewsArticles))
+        }
     }
 
     useEffect(() => {
@@ -23,7 +32,7 @@ const NewsArticleList = (props) => {
                 type="button"
                 className="add-news-button"
                 onClick={() => {
-                    props.history.push("/news/new")
+                    props.history.push("/newsArticles/new")
                 }}
                 >Add News Article</button>
                 </div>
@@ -32,6 +41,8 @@ const NewsArticleList = (props) => {
                         <NewsArticleCard 
                         key={newsArticle.id}
                         newsArticle={newsArticle}
+                        handleDeleteNewsArticle={handleDeleteNewsArticle}
+                        disabled={isLoading}
                         />)}
                 </div>
             </section>

@@ -14,23 +14,24 @@ const ApplicationViews = (props) => {
         path="/"
         render={props =>
           sessionStorage.getItem('userId') === null
-            ? <LoginPage {...props}/>
+            ? <LoginPage {...props} />
             : <h1>This is Home</h1>
         }
       />
       <Route
         exact
-        path="/news"
+        path="/newsArticles"
         render={(props) => {
-          return <NewsArticleList {...props}/>
+          return <NewsArticleList
+            {...props} />
         }}
       >
       </Route>
       <Route
         exact
-        path="/news/new"
+        path="/newsArticles/new"
         render={(props) => {
-          return <NewsArticleForm {...props}/>
+          return <NewsArticleForm {...props} />
         }}
       >
       </Route>

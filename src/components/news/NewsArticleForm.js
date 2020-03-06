@@ -30,7 +30,7 @@ const NewsArticleForm = (props) => {
             };
 
             dbAPI.postObjectByResource("newsArticles", newNewsArticle)
-                .then(() => props.history.push("/news"));
+                .then(() => props.history.push("/newsArticles"));
         }
     };
 
@@ -62,7 +62,7 @@ const NewsArticleForm = (props) => {
                         />
                     </div>
                 </fieldset>
-                <div>
+                <div className="save-new-news-button-container">
                     <button
                         className="save-new-news-button"
                         type="button"
