@@ -5,7 +5,7 @@ import "./ApplicationView.css"
 import NewsArticleList from './news/NewsArticleList';
 import NewsArticleForm from './news/NewsArticleForm';
 
-const ApplicationViews = () => {
+const ApplicationViews = (props) => {
   return (
     <div id="application-views-container">
       <Route
