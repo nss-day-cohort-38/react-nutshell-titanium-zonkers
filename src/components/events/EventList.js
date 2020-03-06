@@ -3,7 +3,7 @@ import EventCard from "./EventCard";
 import APIManager from "../../modules/dbAPI";
 import EventModal from "./EventModal";
 import { Button } from "semantic-ui-react";
-import './EventList.css'
+import "./EventList.css";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -43,6 +43,12 @@ const EventList = () => {
         APIManager.postObjectByResource("events", values).then(() => {
           getEvents();
           toggleModal();
+          setValues({
+            name: "",
+            date: "",
+            location: "",
+            userId: Number(sessionStorage.getItem("userId"))
+          });
         });
       } else if (isEditing) {
         APIManager.editResource("events", values).then(() => {
