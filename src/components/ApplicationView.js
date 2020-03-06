@@ -1,6 +1,7 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect} from "react-router-dom";
 import "./ApplicationView.css"
+import EventList from "./events/EventList"
 import LoginPage from "./auth/Auth"
 
 const ApplicationViews = () => {
@@ -13,6 +14,15 @@ const ApplicationViews = () => {
           sessionStorage.getItem('userId') === null
             ? <LoginPage {...props}/>
             : <h1>This is Home</h1>
+        }
+      />
+      <Route
+        exact
+        path="/events"
+        render={props =>
+          sessionStorage.getItem('userId') === null
+          ? <Redirect exact to="/"/>
+          : <EventList />
         }
       />
     </div>
