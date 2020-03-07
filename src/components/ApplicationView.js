@@ -34,26 +34,12 @@ const ApplicationViews = (props) => {
         <Route
           exact
           path="/newsArticles"
-          render={(props) => {
-            return <NewsArticleList
+          render={(props) => 
+            sessionStorage.getItem("userId") === null 
+            ? <Redirect exact to="/" />
+            : <NewsArticleList
               {...props} />
-          }}
-        >
-        </Route>
-        <Route
-          exact
-          path="/newsArticles/new"
-          render={(props) => {
-            return <NewsArticleForm {...props} />
-          }}
-        >
-        </Route>
-        <Route
-          exact
-          path="/newsArticles/:newsArticleId(\d+)/edit"
-          render={(props) => {
-            return <NewsArticleEditForm {...props} />
-          }}
+          }
         >
         </Route>
         <Route component={Home} />
