@@ -1,18 +1,31 @@
 import React from "react"
- 
-const TaskForm = () => {
-   return (<article id="taskFormContainer">
+import { Sidebar, Button } from "semantic-ui-react"
+
+const TaskFormTransition = ({visible, toggleFormVisibility}) => {
+    return (
+    <Sidebar
+      animation='scale down'
+      direction='bottom'
+      icon='labeled'
+    //   inverted
+    //   vertical
+      visible={visible}
+      width='thin'
+    >
+     <article id="taskFormContainer">
     <form name="taskForm" id="taskForm" action="">
         <fieldset form="taskForm" id="taskNameField">
             <input type="text" name="taskName" id="taskName" placeholder='Enter Task Here' />
         </fieldset>
         <fieldset form="taskForm" id="completionDateField">
-            <label for="completionDate">Deadline:</label>
+            <label >Deadline:</label>
             <input type="datetime-local" name="completionDate" id="completionDate" />
         </fieldset>
     </form>
-    <button id='saveBtn' class='button'>Save Task</button>
-    <button class='createFormButton' id='nevermind'>Nevermind</button>
+    <Button onClick={toggleFormVisibility} className="formButton" className='button'>Save Task</Button>
+    <Button onClick={toggleFormVisibility} className="formButton" id='nevermind'>Nevermind</Button>
     </article>
-    )
+    </Sidebar>
+  )
 }
+export default TaskFormTransition;
