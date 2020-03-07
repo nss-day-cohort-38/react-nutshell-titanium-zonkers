@@ -1,0 +1,23 @@
+/* NEWS ARTICLE CARD STYLING */
+
+.card-articleTitle {
+    font-size: 30px !important;
+}
+
+.card-articleSynopsis {
+    color: gray !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+}
+
+.card-articleUrl {
+    font-size: 15px !important;
+}
+
+/* NEWS ARTICLE LIST STYLING */
+
+.add-news-button-container {
+    margin-bottom: 10px;
+}
+
+

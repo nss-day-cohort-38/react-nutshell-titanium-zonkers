@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NewsArticleCard from './NewsArticleCard';
 import dbAPI from '../../modules/dbAPI';
 import { Button } from "semantic-ui-react";
+import './NewsArticle.css';
 
 const NewsArticleList = (props) => {
     const [newsArticles, setNewsArticles] = useState([]);
