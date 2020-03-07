@@ -15,7 +15,7 @@ const NewsArticleCard = (props) => {
             <Card.Content extra>
                 <div className='ui two buttons'>
                     <Button onClick={() => {
-                        props.history.push(`/newsArticles/${props.newsArticle.id}/edit`)
+                        props.handleEditNewsArticle(props.newsArticle.id)
                     }}
                         basic color='green'>
                         Edit

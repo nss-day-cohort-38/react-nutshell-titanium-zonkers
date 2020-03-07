@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "semantic-ui-react";
 
 const NewsArticleModal = ({
   modalIsOpen,
-  updateNewsArticle,
+  updateNewsArticles,
   isEditing,
   titleError,
   urlError,
@@ -36,7 +36,6 @@ const NewsArticleModal = ({
             value={values.url}
             error={urlError}
           />
-
           <Form.Input
             placeholder="Synopsis"
             id="synopsis"
@@ -45,7 +44,7 @@ const NewsArticleModal = ({
             value={values.synopsis}
             error={synopsisError}
           />
-          <Button onClick={updateNewsArticle}>{isEditing ? "Edit" : "Add"}</Button>
+          <Button onClick={updateNewsArticles}>{isEditing ? "Save" : "Add"}</Button>
           <Button onClick={cancelNewsArticle}>Cancel</Button>
         </Form>
       </Modal.Content>
