@@ -12,7 +12,7 @@ const NewsArticleList = (props) => {
 
     const getNewsArticles = () => {
         return dbAPI.getObjectByResource("newsArticles", activeUserId).then(newsFromAPI => {
-            const sortedNewsFromAPI = newsFromAPI.sort((a,b) => {
+            const sortedNewsFromAPI = newsFromAPI.sort((a, b) => {
                 return new Date(b.created_at) - new Date(a.created_at)
             })
             setNewsArticles(sortedNewsFromAPI)
@@ -36,13 +36,11 @@ const NewsArticleList = (props) => {
             <>
                 <section className="news-content-container">
                     <div className="add-news-button-container">
-                        <button
-                            type="button"
-                            className="add-news-button"
+                        <Button
                             onClick={() => {
                                 props.history.push("/newsArticles/new")
                             }}
-                        >Add News Article</button>
+                        >Add News Article</Button>
                     </div>
                     <div className="no-news-message-container">
                         <h1 className="no-news-message">You have no saved news articles.</h1>

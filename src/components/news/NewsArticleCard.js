@@ -7,10 +7,8 @@ const NewsArticleCard = (props) => {
     return (
         <Card className="news-card-container">
             <Card.Content className="news-card-content">
-                <Card.Header className="card-articleTitle">{props.newsArticle.title}</Card.Header>
+                <Card.Header className="card-articleTitle"><a className="news-link" target="_blank" href={props.newsArticle.url}>{props.newsArticle.title}</a></Card.Header>
                 <Card.Header className="card-articleSynopsis">{props.newsArticle.synopsis}</Card.Header>
-                <Card.Header className="card-articleUrl"><a target="_blank" href={props.newsArticle.url}>{props.newsArticle.url}</a>
-                </Card.Header>
             </Card.Content>
             <Card.Content extra>
         <div className='ui two buttons'>
