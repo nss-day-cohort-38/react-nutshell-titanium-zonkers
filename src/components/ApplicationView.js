@@ -4,10 +4,8 @@ import "./ApplicationView.css"
 import EventList from "./events/EventList"
 import LoginPage from "./auth/Auth"
 import Home from "./home/Home"
-
 import NewsArticleList from './news/NewsArticleList';
-import NewsArticleForm from './news/NewsArticleForm';
-import NewsArticleEditForm from './news/NewsArticleEditForm';
+
 
 const ApplicationViews = (props) => {
   return (
