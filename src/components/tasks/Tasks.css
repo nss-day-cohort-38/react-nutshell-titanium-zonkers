@@ -11,7 +11,8 @@
     right: 0;
     top: 103px;
     height: 86%;
-    width: 250px;
+    width: 260px;
+    padding: 7px;
     border-radius: 3px;
     background-color: black;
     box-shadow: 7px 7px 7px 7px gray;
@@ -102,4 +103,7 @@
 }
 .createFormButton{
     margin-left: 67px !important;
+}
+#formInputs {
+    color: white;
 }

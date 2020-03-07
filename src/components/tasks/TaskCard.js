@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { List } from "semantic-ui-react"
 import moment from 'moment'
 import dbAPI from "../../modules/dbAPI";
@@ -18,6 +18,7 @@ export default ({ taskObj, changeComplete }) => {
         if(window.confirm('Are you sure you want to delete this task?')){
             if(window.confirm('Really, really? Last Chance . . .')){
                 dbAPI.deleteObjectByResource('tasks', taskObj.id)
+                .then(changeComplete(!taskObj.is_complete))
             }
         }
     }

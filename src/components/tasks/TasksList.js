@@ -3,7 +3,7 @@ import { List } from 'semantic-ui-react'
 import dbAPI from "../../modules/dbAPI"
 import TaskCard from "./TaskCard"
 
-const TasksList = (props) => {
+const TasksList = ({isSubmitted, toggleSubmitted}) => {
 
     const [ tasks, setTasks ] = useState([])
     const [ isComplete, changeComplete ] = useState([])
@@ -26,7 +26,7 @@ const TasksList = (props) => {
                 <List.Content>
                     <List.Icon name='x' className='xMarker'/>
                     <List.Description>
-                        You don't have any tasks yet. Click the button up top to create a new task!
+                        You don't have any tasks yet. Click the button down bellow to create one!
                     </List.Description>
                 </List.Content>
             )
@@ -38,7 +38,8 @@ const TasksList = (props) => {
     useEffect (()=>{
         getTasksArray()
         changeComplete()
-    }, [isComplete])
+        toggleSubmitted(false)
+    }, [isComplete, isSubmitted])
 
     return (
         <List id="taskListContainer">
