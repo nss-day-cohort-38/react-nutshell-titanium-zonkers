@@ -10,7 +10,10 @@ const NewsArticleList = (props) => {
 
     const getNewsArticles = () => {
         return dbAPI.getObjectByResource("newsArticles", activeUserId).then(newsFromAPI => {
-            setNewsArticles(newsFromAPI)
+            const sortedNewsFromAPI = newsFromAPI.sort((a,b) => {
+                return new Date(b.created_at) - new Date(a.created_at)
+            })
+            setNewsArticles(sortedNewsFromAPI)
         })
     }
 
@@ -75,3 +78,4 @@ const NewsArticleList = (props) => {
 }
 
 export default NewsArticleList;
+
