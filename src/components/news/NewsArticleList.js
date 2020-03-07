@@ -17,14 +17,12 @@ const NewsArticleList = (props) => {
     const [synopsisError, setSynopsisError] = useState(false);
     const [formIsValid, setFormIsValid] = useState(false, () => formIsValid);
 
-    const currentDateTime = new Date();
-
     const [values, setValues] = useState({
         userId: activeUserId,
         title: "",
         url: "",
         synopsis: "",
-        created_at: currentDateTime
+        created_at: new Date()
     });
 
     const getNewsArticles = () => {
@@ -53,7 +51,7 @@ const NewsArticleList = (props) => {
                             title: "",
                             url: "",
                             synopsis: "",
-                            created_at: currentDateTime
+                            created_at: new Date()
                         });
                     });
             } else if (isEditing) {
@@ -66,7 +64,7 @@ const NewsArticleList = (props) => {
                         title: "",
                         url: "",
                         synopsis: "",
-                        created_at: currentDateTime
+                        created_at: new Date()
                     });
                 });
             }
@@ -134,8 +132,15 @@ const NewsArticleList = (props) => {
         setIsLoading(true);
         setIsEditing(true);
         toggleModal();
-        dbAPI.fetchObjectById("newsArticles", id).then(data => {
-            setValues(data);
+        dbAPI.fetchObjectById("newsArticles", id).then((values) => {
+            setValues({
+                id: values.id,
+                userId: activeUserId,
+                title: values.title,
+                url: values.url,
+                synopsis: values.synopsis,
+                created_at: new Date()
+            })
             setIsLoading(false);
         });
     };
