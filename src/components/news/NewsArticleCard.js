@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import './NewsArticle.css';
-import { Button, Card } from 'semantic-ui-react';
+import { Button, Card, Popup, Grid } from 'semantic-ui-react';
 
 const NewsArticleCard = (props) => {
+
+    const [popIsOpen, setPopIsOpen] = useState(false);
 
     return (
         <Card className="news-card-container">
@@ -11,19 +13,52 @@ const NewsArticleCard = (props) => {
                 <Card.Header className="card-articleSynopsis">{props.newsArticle.synopsis}</Card.Header>
             </Card.Content>
             <Card.Content extra>
-        <div className='ui two buttons'>
-          <Button onClick={() => {
+                <div className='ui two buttons'>
+                    <Button onClick={() => {
                         props.history.push(`/newsArticles/${props.newsArticle.id}/edit`)
                     }}
-                    basic color='green'>
-            Edit
+                        basic color='green'>
+                        Edit
           </Button>
-          <Button onClick={() => props.handleDeleteNewsArticle(props.newsArticle.id)}
-          basic color='red'>
-            Delete
-          </Button>
-        </div>
-      </Card.Content>
+
+                    <Popup
+                        wide
+                        trigger={
+                            <Button
+                                basic
+                                color="red"
+                                content="Delete"
+                                onClick={() => {
+                                    setPopIsOpen(true);
+                                }} />
+                        }
+                        on="click"
+                        open={popIsOpen}
+                    >
+                        <Grid divided columns="equal">
+                            <Grid.Column>
+                                <Button
+                                    color="red"
+                                    content="Confirm"
+                                    onClick={() => {
+                                        props.handleDeleteNewsArticle(props.newsArticle.id);
+                                        setPopIsOpen(false);
+                                    }}
+                                />
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Button
+                                    color="grey"
+                                    content="Cancel"
+                                    onClick={() => {
+                                        setPopIsOpen(false);
+                                    }}
+                                />
+                            </Grid.Column>
+                        </Grid>
+                    </Popup>
+                </div>
+            </Card.Content>
         </Card>
     )
 }

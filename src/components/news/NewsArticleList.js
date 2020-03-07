@@ -20,11 +20,15 @@ const NewsArticleList = (props) => {
     }
 
     const handleDeleteNewsArticle = (id) => {
-        if (window.confirm("Are you sure you want to delete this news article?")) {
             setIsLoading(true);
             dbAPI.deleteObjectByResource("newsArticles", id)
-                .then(() => dbAPI.getObjectByResource("newsArticles", activeUserId).then(setNewsArticles))
-        }
+                .then(() => dbAPI.getObjectByResource("newsArticles", activeUserId).then(newsFromAPI => {
+                    const sortedNewsFromAPI = newsFromAPI.sort((a, b) => {
+                        return new Date(b.created_at) - new Date(a.created_at)
+                    })
+                    setNewsArticles(sortedNewsFromAPI)
+                }))
+        
     }
 
     useEffect(() => {
