@@ -39,7 +39,8 @@ const NewsArticleList = (props) => {
     };
 
     const handleFormSubmit = () => {
-        if (values.title.trim() !== "" && values.url.trim() !== "" && (values.synopsis.trim() !== "") && values.url.includes("www.") === true && (values.url.includes(".com") === true || values.url.includes(".net") === true || values.url.includes(".org") === true || (values.url.includes(".gov")) === true)) {
+        const urlValidation = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&’\(\)\*\+,;=.]+$/g
+        if (values.title.trim() !== "" && values.url.trim() !== "" && (values.synopsis.trim() !== "") && urlValidation.test(values.url)) {
             setFormIsValid(true);
             if (!isEditing) {
                 dbAPI.postObjectByResource("newsArticles", values)
@@ -77,7 +78,7 @@ const NewsArticleList = (props) => {
                 });
             }
 
-            if (values.url.trim() === "" || values.url.includes("www.") === false ||(values.url.includes(".com") === false || values.url.includes(".net") === false || values.url.includes(".org") === false || (values.url.includes(".gov")) === false)) {
+            if ((values.url.trim() === "") || (!urlValidation.test(values.url))) {
                 setFormIsValid(false);
                 setUrlError({
                     content: "Please enter a valid URL",
