@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Segment, Button } from "semantic-ui-react";
+import { Menu, Segment, Button, Popup } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import "./NavBar.css";
 
@@ -8,16 +8,26 @@ const NavBar = ({ history }) => {
 
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
+  const toggleMenu = () => {
+    setMenuIsOpen(!menuIsOpen);
+};
+
   const handleItemClick = (e, { name }) => {
     history.push(`/${name}`);
     setActiveItem(name);
   };
 
+  const logout = () => {
+    sessionStorage.clear();
+    history.push("/");
+    toggleMenu();
+  }
+
   return (
     <Segment inverted id="navbar-container">
       <Menu inverted pointing secondary id="menu-one">
         <Menu.Item name="" onClick={handleItemClick} id="navbar-logo-title">
-          <img id="logo" src={require("./handyandy.svg") } alt="handyandy" />
+          <img id="logo" src={require("./handyandy.svg")} alt="handyandy" />
           <h1 id="navbar-title">Handy Andy</h1>
         </Menu.Item>
         <Menu.Item
@@ -58,13 +68,46 @@ const NavBar = ({ history }) => {
       </Menu>
       <Menu pointing secondary vertical>
         <Menu.Item
-          // onClick={handleItemClick}
           id="user-icon-container"
         >
-          <Button 
-          circular 
-          id="user-icon" 
-          icon="user circle outline" />
+          <Popup
+            wide
+            trigger={
+              <Button
+                circular
+                id="user-icon"
+                icon="user circle outline"
+                onClick={() => {
+                  toggleMenu();
+                }} />
+            }
+            on="click"
+            open={menuIsOpen}
+          >
+            <Menu pointing secondary vertical>
+              <Menu.Item
+                id="myProfile"
+                active={activeItem === "myProfile"}
+                onClick={handleItemClick}
+              >
+                My Profile
+        </Menu.Item>
+        <Menu.Item
+                id="settings"
+                active={activeItem === "settings"}
+                onClick={handleItemClick}
+              >
+                Settings
+        </Menu.Item>
+        <Menu.Item
+                id="logout"
+                active={activeItem === "logout"}
+                onClick={logout}
+              >
+                Logout
+        </Menu.Item>
+            </Menu>
+          </Popup>
         </Menu.Item>
       </Menu>
     </Segment>
