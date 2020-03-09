@@ -2,7 +2,6 @@
 
 .news-card-container {
     margin: 5px !important;
-    width: 30% !important;
 }
 
 .card-articleTitle {
@@ -34,10 +33,11 @@
 
 @media screen and (max-width: 640px) {
     .news-cards-container {
-        justify-content: center;
+        align-content: center;
+        flex-direction: column;
       }
 
-      .news-card-content {
-        width: 90%;
+      .news-card-container {
+        width: 100%;
       }
 }
