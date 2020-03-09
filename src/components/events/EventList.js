@@ -32,7 +32,11 @@ const EventList = () => {
     APIManager.getObjectByResourceNoExpand(
       "events",
       Number(sessionStorage.getItem("userId"))
-    ).then(setEvents);
+    ).then((data) => {
+        points.sort(function(a, b){return a-b});
+        setEvents(data)
+    
+    });
   };
 
   const toggleModal = () => {
