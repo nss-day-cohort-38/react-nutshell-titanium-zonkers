@@ -9,17 +9,101 @@
 .tasksSidebar {
     position: fixed;
     right: 0;
-    top: 97px;
-    height: 100%;
-    width: 250px;
-    border-radius: 5px;
+    top: 103px;
+    height: 86%;
+    width: 260px;
+    padding: 7px;
+    border-radius: 3px;
     background-color: black;
-    box-shadow: 3px 3px 3px 3px gray;
+    box-shadow: 7px 7px 7px 7px gray;
+    border: 2px ridge gray;
 }
 #taskListContainer{
+    position: static;
+    margin-top: 8%;
     margin-right: auto;
     margin-left: auto;
+    height: 80% !important;
 }
+#tasksSidebarContentContainer{
+    height: 83%;
+    margin-top: 5%;
+}
+
 .description{
     color: white !important;
+}
+.taskDiv {
+    margin-left: 10px;
+}
+
+#openTasksButton{
+    transform: rotate(270deg);
+    position: absolute;
+    right: -27px;
+    top: 10%;
+    width: 80px;
+    color: white;
+    background-color: black;
+    border-radius: 0px;
+    transition: 0.5s ease;
+}
+#openTasksButton:hover{
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    transition: 0.5s ease;
+}
+#closeTasksButton{
+    color: white;
+    background-color: black;
+    transition: 0.5s ease;
+}
+#closeTasksButton:hover{
+    color: black;
+    background-color: white;
+    transition: 0.5s ease;
+}
+
+.completed{
+    text-decoration: white line-through;
+    opacity: 0.6;
+}
+
+.checkMark {
+    color: limegreen;
+    font-size: 15px !important;
+    transition: 0.5s ease;
+}
+.checkMark:hover {
+    color: lime;
+    font-size: 20px !important;
+    margin-left: -10px !important;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.xMark {
+    color: #ce1414;
+    font-size: 15px !important;
+    transition: 0.5s ease;
+}
+.xMark:hover {
+    color: #ff3131;
+    font-size: 20px !important;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.deleteTask {
+    color: gray;
+    padding-right: 20px !important;
+}
+.deleteTask:hover{
+    color: lightgray;
+    cursor: pointer;
+}
+.createFormButton{
+    margin-left: 67px !important;
+}
+#formInputs {
+    color: white;
 }
