@@ -64,7 +64,7 @@ const EventList = () => {
           });
           setFormValues({
             date: "",
-            time: "",
+            time: ""
           });
         });
       } else if (isEditing) {
@@ -79,7 +79,7 @@ const EventList = () => {
           });
           setFormValues({
             date: "",
-            time: "",
+            time: ""
           });
           setIsEditing(false);
         });
@@ -118,7 +118,7 @@ const EventList = () => {
 
   const handleFieldChange = evt => {
     const fieldId = evt.target.id;
-    const changeValue = {...values};
+    const changeValue = { ...values };
     const fieldValue = evt.target.value;
     if (fieldId === "date" || fieldId === "time") {
       const changeFormValue = { ...formValues };
@@ -189,9 +189,14 @@ const EventList = () => {
     });
 
     setFormValues({
-        date: "",
-        time: "",
-      });
+      date: "",
+      time: ""
+    });
+
+    setLocationError(false);
+    setDateError(false);
+    setNameError(false);
+    setTimeError(false);
     setIsEditing(false);
     toggleModal();
   };
@@ -206,7 +211,10 @@ const EventList = () => {
     toggleModal();
     APIManager.fetchObjectById("events", id).then(data => {
       setValues(data);
-      setFormValues({date: data.isoTime.split("T")[0],time:data.isoTime.split("T")[1]});
+      setFormValues({
+        date: data.isoTime.split("T")[0],
+        time: data.isoTime.split("T")[1]
+      });
       setIsLoading(false);
     });
   };
@@ -234,20 +242,19 @@ const EventList = () => {
         setIsEditing={setIsEditing}
       />
       <div id="events-card-container">
-      {
-        events.length > 0 ?
-        events.map((item, i) => (
-          <EventCard
-            key={i}
-            cardNumber={i}
-            item={item}
-            editEvent={editEvent}
-            deleteEvent={deleteEvent}
-          />
-        )) :
-        <div>This is empty</div>
-        
-        }
+        {events.length > 0 ? (
+          events.map((item, i) => (
+            <EventCard
+              key={i}
+              cardNumber={i}
+              item={item}
+              editEvent={editEvent}
+              deleteEvent={deleteEvent}
+            />
+          ))
+        ) : (
+          <div>This is empty</div>
+        )}
       </div>
     </>
   );

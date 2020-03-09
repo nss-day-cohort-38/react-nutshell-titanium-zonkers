@@ -56,7 +56,7 @@ const EventModal = ({
             value={values.location}
             error={locationError}
           />
-          <Button onClick={updateEvents}>{isEditing ? "Edit" : "Add"}</Button>
+          <Button onClick={updateEvents}>{isEditing ? "Save" : "Add"}</Button>
           <Button onClick={cancelEvent}>Cancel</Button>
         </Form>
       </Modal.Content>
