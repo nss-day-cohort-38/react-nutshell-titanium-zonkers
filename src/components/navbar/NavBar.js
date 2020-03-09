@@ -56,7 +56,7 @@ const NavBar = ({ history }) => {
           Events
         </Menu.Item>
       </Menu>
-      <Menu inverted secondary>
+      <Menu pointing secondary vertical>
         <Menu.Item
           // onClick={handleItemClick}
           id="user-icon-container"
