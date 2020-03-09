@@ -249,7 +249,7 @@ const EventList = () => {
 
   return (
     <>
-      <Button onClick={toggleModal}>Add Event</Button>
+      <Button onClick={toggleModal} id="test_id">Add Event</Button>
       <Button onClick={togglePast}>{showPast ? "Hide Past" : "Show Past"}</Button>
       <EventModal
         modalIsOpen={modalIsOpen}
