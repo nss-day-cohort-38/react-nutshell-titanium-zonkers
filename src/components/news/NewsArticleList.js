@@ -43,7 +43,21 @@ const NewsArticleList = (props) => {
         if (values.title.trim() !== "" && values.url.trim() !== "" && (values.synopsis.trim() !== "") && urlValidation.test(values.url)) {
             setFormIsValid(true);
             if (!isEditing) {
-                dbAPI.postObjectByResource("newsArticles", values)
+
+                let validUrl = values.url;
+            if (!validUrl.startsWith("https://")) {
+                validUrl = `https://${validUrl}`
+            }
+
+            const newArticle = {
+                userId: values.userId,
+                title: values.title,
+                url: validUrl,
+                synopsis: values.synopsis,
+                created_at: new Date()
+            }
+
+                dbAPI.postObjectByResource("newsArticles", newArticle)
                     .then(() => {
                         getNewsArticles();
                         toggleModal();
@@ -56,7 +70,22 @@ const NewsArticleList = (props) => {
                         });
                     });
             } else if (isEditing) {
-                dbAPI.putObjectByResource("newsArticles", values).then(() => {
+
+                let validUrl = values.url;
+                if (!validUrl.startsWith("https://")) {
+                    validUrl = `https://${validUrl}`
+                }
+    
+                const editedArticle = {
+                    id: values.id,
+                    userId: values.userId,
+                    title: values.title,
+                    url: validUrl,
+                    synopsis: values.synopsis,
+                    created_at: new Date()
+                }
+            
+                dbAPI.putObjectByResource("newsArticles", editedArticle).then(() => {
                     getNewsArticles();
                     toggleModal();
                     setIsEditing(false);
@@ -99,7 +128,7 @@ const NewsArticleList = (props) => {
     const handleFieldChange = evt => {
         const changeValue = { ...values };
         const fieldId = evt.target.id;
-        const fieldValue = evt.target.value;
+        let fieldValue = evt.target.value;
         changeValue[fieldId] = fieldValue;
         if (fieldId === "title") {
             if (fieldValue.length >= 1) {
@@ -108,11 +137,14 @@ const NewsArticleList = (props) => {
         } else if (fieldId === "url") {
             if (fieldValue.length >= 1) {
                 setUrlError(false);
-            }
+            } 
         } else if (fieldId === "synopsis") {
             if (fieldValue.length >= 1) {
                 setSynopsisError(false);
             }
+        }
+        if (!values.url.startsWith("https//")) {
+            const validUrl = `https//${values.url}` 
         }
         setValues(changeValue);
     };
