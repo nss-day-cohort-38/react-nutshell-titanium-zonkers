@@ -66,11 +66,12 @@ const NavBar = ({ history }) => {
           Events
         </Menu.Item>
       </Menu>
-      <Menu pointing secondary vertical>
+      <Menu inverted>
         <Menu.Item
           id="user-icon-container"
         >
-          <Popup
+          <Popup 
+          position="top right"
             wide
             trigger={
               <Button
@@ -84,7 +85,7 @@ const NavBar = ({ history }) => {
             on="click"
             open={menuIsOpen}
           >
-            <Menu pointing secondary vertical>
+            <Menu size="mini" inverted vertical>
               <Menu.Item
                 id="myProfile"
                 active={activeItem === "myProfile"}
@@ -95,7 +96,10 @@ const NavBar = ({ history }) => {
         <Menu.Item
                 id="settings"
                 active={activeItem === "settings"}
-                onClick={handleItemClick}
+                onClick={() => {
+                  history.push("/settings");
+                  toggleMenu();
+                }}
               >
                 Settings
         </Menu.Item>
