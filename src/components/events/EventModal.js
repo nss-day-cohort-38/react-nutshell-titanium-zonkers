@@ -11,6 +11,7 @@ const EventModal = ({
   handleFieldChange,
   values,
   timeError,
+  formValues,
   cancelEvent,
   isLoading
 }) => {
@@ -34,7 +35,7 @@ const EventModal = ({
             type="date"
             label="Event Date"
             onChange={handleFieldChange}
-            value={values.date}
+            value={formValues.date}
             error={dateError}
           />
 
@@ -44,7 +45,7 @@ const EventModal = ({
             label="Time"
             type="time"
             onChange={handleFieldChange}
-            value={values.time}
+            value={formValues.time}
             error={timeError}
           />
           <Form.Input

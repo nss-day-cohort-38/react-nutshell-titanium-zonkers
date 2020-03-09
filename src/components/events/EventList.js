@@ -3,6 +3,7 @@ import EventCard from "./EventCard";
 import APIManager from "../../modules/dbAPI";
 import EventModal from "./EventModal";
 import { Button } from "semantic-ui-react";
+import * as moment from "moment";
 import "./EventList.css";
 
 const EventList = () => {
@@ -17,7 +18,7 @@ const EventList = () => {
   const [nameError, setNameError] = useState(false);
   const [timeError, setTimeError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [formValues, setFormValues] = useState({ date: "00/00/000", time: "00:00" });
   const [values, setValues] = useState({
     name: "",
     date: "",
@@ -32,10 +33,12 @@ const EventList = () => {
     APIManager.getObjectByResourceNoExpand(
       "events",
       Number(sessionStorage.getItem("userId"))
-    ).then((data) => {
-        points.sort(function(a, b){return a-b});
-        setEvents(data)
-    
+    ).then(data => {
+      const sortedData = data.sort((a, b) => {
+        return a.isoTime < b.isoTime ? -1 : a.isoTime > b.isoTime ? 1 : 0;
+      });
+
+      setEvents(sortedData);
     });
   };
 
@@ -46,10 +49,9 @@ const EventList = () => {
   const handleFormSubmit = () => {
     if (
       values.location !== "" &&
-      values.date !== "" &&
+      formValues.date !== "" &&
       values.name !== "" &&
-      values.time !== ""
-
+      formValues.time !== ""
     ) {
       setFormIsValid(true);
       if (!isEditing) {
@@ -58,9 +60,7 @@ const EventList = () => {
           toggleModal();
           setValues({
             name: "",
-            date: "",
             location: "",
-            time: "",
             isoTime: "",
             userId: Number(sessionStorage.getItem("userId"))
           });
@@ -71,18 +71,15 @@ const EventList = () => {
           toggleModal();
           setValues({
             name: "",
-            date: "",
-            time: "",
             isoTime: "",
             location: "",
             userId: Number(sessionStorage.getItem("userId"))
           });
           setIsEditing(false);
         });
-
       }
     } else {
-        console.log("error")
+      console.log("error");
       if (values.name === "") {
         setNameError({
           content: "Please enter a name",
@@ -90,7 +87,7 @@ const EventList = () => {
         });
       }
 
-      if (values.date === "") {
+      if (formValues.date === "") {
         setDateError({
           content: "Please enter a date",
           pointing: "below"
@@ -104,7 +101,7 @@ const EventList = () => {
         });
       }
 
-      if (values.time === "") {
+      if (formValues.time === "") {
         setTimeError({
           content: "Please enter a time",
           pointing: "below"
@@ -114,60 +111,68 @@ const EventList = () => {
   };
 
   const handleFieldChange = evt => {
-    const changeValue = { ...values };
     const fieldId = evt.target.id;
-    const fieldValue = evt.target.value;
-    changeValue[fieldId] = fieldValue;
-    if (fieldId === "name") {
-      if (fieldValue.length < 1) {
-        setFormIsValid(false);
-        setNameError({
-          content: "Please enter a name",
-          pointing: "below"
-        });
-      } else {
-        setNameError(false);
+    if (fieldId === "date" || fieldId === "time") {
+      const changeValue = { ...formValues };
+      const fieldValue = evt.target.value;
+      changeValue[fieldId] = fieldValue;
+      if (fieldId === "date") {
+        if (fieldValue.length < 1) {
+          setFormIsValid(false);
+          setDateError({
+            content: "Please enter a date",
+            pointing: "below"
+          });
+        } else {
+          changeValue["isoTime"] = `${fieldValue}T${formValues.time}`;
+          setDateError(false);
+        }
+      } else if (fieldId === "time") {
+        if (fieldValue.length < 1) {
+          setFormIsValid(false);
+          setTimeError({
+            content: "Please enter a time",
+            pointing: "below"
+          });
+        } else {
+          const timeSplit = fieldValue.split(":");
+          const date = formValues.date; //Sec
+          changeValue["isoTime"] = `${date}T${timeSplit.join(":")}`;
+          changeValue[fieldId] = fieldValue.split(":").join(":");
+          setTimeError(false);
+        }
       }
-    } else if (fieldId === "location") {
-      setFormIsValid(false);
+      setFormValues(changeValue);
+    } else {
+      const changeValue = { ...values };
+      const fieldValue = evt.target.value;
+      changeValue[fieldId] = fieldValue;
+      if (fieldId === "name") {
+        if (fieldValue.length < 1) {
+          setFormIsValid(false);
+          setNameError({
+            content: "Please enter a name",
+            pointing: "below"
+          });
+        } else {
+          setNameError(false);
+        }
+      } else if (fieldId === "location") {
+        setFormIsValid(false);
 
-      if (fieldValue.length < 1) {
-        setFormIsValid(false);
+        if (fieldValue.length < 1) {
+          setFormIsValid(false);
 
-        setLocationError({
-          content: "Please enter a location",
-          pointing: "below"
-        });
-      } else {
-        setLocationError(false);
+          setLocationError({
+            content: "Please enter a location",
+            pointing: "below"
+          });
+        } else {
+          setLocationError(false);
+        }
       }
-    } else if (fieldId === "date") {
-      if (fieldValue.length < 1) {
-        setFormIsValid(false);
-        setDateError({
-          content: "Please enter a date",
-          pointing: "below"
-        });
-      } else {
-        changeValue["isoTime"] = `${fieldValue}T${values.time}`;
-        setDateError(false);
-      }
-    } else if (fieldId === "time") {
-      if (fieldValue.length < 1) {
-        setFormIsValid(false);
-        setTimeError({
-          content: "Please enter a time",
-          pointing: "below"
-        });
-      } else {
-        const timeSplit = fieldValue.split(":");
-        const date = values.date; //Sec
-        changeValue["isoTime"] = `${date}T${timeSplit.join(":")}`;
-        changeValue[fieldId] = fieldValue.split(":").join(":");
-        setTimeError(false);
-      }
+      setValues(changeValue);
     }
-    setValues(changeValue);
   };
 
   const cancelEvent = () => {
@@ -193,6 +198,7 @@ const EventList = () => {
     toggleModal();
     APIManager.fetchObjectById("events", id).then(data => {
       setValues(data);
+      setFormValues({date: data.isoTime.split("T")[0],time:data.isoTime.split("T")[1]});
       setIsLoading(false);
     });
   };
@@ -214,6 +220,7 @@ const EventList = () => {
         dateError={dateError}
         handleFieldChange={handleFieldChange}
         values={values}
+        formValues={formValues}
         cancelEvent={cancelEvent}
         isLoading={isLoading}
         setIsEditing={setIsEditing}
