@@ -18,7 +18,7 @@ const EventList = () => {
   const [nameError, setNameError] = useState(false);
   const [timeError, setTimeError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formValues, setFormValues] = useState({ date: "00/00/000", time: "00:00" });
+  const [formValues, setFormValues] = useState({ date: "", time: "" });
   const [values, setValues] = useState({
     name: "",
     isoTime: "",
@@ -62,6 +62,10 @@ const EventList = () => {
             isoTime: "",
             userId: Number(sessionStorage.getItem("userId"))
           });
+          setFormValues({
+            date: "",
+            time: "",
+          });
         });
       } else if (isEditing) {
         APIManager.editResource("events", values).then(() => {
@@ -72,6 +76,10 @@ const EventList = () => {
             isoTime: "",
             location: "",
             userId: Number(sessionStorage.getItem("userId"))
+          });
+          setFormValues({
+            date: "",
+            time: "",
           });
           setIsEditing(false);
         });
@@ -175,12 +183,15 @@ const EventList = () => {
   const cancelEvent = () => {
     setValues({
       name: "",
-      date: "",
-      time: "",
       isoTime: "",
       location: "",
       userId: Number(sessionStorage.getItem("userId"))
     });
+
+    setFormValues({
+        date: "",
+        time: "",
+      });
     setIsEditing(false);
     toggleModal();
   };
@@ -223,7 +234,9 @@ const EventList = () => {
         setIsEditing={setIsEditing}
       />
       <div id="events-card-container">
-        {events.map((item, i) => (
+      {
+        events.length > 0 ?
+        events.map((item, i) => (
           <EventCard
             key={i}
             cardNumber={i}
@@ -231,7 +244,10 @@ const EventList = () => {
             editEvent={editEvent}
             deleteEvent={deleteEvent}
           />
-        ))}
+        )) :
+        <div>This is empty</div>
+        
+        }
       </div>
     </>
   );

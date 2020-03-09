@@ -10,3 +10,19 @@
     font-size: 2rem;
 }
 
+@media screen and (max-width: 640px) {
+
+    #firstCard {
+        width: 290px;
+    }
+
+    #firstCard .content{
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+    }
+
+    #firstCard .meta{
+        display: none;
+    }
+  }
