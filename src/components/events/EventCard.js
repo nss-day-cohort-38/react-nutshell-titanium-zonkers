@@ -10,13 +10,33 @@ const EventCard = ({ item, editEvent, deleteEvent, cardNumber }) => {
     <Card id={cardNumber === 0 ? "firstCard" : ""}>
       <Card.Content>
         <Card.Header>
-          <div>{cardNumber === 0 && "Name:"}</div> <div>{item.name}</div>
+          {cardNumber == 0 && (
+            <Card.Meta>
+              <div>Name</div>
+            </Card.Meta>
+          )}
+          <div>{item.name}</div>
         </Card.Header>
-        <Card.Meta>
-          <div>{moment(item.isoTime, "YYYY-MM-DD HH:mm").calendar()}</div>
-        </Card.Meta>
+        {cardNumber === 0 ? (
+          <>
+            <Card.Header>
+              <Card.Meta>
+                <div>Date</div>
+              </Card.Meta>
+              <div>{moment(item.isoTime, "YYYY-MM-DD HH:mm").calendar()}</div>
+            </Card.Header>
+          </>
+        ) : (
+          <Card.Meta>
+            <div>{moment(item.isoTime, "YYYY-MM-DD HH:mm").calendar()}</div>
+          </Card.Meta>
+        )}
         <Card.Header>
-          <div>{cardNumber === 0 && "Location:"}</div>{" "}
+          {cardNumber == 0 && (
+            <Card.Meta>
+              <div>Location</div>
+            </Card.Meta>
+          )}
           <div>{item.location}</div>
         </Card.Header>
       </Card.Content>
