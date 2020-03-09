@@ -10,6 +10,7 @@ const EventModal = ({
   nameError,
   handleFieldChange,
   values,
+  timeError,
   cancelEvent,
   isLoading
 }) => {
@@ -37,6 +38,15 @@ const EventModal = ({
             error={dateError}
           />
 
+          <Form.Input
+            placeholder="Time"
+            id="time"
+            label="Time"
+            type="time"
+            onChange={handleFieldChange}
+            value={values.time}
+            error={timeError}
+          />
           <Form.Input
             placeholder="Location"
             id="location"

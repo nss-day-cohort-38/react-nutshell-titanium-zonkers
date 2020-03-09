@@ -16,6 +16,10 @@ const EventCard = ({ item, editEvent, deleteEvent, cardNumber }) => {
         <div>{cardNumber === 0 && "Date:"}</div>  <div
         >{moment(item.date, moment.ISO_8601).calendar()}</div>        
         </Card.Header>
+        <Card.Meta>
+          <div>{cardNumber === 0 && "Time:"}</div>{" "}
+          <div>{moment(item.isoTime, moment.ISO_8601).format('LLL')}</div>
+        </Card.Meta>
         <Card.Header>
           <div>{cardNumber === 0 && "Location:"}</div>{" "}
           <div>{item.location}</div>

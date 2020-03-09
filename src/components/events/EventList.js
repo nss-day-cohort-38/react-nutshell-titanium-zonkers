@@ -15,11 +15,14 @@ const EventList = () => {
   const [locationError, setLocationError] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [nameError, setNameError] = useState(false);
+  const [timeError, setTimeError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [values, setValues] = useState({
     name: "",
     date: "",
+    time: "",
+    isoTime: "",
     location: "",
     userId: Number(sessionStorage.getItem("userId"))
   });
@@ -37,7 +40,12 @@ const EventList = () => {
   };
 
   const handleFormSubmit = () => {
-    if (values.location !== "" && values.date !== "" && values.name !== "") {
+    if (
+      values.location !== "" &&
+      values.date !== "" &&
+      values.name !== "" &&
+      values.time !== ""
+    ) {
       setFormIsValid(true);
       if (!isEditing) {
         APIManager.postObjectByResource("events", values).then(() => {
@@ -47,6 +55,8 @@ const EventList = () => {
             name: "",
             date: "",
             location: "",
+            time: "",
+            isoTime: "",
             userId: Number(sessionStorage.getItem("userId"))
           });
         });
@@ -54,6 +64,14 @@ const EventList = () => {
         APIManager.editResource("events", values).then(() => {
           getEvents();
           toggleModal();
+        });
+        setValues({
+          name: "",
+          date: "",
+          time: "",
+          isoTime: "",
+          location: "",
+          userId: Number(sessionStorage.getItem("userId"))
         });
       }
     } else {
@@ -74,6 +92,13 @@ const EventList = () => {
       if (values.location === "") {
         setLocationError({
           content: "Please enter a location",
+          pointing: "below"
+        });
+      }
+
+      if (values.time === "") {
+        setTimeError({
+          content: "Please enter a time",
           pointing: "below"
         });
       }
@@ -119,6 +144,19 @@ const EventList = () => {
       } else {
         setDateError(false);
       }
+    } else if (fieldId === "time") {
+      if (fieldValue.length < 1) {
+        setFormIsValid(false);
+        setTimeError({
+          content: "Please enter a time",
+          pointing: "below"
+        });
+      } else {
+        const timeSplit = fieldValue.split(":");
+        const date = values.isoTime.split(":")[0].split("T")[0]; //Sec
+        changeValue[fieldId] = `${date}T${timeSplit.join(":")}:00Z`;
+        setTimeError(false);
+      }
     }
     setValues(changeValue);
   };
@@ -127,6 +165,8 @@ const EventList = () => {
     setValues({
       name: "",
       date: "",
+      time: "",
+      isoTime: "",
       location: "",
       userId: Number(sessionStorage.getItem("userId"))
     });
@@ -160,6 +200,7 @@ const EventList = () => {
         updateEvents={handleFormSubmit}
         isEditing={isEditing}
         locationError={locationError}
+        timeError={timeError}
         nameError={nameError}
         dateError={dateError}
         handleFieldChange={handleFieldChange}
