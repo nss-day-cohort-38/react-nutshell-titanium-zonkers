@@ -32,4 +32,12 @@
     flex-wrap: wrap;
 }
 
+@media screen and (max-width: 640px) {
+    .news-cards-container {
+        justify-content: center;
+      }
 
+      .news-card-content {
+        width: 90%;
+      }
+}
