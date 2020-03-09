@@ -10,6 +10,8 @@ const EventModal = ({
   nameError,
   handleFieldChange,
   values,
+  timeError,
+  formValues,
   cancelEvent,
   isLoading
 }) => {
@@ -33,10 +35,19 @@ const EventModal = ({
             type="date"
             label="Event Date"
             onChange={handleFieldChange}
-            value={values.date}
+            value={formValues.date}
             error={dateError}
           />
 
+          <Form.Input
+            placeholder="Time"
+            id="time"
+            label="Time"
+            type="time"
+            onChange={handleFieldChange}
+            value={formValues.time}
+            error={timeError}
+          />
           <Form.Input
             placeholder="Location"
             id="location"
@@ -45,7 +56,7 @@ const EventModal = ({
             value={values.location}
             error={locationError}
           />
-          <Button onClick={updateEvents}>{isEditing ? "Edit" : "Add"}</Button>
+          <Button onClick={updateEvents}>{isEditing ? "Save" : "Add"}</Button>
           <Button onClick={cancelEvent}>Cancel</Button>
         </Form>
       </Modal.Content>
