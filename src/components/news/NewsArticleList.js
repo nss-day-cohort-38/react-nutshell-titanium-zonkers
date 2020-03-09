@@ -39,7 +39,7 @@ const NewsArticleList = (props) => {
     };
 
     const handleFormSubmit = () => {
-        if (values.title !== "" && values.url !== "" && values.synopsis !== "") {
+        if (values.title.trim() !== "" && values.url.trim() !== "" && (values.synopsis.trim() !== "") && values.url.includes("www.") === true && (values.url.includes(".com") === true || values.url.includes(".net") === true || values.url.includes(".org") === true || (values.url.includes(".gov")) === true)) {
             setFormIsValid(true);
             if (!isEditing) {
                 dbAPI.postObjectByResource("newsArticles", values)
@@ -69,7 +69,7 @@ const NewsArticleList = (props) => {
                 });
             }
         } else {
-            if (values.title === "") {
+            if (values.title.trim() === "") {
                 setFormIsValid(false);
                 setTitleError({
                     content: "Please enter a title",
@@ -77,15 +77,15 @@ const NewsArticleList = (props) => {
                 });
             }
 
-            if (values.url === "") {
+            if (values.url.trim() === "" || values.url.includes("www.") === false ||(values.url.includes(".com") === false || values.url.includes(".net") === false || values.url.includes(".org") === false || (values.url.includes(".gov")) === false)) {
                 setFormIsValid(false);
                 setUrlError({
-                    content: "Please enter a URL",
+                    content: "Please enter a valid URL",
                     pointing: "below"
                 });
             }
 
-            if (values.synopsis === "") {
+            if (values.synopsis.trim() === "") {
                 setFormIsValid(false);
                 setSynopsisError({
                     content: "Please enter a synopsis",
