@@ -1,0 +1,20 @@
+
+
+.messagesContainer{
+    margin-top: 3vh !important;
+    height: 80vh;
+    width: 80vw !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    /* background-color: black; */
+    box-shadow: 6px 6px 6px 3px gray !important;
+    border-radius: 4px;
+}
+
+.fullMessage {
+    color: white !important;
+}
+
+#messagesBottomRow {
+    /* height: 20px !important; */
+}
