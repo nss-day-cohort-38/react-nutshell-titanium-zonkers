@@ -1,0 +1,35 @@
+/* NEWS ARTICLE CARD STYLING */
+
+.news-card-container {
+    margin: 5px !important;
+    width: 30% !important;
+}
+
+.card-articleTitle {
+    font-size: 25px !important;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.news-link:hover {
+    color: rgb(15, 56, 80);
+}
+
+.card-articleSynopsis {
+    color: gray !important;
+    text-align: center;
+    font-size: 15px !important;
+}
+
+/* NEWS ARTICLE LIST STYLING */
+
+.add-news-button-container {
+    margin-bottom: 10px;
+}
+
+.news-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
