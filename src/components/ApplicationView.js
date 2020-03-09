@@ -5,6 +5,7 @@ import EventList from "./events/EventList"
 import LoginPage from "./auth/Auth"
 import Home from "./home/Home"
 import NewsArticleList from './news/NewsArticleList';
+import MessagesMain from "./messages/MessageMain";
 
 
 const ApplicationViews = (props) => {
@@ -38,8 +39,17 @@ const ApplicationViews = (props) => {
             : <NewsArticleList
               {...props} />
           }
-        >
-        </Route>
+        />
+        <Route
+          exact
+          path="/messages"
+          render={(props) => 
+            sessionStorage.getItem("userId") === null 
+            ? <Redirect exact to="/" />
+            : <MessagesMain
+              {...props} />
+          }
+        />
         <Route component={Home} />
       </Switch>
     </div>
