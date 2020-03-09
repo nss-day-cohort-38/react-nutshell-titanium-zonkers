@@ -41,7 +41,7 @@ const ApplicationViews = (props) => {
           }
         >
         </Route>
-        {/* <Route
+        <Route
           exact
           path="/settings"
           render={(props) => 
@@ -51,7 +51,7 @@ const ApplicationViews = (props) => {
               {...props} />
           }
         >
-        </Route> */}
+        </Route>
         <Route component={Home} />
       </Switch>
     </div>
