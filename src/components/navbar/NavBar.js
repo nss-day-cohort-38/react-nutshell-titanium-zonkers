@@ -6,6 +6,8 @@ import "./NavBar.css";
 const NavBar = ({ history }) => {
   const [activeItem, setActiveItem] = useState("home");
 
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
+
   const handleItemClick = (e, { name }) => {
     history.push(`/${name}`);
     setActiveItem(name);
@@ -59,7 +61,10 @@ const NavBar = ({ history }) => {
           // onClick={handleItemClick}
           id="user-icon-container"
         >
-          <Button circular id="user-icon" disabled icon="user circle outline" />
+          <Button 
+          circular 
+          id="user-icon" 
+          icon="user circle outline" />
         </Menu.Item>
       </Menu>
     </Segment>
