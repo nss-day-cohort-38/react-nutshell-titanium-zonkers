@@ -21,8 +21,6 @@ const EventList = () => {
   const [formValues, setFormValues] = useState({ date: "00/00/000", time: "00:00" });
   const [values, setValues] = useState({
     name: "",
-    date: "",
-    time: "",
     isoTime: "",
     location: "",
     userId: Number(sessionStorage.getItem("userId"))
@@ -112,10 +110,10 @@ const EventList = () => {
 
   const handleFieldChange = evt => {
     const fieldId = evt.target.id;
+    const changeValue = {...values};
+    const fieldValue = evt.target.value;
     if (fieldId === "date" || fieldId === "time") {
-      const changeValue = { ...formValues };
-      const fieldValue = evt.target.value;
-      changeValue[fieldId] = fieldValue;
+      const changeFormValue = { ...formValues };
       if (fieldId === "date") {
         if (fieldValue.length < 1) {
           setFormIsValid(false);
@@ -124,6 +122,7 @@ const EventList = () => {
             pointing: "below"
           });
         } else {
+          changeFormValue[fieldId] = fieldValue;
           changeValue["isoTime"] = `${fieldValue}T${formValues.time}`;
           setDateError(false);
         }
@@ -136,17 +135,15 @@ const EventList = () => {
           });
         } else {
           const timeSplit = fieldValue.split(":");
-          const date = formValues.date; //Sec
-          changeValue["isoTime"] = `${date}T${timeSplit.join(":")}`;
-          changeValue[fieldId] = fieldValue.split(":").join(":");
+          changeValue["isoTime"] = `${formValues.date}T${timeSplit.join(":")}`;
+          changeFormValue[fieldId] = fieldValue.split(":").join(":");
           setTimeError(false);
         }
       }
-      setFormValues(changeValue);
+      setFormValues(changeFormValue);
     } else {
-      const changeValue = { ...values };
-      const fieldValue = evt.target.value;
       changeValue[fieldId] = fieldValue;
+
       if (fieldId === "name") {
         if (fieldValue.length < 1) {
           setFormIsValid(false);
@@ -171,8 +168,8 @@ const EventList = () => {
           setLocationError(false);
         }
       }
-      setValues(changeValue);
     }
+    setValues(changeValue);
   };
 
   const cancelEvent = () => {
