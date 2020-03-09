@@ -45,6 +45,7 @@ const EventList = () => {
       values.date !== "" &&
       values.name !== "" &&
       values.time !== ""
+
     ) {
       setFormIsValid(true);
       if (!isEditing) {
@@ -64,17 +65,20 @@ const EventList = () => {
         APIManager.editResource("events", values).then(() => {
           getEvents();
           toggleModal();
+          setValues({
+            name: "",
+            date: "",
+            time: "",
+            isoTime: "",
+            location: "",
+            userId: Number(sessionStorage.getItem("userId"))
+          });
+          setIsEditing(false);
         });
-        setValues({
-          name: "",
-          date: "",
-          time: "",
-          isoTime: "",
-          location: "",
-          userId: Number(sessionStorage.getItem("userId"))
-        });
+
       }
     } else {
+        console.log("error")
       if (values.name === "") {
         setNameError({
           content: "Please enter a name",
@@ -141,6 +145,7 @@ const EventList = () => {
           pointing: "below"
         });
       } else {
+        changeValue["isoTime"] = `${fieldValue}T${values.time}`;
         setDateError(false);
       }
     } else if (fieldId === "time") {
@@ -152,12 +157,8 @@ const EventList = () => {
         });
       } else {
         const timeSplit = fieldValue.split(":");
-        const date = values.isoTime.split(":")[0].split("T")[0]; //Sec
-        console.log(`${date}T${timeSplit.join(":")}:00Z`);
-        console.log("1994-11-05T13:15:30Z");
-        
-        
-        setValues({...values, isoTime:`${date}T${timeSplit.join(":")}:00Z`});
+        const date = values.date; //Sec
+        changeValue["isoTime"] = `${date}T${timeSplit.join(":")}`;
         changeValue[fieldId] = fieldValue.split(":").join(":");
         setTimeError(false);
       }

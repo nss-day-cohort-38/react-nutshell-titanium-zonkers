@@ -12,13 +12,8 @@ const EventCard = ({ item, editEvent, deleteEvent, cardNumber }) => {
         <Card.Header>
         <div>{cardNumber === 0 && "Name:"}</div> <div>{item.name}</div>
         </Card.Header>
-        <Card.Header>
-        <div>{cardNumber === 0 && "Date:"}</div>  <div
-        >{moment(item.date, moment.ISO_8601).calendar()}</div>        
-        </Card.Header>
         <Card.Meta>
-          <div>{cardNumber === 0 && "Time:"}</div>{" "}
-          <div>{moment(item.isoTime, moment.ISO_8601).format('LLL')}</div>
+          <div>{moment(item.isoTime, "YYYY-MM-DD HH:mm").calendar()}</div>
         </Card.Meta>
         <Card.Header>
           <div>{cardNumber === 0 && "Location:"}</div>{" "}
