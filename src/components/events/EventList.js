@@ -113,7 +113,6 @@ const EventList = () => {
     if (fieldId === "name") {
       if (fieldValue.length < 1) {
         setFormIsValid(false);
-
         setNameError({
           content: "Please enter a name",
           pointing: "below"
@@ -154,7 +153,12 @@ const EventList = () => {
       } else {
         const timeSplit = fieldValue.split(":");
         const date = values.isoTime.split(":")[0].split("T")[0]; //Sec
-        changeValue[fieldId] = `${date}T${timeSplit.join(":")}:00Z`;
+        console.log(`${date}T${timeSplit.join(":")}:00Z`);
+        console.log("1994-11-05T13:15:30Z");
+        
+        
+        setValues({...values, isoTime:`${date}T${timeSplit.join(":")}:00Z`});
+        changeValue[fieldId] = fieldValue.split(":").join(":");
         setTimeError(false);
       }
     }
