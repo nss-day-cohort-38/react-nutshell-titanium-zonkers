@@ -6,6 +6,11 @@ import ApplicationViews from './components/ApplicationView';
 import TasksMain from "./components/tasks/TasksMain"
 
 function App() {
+  window.addEventListener('storage', () => {  
+    sessionStorage.removeItem("userId");
+  });
+
+
   return (
     <Router>
       <NavBar/>
