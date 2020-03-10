@@ -6,7 +6,7 @@ import LoginPage from "./auth/Auth";
 import Home from "./home/Home";
 import NewsArticleList from "./news/NewsArticleList";
 import SettingsList from "./settings/SettingsList";
-import FriendsList from './friends/FriendsList'
+import MessagesMain from './messages/MessageMain'
 
 const ApplicationViews = props => {
   let history = useHistory();
@@ -44,17 +44,6 @@ const ApplicationViews = props => {
         />
         <Route
           exact
-          path="/friends"
-          render={props =>
-            sessionStorage.getItem("userId") === null ? (
-              <Redirect exact to="/" />
-            ) : (
-              <FriendsList />
-            )
-          }
-        />
-        <Route
-          exact
           path="/newsArticles"
           render={props =>
             sessionStorage.getItem("userId") === null ? (
@@ -63,7 +52,17 @@ const ApplicationViews = props => {
               <NewsArticleList {...props} />
             )
           }
-        ></Route>
+        />
+        <Route
+          exact
+          path="/messages"
+          render={(props) => 
+            sessionStorage.getItem("userId") === null 
+            ? <Redirect exact to="/" />
+            : <MessagesMain
+              {...props} />
+          }
+        />
         <Route
           exact
           path="/settings"
