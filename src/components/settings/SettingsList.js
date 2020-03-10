@@ -12,15 +12,16 @@ const SettingsList = (props) => {
     const [usernameModalIsOpen, setUsernameModalIsOpen] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
     const [usernameFormIsValid, setUsernameFormIsValid] = useState(false, () => usernameFormIsValid);
+    const [newUsername, setNewUsername] = useState({})
 
     const [values, setValues] = useState({
-      "id": activeUserId,
-      "username": "",
-      "email": "",
-      "password": "",
-      "isActive": true,
-      "first_name": "",
-      "last_name": ""
+        "id": activeUserId,
+        "username": "",
+        "email": "",
+        "password": "",
+        "isActive": true,
+        "first_name": "",
+        "last_name": ""
     });
 
     const getUsers = () => {
@@ -35,7 +36,37 @@ const SettingsList = (props) => {
 
     const handleFormSubmit = () => {
         if (event.target.id === "username") {
-            
+            const usernames = users.filter(user => {
+                if (newUsername === user.username) {
+                    if (usernames.length !== 0) {
+                        window.alert("Username already taken!")
+                    }
+                } else {
+                    const editedUserInfo = {
+                        "id": activeUserId,
+                        "username": values.newUsername,
+                        "email": values.email,
+                        "password": values.password,
+                        "isActive": true,
+                        "first_name": values.first_name,
+                        "last_name": values.last_name
+                    }
+
+                    dbAPI.putObjectByResource("users", editedUserInfo).then(() => {
+                        getUsers();
+                        toggleUsernameModal();
+                        setValues({
+                            "id": activeUserId,
+                            "username": "",
+                            "email": "",
+                            "password": "",
+                            "isActive": true,
+                            "first_name": "",
+                            "last_name": ""
+                        })
+                    })
+                }
+            })
         }
     }
 
