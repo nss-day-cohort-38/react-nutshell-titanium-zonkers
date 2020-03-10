@@ -6,7 +6,6 @@ import LoginPage from "./auth/Auth"
 import Home from "./home/Home"
 import NewsArticleList from './news/NewsArticleList';
 
-
 const ApplicationViews = (props) => {
   return (
     <div id="application-views-container">
