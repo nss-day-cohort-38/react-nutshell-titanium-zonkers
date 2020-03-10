@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 import SettingsUsernameModal from './SettingsUsernameModal';
+import SettingsEmailModal from './SettingsEmailModal';
 import dbAPI from '../../modules/dbAPI';
 import './Settings.css';
 
@@ -8,11 +9,16 @@ const SettingsCard = (props) => {
 
     const activeUserId = parseInt(sessionStorage.getItem("userId"));
 
+    const [userInfo, setUserInfo] = useState({});
+
     const [usernameModalIsOpen, setUsernameModalIsOpen] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
     const [usernameFormIsValid, setUsernameFormIsValid] = useState(false, () => usernameFormIsValid);
-    const [userInfo, setUserInfo] = useState({})
 
+    const [emailModalIsOpen, setEmailModalIsOpen] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [emailFormIsValid, setEmailFormIsValid] = useState(false, () => emailFormIsValid);
+   
 
     const [values, setValues] = useState({
         "id": activeUserId,
@@ -39,11 +45,24 @@ const SettingsCard = (props) => {
         setUsernameModalIsOpen(!usernameModalIsOpen);
     };
 
+    const toggleEmailModal = () => {
+        setEmailModalIsOpen(!emailModalIsOpen);
+    };
+
     const handleUsernameFormSubmit = () => {
         if (setUsernameFormIsValid) {
             dbAPI.putObjectByResource("users", values).then(() => {
                 getUser();
                 toggleUsernameModal();
+            })
+        }
+    }
+
+    const handleEmailFormSubmit = () => {
+        if (setEmailFormIsValid) {
+            dbAPI.putObjectByResource("users", values).then(() => {
+                getUser();
+                toggleEmailModal();
             })
         }
     }
@@ -60,7 +79,6 @@ const SettingsCard = (props) => {
             dbAPI.getUsers().then(users => {
                 users.map(user => {
                     if (fieldValue === user.username) {
-                        console.log(fieldValue)
                         setUsernameFormIsValid(false);
                         setUsernameError({
                             content: "Username already taken!",
@@ -69,7 +87,20 @@ const SettingsCard = (props) => {
                     }
                 });
             })
-
+        } else if (fieldId === "email") {
+            setEmailError(false)
+            setEmailFormIsValid(true)
+            dbAPI.getUsers().then(users => {
+                users.map(user => {
+                    if (fieldValue === user.email) {
+                        setEmailFormIsValid(false);
+                        setEmailError({
+                            content: "Email already taken!",
+                            pointing: "below"
+                        })
+                    }
+                });
+            })
         }
     }
 
@@ -87,6 +118,19 @@ const SettingsCard = (props) => {
         toggleUsernameModal();
     }
 
+    const cancelSettingsEmail = () => {
+        setValues({
+            "id": activeUserId,
+            "username": values.username,
+            "email": values.email,
+            "password": values.password,
+            "isActive": true,
+            "first_name": values.first_name,
+            "last_name": values.last_name
+        });
+        setEmailError(false);
+        toggleEmailModal();
+    }
 
     return (
         <>
@@ -102,7 +146,7 @@ const SettingsCard = (props) => {
                             onClick={toggleUsernameModal}
                         >Change Username</Button>
                         <Card.Header className="settings-email">Email: {userInfo.email}</Card.Header>
-                        <Button size="tiny">Change Email</Button>
+                        <Button size="tiny" onClick={toggleEmailModal}>Change Email</Button>
                         <Card.Header className="settings-password">Password:</Card.Header>
                         <Button size="tiny">Change Password</Button>
                     </Card.Content>
@@ -116,6 +160,17 @@ const SettingsCard = (props) => {
                     handleFieldChange={handleFieldChange}
                     values={values}
                     cancelSettingsUsername={cancelSettingsUsername}
+                    userInfo={userInfo}
+                />
+            </div>
+            <div className="settings-modal-container">
+                <SettingsEmailModal
+                    emailModalIsOpen={emailModalIsOpen}
+                    updateSettingsEmail={handleEmailFormSubmit}
+                    emailError={emailError}
+                    handleFieldChange={handleFieldChange}
+                    values={values}
+                    cancelSettingsEmail={cancelSettingsEmail}
                     userInfo={userInfo}
                 />
             </div>
