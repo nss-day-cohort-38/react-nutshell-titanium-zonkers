@@ -12,6 +12,7 @@ const EventList = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [isEditing, setIsEditing] = useState(false);
+  const [showPast, setShowPast] = useState(false);
 
   const [locationError, setLocationError] = useState(false);
   const [dateError, setDateError] = useState(false);
@@ -36,8 +37,31 @@ const EventList = () => {
         return a.isoTime < b.isoTime ? -1 : a.isoTime > b.isoTime ? 1 : 0;
       });
 
-      setEvents(sortedData);
+      const filteredDate = sortedData.filter((item) => {
+        return item.isoTime > moment().format("YYYY-MM-DD HH:mm");
+      })
+
+      setEvents(filteredDate);
     });
+  };
+
+  const togglePast = () => {
+    if (showPast) {
+        getEvents();
+    } else {
+        APIManager.getObjectByResourceNoExpand(
+            "events",
+            Number(sessionStorage.getItem("userId"))
+          ).then(data => {
+            const sortedData = data.sort((a, b) => {
+              return a.isoTime < b.isoTime ? -1 : a.isoTime > b.isoTime ? 1 : 0;
+            });
+    
+            setEvents(sortedData);
+          });
+    }
+    setShowPast(!showPast);
+    // setModalIsOpen(!modalIsOpen);
   };
 
   const toggleModal = () => {
@@ -225,7 +249,8 @@ const EventList = () => {
 
   return (
     <>
-      <Button onClick={toggleModal}>Add Event</Button>
+      <Button onClick={toggleModal} id="test_id">Add Event</Button>
+      <Button onClick={togglePast}>{showPast ? "Hide Past" : "Show Past"}</Button>
       <EventModal
         modalIsOpen={modalIsOpen}
         updateEvents={handleFormSubmit}
