@@ -1,12 +1,13 @@
 import React from "react"
 import { Grid, Image, Button } from "semantic-ui-react"
 import MessageList from "./MessageList"
+import FriendsList from "../friends/FriendsList"
 import "./Messages.css"
 
 
 
 const MessagesMain = () => {
-    
+ 
     return (
         <Grid celled className="messagesContainer">
         <Grid.Row id='messagesTopRow'>
@@ -22,7 +23,7 @@ const MessagesMain = () => {
                     <MessageList />
                 </Grid.Column>
                 <Grid.Column className="middleRow" width={5}>
-                    <Image src='/images/wireframe/centered-paragraph.png' />
+                    <FriendsList />
                 </Grid.Column>
             </Grid.Row> 
             
