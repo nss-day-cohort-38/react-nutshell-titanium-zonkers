@@ -1,4 +1,23 @@
-.settings-container {
-    display: flex;
+.settings {
+    display:flex;
     justify-content: center;
+    margin-top: 20px;
 }
+
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    margin-bottom: 15px;
+    width: 60%;
+}
+
+button {
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SettingsCard from './SettingsCard';
 import dbAPI from '../../modules/dbAPI';
+import './Settings.css';
 
 const SettingsList = (props) => {
 
