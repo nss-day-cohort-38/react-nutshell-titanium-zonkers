@@ -46,18 +46,18 @@ const NavBar = ({ history }) => {
           Events
         </Menu.Item>
         <Menu.Item
-          name="messages"
-          active={activeItem === "messages"}
-          onClick={handleItemClick}
-        >
-          Messages
-        </Menu.Item>
-        <Menu.Item
           name="friends"
           active={activeItem === "friends"}
           onClick={handleItemClick}
         >
           Friends
+        </Menu.Item>
+        <Menu.Item
+          name="messages"
+          active={activeItem === "messages"}
+          onClick={handleItemClick}
+        >
+          Messages
         </Menu.Item>
       </Menu>
       <Menu inverted>
