@@ -30,7 +30,8 @@ const NavBar = ({ history }) => {
           <img id="logo" src={require("./handyandy.svg")} alt="handyandy" />
           <h1 id="navbar-title">Handy Andy</h1>
         </Menu.Item>
-        <Menu.Item
+        {sessionStorage.getItem('userId') !== null
+        ? <Menu.Item
           id="news-nav-link"
           name="newsArticles"
           active={activeItem === "newsArticles"}
@@ -38,29 +39,37 @@ const NavBar = ({ history }) => {
         >
           News
         </Menu.Item>
-        <Menu.Item
+        : null }
+        {sessionStorage.getItem('userId') !== null
+        ? <Menu.Item
           name="events"
           active={activeItem === "events"}
           onClick={handleItemClick}
         >
           Events
         </Menu.Item>
-        <Menu.Item
+        : null }
+        {sessionStorage.getItem('userId') !== null
+        ? <Menu.Item
           name="friends"
           active={activeItem === "friends"}
           onClick={handleItemClick}
         >
           Friends
         </Menu.Item>
-        <Menu.Item
+        : null }
+        {sessionStorage.getItem('userId') !== null
+        ? <Menu.Item
           name="messages"
           active={activeItem === "messages"}
           onClick={handleItemClick}
         >
           Messages
         </Menu.Item>
+        : null }
       </Menu>
-      <Menu inverted>
+      {sessionStorage.getItem('userId') !== null
+      ? <Menu inverted>
         <Menu.Item
           id="user-icon-container"
         >
@@ -108,6 +117,7 @@ const NavBar = ({ history }) => {
           </Popup>
         </Menu.Item>
       </Menu>
+      : null }
     </Segment>
   );
 };
