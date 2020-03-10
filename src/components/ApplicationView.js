@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch, useHistory } from "react-router-dom";
 import "./ApplicationView.css"
 import EventList from "./events/EventList"
 import LoginPage from "./auth/Auth"
@@ -7,6 +7,7 @@ import Home from "./home/Home"
 import NewsArticleList from './news/NewsArticleList';
 import MessagesMain from "./messages/MessageMain";
 import SettingsList from './settings/SettingsList';
+
 
 const ApplicationViews = props => {
   let history = useHistory();

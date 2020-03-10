@@ -1,4 +1,9 @@
 
+#mainMessageContainer{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: right !important;
+}
 
 .messagesContainer{
     margin-top: 3vh !important;
@@ -14,7 +19,30 @@
 .fullMessage {
     color: white !important;
 }
-
-/* #messagesBottomRow {
-
-} */
+#messagesTopRow{
+    position: absolute;
+    height: 80px !important;
+    top: 134px;
+    width: 80% !important;
+}
+.topRow{
+    height: 100% !important;
+}
+#messagesMiddleRow{
+    position: absolute;
+    height: 60% !important;
+    top: 205px;
+    width: 80% !important;
+}
+.middleRow{
+    height: 100% !important;
+}
+.bottomRow {
+   height: 100%;
+}
+#messagesBottomRow{
+    position: absolute;
+    height: 100px !important;
+    bottom: 50px;
+    width: 80% !important;
+}
