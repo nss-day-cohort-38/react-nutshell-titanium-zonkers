@@ -5,7 +5,7 @@ const dbAPI = {
     return fetch(`${baseUrl}/users`).then(resp => resp.json());
   },
   getFriends(currentUserId) {
-    return fetch(`${baseUrl}/following?active_userId=${currentUserId}&_expand=user`).then(resp => resp.json());
+    return fetch(`${baseUrl}/friends?active_userId=${currentUserId}&_expand=user`).then(resp => resp.json());
   },
   getObjectByResource(resource, userId) {
     return fetch(
@@ -63,6 +63,10 @@ const dbAPI = {
       },
       body: JSON.stringify(resourceObject)
     });
+  },
+  searchUsers(property, query) {
+    return fetch(`${baseUrl}/users?${property}_like=${query}`).then(resp => resp.json());
+
   }
 };
 

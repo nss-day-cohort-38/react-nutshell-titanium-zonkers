@@ -1,28 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { Card, Button, Image } from "semantic-ui-react";
+import React, { useState, useEffect, createRef } from "react";
+import { Card, Button, Image, Icon, Popup } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import "./UserCard.css";
 import APIManager from "../../modules/dbAPI";
 
-const UserCard = ({ user, showAll, getEverything }) => {
+const UserCard = ({ user, showAll, getEverything, history }) => {
+  const contextRef = createRef();
+
   const [userInfo, setUserInfo] = useState(user);
+  const [popIsOpen, setPopIsOpen] = useState(false);
 
   const handleClick = () => {
     if (userInfo.isFriend) {
-      APIManager.deleteObjectByResource("following", userInfo.friendId).then(
+      APIManager.deleteObjectByResource("friends", userInfo.friendId).then(
         getEverything
       );
-    } else if(showAll){
-      APIManager.postObjectByResource("following", {
+    } else if (!userInfo.isFriend) {
+      APIManager.postObjectByResource("friends", {
         userId: userInfo.id,
         active_userId: Number(sessionStorage.getItem("userId"))
       }).then(getEverything);
     }
   };
+
+  const handleLinkClick = (e) => {
+    APIManager.getFriends(e.target.id.split("--")[1]).then(data => {
+      let isfriend = false;
+      data.forEach(element => {
+        if (element.userId === Number(sessionStorage.getItem("userId"))) {
+          history.push(`/profile/${userInfo.username}`)
+          isfriend = true;
+        } 
+      });
+
+      if(!isfriend){
+        setPopIsOpen(true)
+        setTimeout(() => { setPopIsOpen(false)}, 2500)
+      }
+      // setUserInfo(userObj);
+    });
+
+  };
+
   useEffect(() => {
     if (user.user) {
-        const userObj = { ...user.user };
-        userObj.isFriend = true;
-        userObj.friendId = user.id;
+      const userObj = { ...user.user };
+      userObj.isFriend = true;
+      userObj.friendId = user.id;
       setUserInfo(userObj);
     } else {
       const userObj = { ...user };
@@ -41,10 +65,8 @@ const UserCard = ({ user, showAll, getEverything }) => {
 
   return (
     <>
-      {" "}
       <Card>
         <Card.Content>
-          {/* <div className="user-card-info"> */}
           <Image
             floated="left"
             size="mini"
@@ -56,19 +78,28 @@ const UserCard = ({ user, showAll, getEverything }) => {
             floated="right"
             size="mini"
             basic
-            color="green"
+            compact
+            color={userInfo.isFriend ? "red" : "green"}
+            icon
           >
-            {userInfo.isFriend || !showAll ? "Unfollow" : "Follow"}
+            <Icon
+              name={userInfo.isFriend ? "user delete" : "add user"}
+            />
           </Button>
 
           <Card.Header>
-            {userInfo.first_name} {userInfo.last_name}{" "}
+            <Popup
+              context={contextRef}
+              content={`@${userInfo.username} needs to add you as a friend first`}
+              position="top center"
+              open={popIsOpen}
+            />
+
+            <Link id={`user--${userInfo.id}`} ref={contextRef} onClick={handleLinkClick} to={"/messages"}>
+              {userInfo.first_name} {userInfo.last_name}{" "}
+            </Link>
           </Card.Header>
           <Card.Meta>@{userInfo.username}</Card.Meta>
-          {/* </div> */}
-          {/* <div className="user-card-follow-button"> */}
-
-          {/* </div> */}
         </Card.Content>
       </Card>
     </>

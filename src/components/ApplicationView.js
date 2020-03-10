@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Route, Redirect, Switch, useHistory } from "react-router-dom";
 import "./ApplicationView.css";
 import EventList from "./events/EventList";
@@ -6,9 +6,14 @@ import LoginPage from "./auth/Auth";
 import Home from "./home/Home";
 import NewsArticleList from "./news/NewsArticleList";
 import SettingsList from "./settings/SettingsList";
-import MessagesMain from './messages/MessageMain'
+import MessagesMain from "./messages/MessageMain";
+import Profile from "./profile/Profile";
+import FriendsList from "./friends/FriendsList";
+import SearchUsers from "./friends/SearchUsers";
 
 const ApplicationViews = props => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   let history = useHistory();
   window.addEventListener("storage", () => {
     sessionStorage.removeItem("userId");
@@ -56,13 +61,48 @@ const ApplicationViews = props => {
         <Route
           exact
           path="/messages"
-          render={(props) => 
-            sessionStorage.getItem("userId") === null 
-            ? <Redirect exact to="/" />
-            : <MessagesMain
-              {...props} />
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <MessagesMain {...props} />
+            )
           }
         />
+        <Route
+          exact
+          path="/friends"
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <>
+                <FriendsList
+                  searchQuery={searchQuery}
+                  showAll={true}
+                  {...props}
+                />
+                <SearchUsers
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />{" "}
+              </>
+            )
+          }
+        />
+
+        <Route
+          exact
+          path="/profile/:username"
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <Profile user={props.match.params.username} />
+            )
+          }
+        />
+
         <Route
           exact
           path="/settings"
@@ -74,8 +114,6 @@ const ApplicationViews = props => {
             )
           }
         ></Route>
-        
-        
 
         <Route render={props => <Redirect exact to="/" />} />
       </Switch>
