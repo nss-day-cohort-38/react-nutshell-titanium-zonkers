@@ -8,7 +8,7 @@ import TaskFormTransition from "./TaskForm"
 const TasksMain = () => {
     const [isVisible, changeVisible] = useState(false)
     const [isFormVisible, changeIsFormVisible] = useState(false)
-    const [ isSubmitted, toggleSubmitted ] = useState(false)
+    const [isSubmitted, toggleSubmitted] = useState(false)
 
     const toggleVisibility = () => {
         changeVisible(!isVisible)
@@ -19,9 +19,11 @@ const TasksMain = () => {
         changeIsFormVisible(!isFormVisible)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         changeIsFormVisible(false)
     }, [isSubmitted])
+
+
 
     return (
 
