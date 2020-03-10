@@ -157,7 +157,10 @@ const NewsArticleList = (props) => {
             synopsis: "",
             created_at: new Date()
         });
-        setIsEditing(false)
+        setIsEditing(false);
+        setTitleError(false);
+        setUrlError(false);
+        setSynopsisError(false);
         toggleModal();
     };
 
