@@ -5,11 +5,11 @@ import NavBar from "./components/navbar/NavBar";
 import ApplicationViews from './components/ApplicationView';
 import TasksMain from "./components/tasks/TasksMain"
 
-function App() {
+function App(props) {
   return (
     <Router>
       <NavBar/>
-      <ApplicationViews />
+      <ApplicationViews {...props}/>
       <TasksMain />
     </Router>
     
