@@ -11,6 +11,7 @@
 #user-icon {
   opacity: 1 !important;
   /* margin: 0 auto; */
+  /* margin-right: 150px; */
 }
 
 #navbar-container {
@@ -28,12 +29,16 @@
 } */
 
 #navbar-title {
-  margin: 0;
+  margin: 0
 }
 
 #logo {
   border-radius: 100%;
   width: 50px;
   height: 50px;
-  margin: auto 0px 5px 5px;
+  margin: auto 15px 5px 5px;
+}
+
+#news-nav-link {
+  margin-left: 20px;
 }

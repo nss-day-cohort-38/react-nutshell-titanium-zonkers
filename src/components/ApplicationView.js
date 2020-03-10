@@ -6,6 +6,7 @@ import LoginPage from "./auth/Auth"
 import Home from "./home/Home"
 import NewsArticleList from './news/NewsArticleList';
 import MessagesMain from "./messages/MessageMain";
+import SettingsList from './settings/SettingsList';
 
 
 const ApplicationViews = (props) => {
@@ -50,6 +51,17 @@ const ApplicationViews = (props) => {
               {...props} />
           }
         />
+        <Route
+          exact
+          path="/settings"
+          render={(props) => 
+            sessionStorage.getItem("userId") === null 
+            ? <Redirect exact to="/" />
+            : <SettingsList
+              {...props} />
+          }
+        >
+        </Route>
         <Route component={Home} />
       </Switch>
     </div>
