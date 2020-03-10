@@ -45,6 +45,8 @@ const FriendsList = ({ searchQuery, showAll, history }) => {
     getQueryUsers().then(() => setIsLoading(false));
   }, [searchQuery]);
 
+  
+
   return (
     <Card.Group id="friend-cards">
       <Card.Header>

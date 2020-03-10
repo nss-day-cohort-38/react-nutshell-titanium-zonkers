@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Segment, Button, Popup } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import "./NavBar.css";
@@ -7,6 +7,11 @@ const NavBar = ({ history }) => {
   const [activeItem, setActiveItem] = useState("home");
 
   const [menuIsOpen, setMenuIsOpen] = useState(false)
+
+ useEffect(() => {
+   console.log(history.location.pathname.split("/")[1])
+  setActiveItem(history.location.pathname.split("/")[1])
+ }, [])
 
   const toggleMenu = () => {
     setMenuIsOpen(!menuIsOpen);
