@@ -1,9 +1,4 @@
 
-#mainMessageContainer{
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: right !important;
-}
 
 .messagesContainer{
     margin-top: 3vh !important;
@@ -13,17 +8,17 @@
     margin-right: auto !important;
     /* background-color: black; */
     box-shadow: 6px 6px 6px 3px gray !important;
-    border-radius: 4px;
+    /* border-radius: 4px; */
+    border: 2px solid black;
 }
 
-.fullMessage {
-    color: white !important;
-}
 #messagesTopRow{
     position: static;
     height: 8vh !important;
     top: 134px;
     width: 100%;
+    background-color: black;
+    color: white;
 }
 .topRow{
     height: 100% !important;
@@ -40,9 +35,100 @@
 .bottomRow {
    height: 100%;
 }
+
 #messagesBottomRow{
     position: static;
-    height: 11vh !important;
+    height: 11.5vh !important;
     bottom: 50px;
     width: 100%;
+    background-color: black;
+}
+
+/* ******** Messages Header Styling ******* */
+
+#messagesHeaderContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#messagesHeaderContainer h1{
+    color: white;
+}
+.messagesDropDown {
+    padding: 11px;
+    border: 1px solid white;
+    border-radius: 3px;
+    transition: 0.5s ease ;
+}
+
+.messagesDropDown:hover {
+    color: black;
+    background-color: white;
+    transition: 0.5s ease ;
+}
+
+/* ********* Main Message Container Styling ********** */
+
+#mainMessageContainer{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: right !important;
+    overflow: auto;
+}
+
+.fullMessage {
+    color: white !important;
+    width: 50% !important;
+}
+
+.activeUserMessage {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    /* justify-content: center !important; */
+    margin-left: 50% !important;
+}
+.messageButton {
+    border: none;
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    padding: 10px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    transition: 0.5 ease;
+    /* border-bottom: 1px solid gray !important; */
+}
+.messageButton:hover {
+    color: lightblue !important;
+    cursor: pointer;
+    transition: 0.5 ease;
+}
+.deleteButton{
+    border-left: 1px solid gray !important;
+    transition: 0.5 ease;
+}
+.deleteButton:hover{
+    color: red !important;
+    transition: 0.5 ease;
+}
+.friendButton{
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    cursor: pointer;
+}
+
+
+.friendMessage{
+    color: green !important;
+}
+.nonFriendMessage {
+    color: orange !important;
+}
+/* ******* Styling for Message Entry Component *** */
+
+.sendMessage {
+    text-align: center !important;
+}
+.sendMessage #message{
+    margin-right: 1vw;
 }

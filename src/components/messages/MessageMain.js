@@ -1,18 +1,22 @@
-import React from "react"
-import { Grid, Image, Button } from "semantic-ui-react"
+import React, { useState } from "react"
+import { Grid, Image, Button, Input } from "semantic-ui-react"
+import MessageHeader from "./MessagesHeader"
 import MessageList from "./MessageList"
 import FriendsList from "../friends/FriendsList"
+import MessageEntry from "./MessageEntry"
 import "./Messages.css"
 
 
 
 const MessagesMain = () => {
+
+    const [ messageChange, setMessageChange ] = useState(false)
  
     return (
         <Grid celled className="messagesContainer">
         <Grid.Row id='messagesTopRow'>
                 <Grid.Column className='topRow' width={11}>
-                    <Button>Send Message</Button>
+                    <MessageHeader />
                 </Grid.Column>
                 <Grid.Column className='topRow' width={5}>
                     <Button>Toggle Friends</Button>
@@ -20,7 +24,8 @@ const MessagesMain = () => {
             </Grid.Row>
             <Grid.Row id="messagesMiddleRow">
                 <Grid.Column className="middleRow" id="mainMessageContainer" width={11}>
-                    <MessageList />
+                    {/* Where the messages live! */}
+                    <MessageList messageChange={messageChange}  setMessageChange={setMessageChange}/>
                 </Grid.Column>
                 <Grid.Column className="middleRow" width={5}>
                     <FriendsList />
@@ -28,8 +33,8 @@ const MessagesMain = () => {
             </Grid.Row> 
             
             <Grid.Row id='messagesBottomRow'>
-                <Grid.Column className='bottomRow' width={11}>
-                    <Button>Send Message</Button>
+                <Grid.Column className='sendMessage bottomRow' width={11}>
+                    <MessageEntry setMessageChange={setMessageChange}/>
                 </Grid.Column>
                 <Grid.Column className='bottomRow' width={5}>
                     <Button>Toggle Friends</Button>
