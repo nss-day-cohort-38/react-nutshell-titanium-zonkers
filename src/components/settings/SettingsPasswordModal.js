@@ -2,36 +2,50 @@ import React from 'react';
 import { Form, Modal, Button } from 'semantic-ui-react';
 import './Settings.css';
 
-const SettingsUsernameModal = ({
-    usernameModalIsOpen,
-    updateSettingsUsername,
-    usernameError,
+const SettingsPasswordModal = ({
+    passwordModalIsOpen,
+    updateSettingsPassword,
+    newPasswordError,
+    oldPasswordError,
     handleFieldChange,
-    userInfo,
-    cancelSettingsUsername,
+    cancelSettingsPassword,
     isLoading
 }) => {
     return (
-        <Modal size="mini" open={usernameModalIsOpen}>
-            <Modal.Header>Update Username</Modal.Header>
-            <Modal.Header className=
-            "current-username">Current Username: {userInfo.username}</Modal.Header>
+        <Modal size="mini" open={passwordModalIsOpen}>
+            <Modal.Header>Update Password</Modal.Header>
             <Modal.Content>
                 <Form loading={isLoading}>
-                    <Form.Input
-                    placeholder="New Username"
-                    id="username"
+                <Form.Input
+                    placeholder="Old Password"
+                    id="oldPassword"
                     type="text"
-                    label="New Username"
+                    label="Old Password"
                     onChange={handleFieldChange}
-                    error={usernameError}
+                    error={oldPasswordError}
                     />
-                    <Button onClick={updateSettingsUsername}>Update</Button>
-                    <Button onClick={cancelSettingsUsername}>Cancel</Button>
+                    <Form.Input
+                    placeholder="New Password"
+                    id="password"
+                    type="text"
+                    label="New Password"
+                    onChange={handleFieldChange}
+                    error={newPasswordError}
+                    />
+                    <Form.Input
+                    placeholder="Re-Enter New Password"
+                    id="passwordReEnter"
+                    type="text"
+                    label="Re-Enter New Password"
+                    onChange={handleFieldChange}
+                    error={newPasswordError}
+                    />
+                    <Button onClick={updateSettingsPassword}>Update</Button>
+                    <Button onClick={cancelSettingsPassword}>Cancel</Button>
                 </Form>
             </Modal.Content>
         </Modal>
     )
 }
 
-export default SettingsUsernameModal;
+export default SettingsPasswordModal;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 import SettingsUsernameModal from './SettingsUsernameModal';
 import SettingsEmailModal from './SettingsEmailModal';
+import SettingsPasswordModal from './SettingsPasswordModal';
 import dbAPI from '../../modules/dbAPI';
 import './Settings.css';
 
@@ -18,7 +19,12 @@ const SettingsCard = (props) => {
     const [emailModalIsOpen, setEmailModalIsOpen] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [emailFormIsValid, setEmailFormIsValid] = useState(false, () => emailFormIsValid);
-   
+
+    const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false);
+    const [newPasswordError, setNewPasswordError] = useState(false);
+    const [oldPasswordError, setOldPasswordError] = useState(false);
+    const [passwordFormIsValid, setPasswordFormIsValid] = useState(false, () => passwordFormIsValid);
+
 
     const [values, setValues] = useState({
         "id": activeUserId,
@@ -49,6 +55,10 @@ const SettingsCard = (props) => {
         setEmailModalIsOpen(!emailModalIsOpen);
     };
 
+    const togglePasswordModal = () => {
+        setPasswordModalIsOpen(!passwordModalIsOpen);
+    };
+
     const handleUsernameFormSubmit = () => {
         if (setUsernameFormIsValid) {
             dbAPI.putObjectByResource("users", values).then(() => {
@@ -65,6 +75,10 @@ const SettingsCard = (props) => {
                 toggleEmailModal();
             })
         }
+    }
+
+    const handlePasswordFormSubmit = () => {
+
     }
 
     const handleFieldChange = evt => {
@@ -101,6 +115,8 @@ const SettingsCard = (props) => {
                     }
                 });
             })
+        } else if (fieldId === "oldPassword") {
+            
         }
     }
 
@@ -132,6 +148,21 @@ const SettingsCard = (props) => {
         toggleEmailModal();
     }
 
+    const cancelSettingsPassword = () => {
+        setValues({
+            "id": activeUserId,
+            "username": values.username,
+            "email": values.email,
+            "password": values.password,
+            "isActive": true,
+            "first_name": values.first_name,
+            "last_name": values.last_name
+        });
+        setNewPasswordError(false);
+        setOldPasswordError(false);
+        togglePasswordModal();
+    }
+
     return (
         <>
             <div className="settings">
@@ -146,9 +177,13 @@ const SettingsCard = (props) => {
                             onClick={toggleUsernameModal}
                         >Change Username</Button>
                         <Card.Header className="settings-email">Email: {userInfo.email}</Card.Header>
-                        <Button size="tiny" onClick={toggleEmailModal}>Change Email</Button>
+                        <Button size="tiny"
+                            onClick={toggleEmailModal}
+                        >Change Email</Button>
                         <Card.Header className="settings-password">Password:</Card.Header>
-                        <Button size="tiny">Change Password</Button>
+                        <Button size="tiny"
+                            onClick={togglePasswordModal}
+                        >Change Password</Button>
                     </Card.Content>
                 </Card>
             </div>
@@ -172,6 +207,17 @@ const SettingsCard = (props) => {
                     values={values}
                     cancelSettingsEmail={cancelSettingsEmail}
                     userInfo={userInfo}
+                />
+            </div>
+            <div className="settings-modal-container">
+                <SettingsPasswordModal
+                    passwordModalIsOpen={passwordModalIsOpen}
+                    updateSettingsPassword={handlePasswordFormSubmit}
+                    newPasswordError={newPasswordError}
+                    oldPasswordError={oldPasswordError}
+                    handleFieldChange={handleFieldChange}
+                    values={values}
+                    cancelSettingsPassword={cancelSettingsPassword}
                 />
             </div>
         </>
