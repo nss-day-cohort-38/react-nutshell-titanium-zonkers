@@ -1,8 +1,9 @@
 import React from 'react';
 import { Form, Modal, Button } from 'semantic-ui-react';
+import './Settings.css';
 
 const SettingsUsernameModal = ({
-    modalIsOpen,
+    usernameModalIsOpen,
     updateSettingsUsername,
     usernameError,
     handleFieldChange,
@@ -11,9 +12,10 @@ const SettingsUsernameModal = ({
     isLoading
 }) => {
     return (
-        <Modal open={modalIsOpen}>
+        <Modal open={usernameModalIsOpen}>
             <Modal.Header>Update Username</Modal.Header>
-            <Modal.Descripsion>Current Username: {values.username}</Modal.Descripsion>
+            <Modal.Header className=
+            "current-username">Current Username: {values.username}</Modal.Header>
             <Modal.Content>
                 <Form loading={isLoading}>
                     <Form.Input
@@ -22,7 +24,7 @@ const SettingsUsernameModal = ({
                     type="text"
                     label="New Username"
                     onChange={handleFieldChange}
-                    value={values.username}
+                    value=""
                     error={usernameError}
                     />
                     <Button onClick={updateSettingsUsername}>Update</Button>
