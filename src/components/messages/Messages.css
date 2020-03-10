@@ -20,19 +20,19 @@
     color: white !important;
 }
 #messagesTopRow{
-    position: absolute;
-    height: 80px !important;
+    position: static;
+    height: 8vh !important;
     top: 134px;
-    width: 80% !important;
+    width: 100%;
 }
 .topRow{
     height: 100% !important;
 }
 #messagesMiddleRow{
-    position: absolute;
-    height: 530px !important;
+    position: static;
+    height: 60vh !important;
     top: 205px;
-    width: 80% !important;
+    width: 100%;
 }
 .middleRow{
     height: 100% !important;
@@ -41,8 +41,8 @@
    height: 100%;
 }
 #messagesBottomRow{
-    position: absolute;
-    height: 100px !important;
+    position: static;
+    height: 11vh !important;
     bottom: 50px;
-    width: 80% !important;
+    width: 100%;
 }
