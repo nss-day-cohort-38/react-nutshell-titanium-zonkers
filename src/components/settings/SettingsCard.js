@@ -8,11 +8,11 @@ const SettingsCard = (props) => {
 
     const activeUserId = parseInt(sessionStorage.getItem("userId"));
 
-    const [users, setUsers] = useState([]);
     const [usernameModalIsOpen, setUsernameModalIsOpen] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
     const [usernameFormIsValid, setUsernameFormIsValid] = useState(false, () => usernameFormIsValid);
-    const [newUsername, setNewUsername] = useState({})
+    const [userInfo, setUserInfo] = useState({})
+
 
     const [values, setValues] = useState({
         "id": activeUserId,
@@ -25,7 +25,10 @@ const SettingsCard = (props) => {
     });
 
     const getUser = () => {
-        return dbAPI.fetchObjectById("users", activeUserId).then(setValues);
+        return dbAPI.fetchObjectById("users", activeUserId).then((data) => {
+            setValues(data);
+            setUserInfo(data)
+        })
     };
 
     useEffect(() => {
@@ -36,42 +39,11 @@ const SettingsCard = (props) => {
         setUsernameModalIsOpen(!usernameModalIsOpen);
     };
 
-    const handleFormSubmit = (evt) => {
-        if (evt.target.id === "username") {
-            const usernames = users.filter(user => {
-                if (newUsername === user.username) {
-                    if (usernames.length !== 0) {
-                        setUsernameFormIsValid(false);
-                        setUsernameError({
-                            content: "Username already taken!",
-                            pointing: "below"
-                        })
-                    }
-                } else {
-                    const editedUserInfo = {
-                        "id": activeUserId,
-                        "username": values.newUsername,
-                        "email": values.email,
-                        "password": values.password,
-                        "isActive": true,
-                        "first_name": values.first_name,
-                        "last_name": values.last_name
-                    }
-
-                    dbAPI.putObjectByResource("users", editedUserInfo).then(() => {
-                        getUser();
-                        toggleUsernameModal();
-                        setValues({
-                            "id": activeUserId,
-                            "username": "",
-                            "email": "",
-                            "password": "",
-                            "isActive": true,
-                            "first_name": "",
-                            "last_name": ""
-                        })
-                    })
-                }
+    const handleUsernameFormSubmit = () => {
+        if (setUsernameFormIsValid) {
+            dbAPI.putObjectByResource("users", values).then(() => {
+                getUser();
+                toggleUsernameModal();
             })
         }
     }
@@ -81,11 +53,23 @@ const SettingsCard = (props) => {
         const fieldId = evt.target.id;
         let fieldValue = evt.target.value;
         changeValue[fieldId] = fieldValue;
+        setValues(changeValue)
         if (fieldId === "username") {
-            if (fieldValue.length >= 1) {
-                setUsernameError(false);
-            }
-            setValues(changeValue);
+            setUsernameError(false)
+            setUsernameFormIsValid(true)
+            dbAPI.getUsers().then(users => {
+                users.map(user => {
+                    if (fieldValue === user.username) {
+                        console.log(fieldValue)
+                        setUsernameFormIsValid(false);
+                        setUsernameError({
+                            content: "Username already taken!",
+                            pointing: "below"
+                        })
+                    }
+                });
+            })
+
         }
     }
 
@@ -106,32 +90,33 @@ const SettingsCard = (props) => {
 
     return (
         <>
-        <div className="settings">
-            <Card
-                key={values.id}
-                user={props.user} 
-                className="settings-container">
-                <Card.Content className="settings-content">
-                    <Image src={require("./profile-icon.png")} />
-                    <Card.Header className="settings-username">Username: {values.username}</Card.Header>
-                    <Button size="tiny"
-                        onClick={toggleUsernameModal}
-                    >Change Username</Button>
-                    <Card.Header className="settings-email">Email: {values.email}</Card.Header>
-                    <Button size="tiny">Change Email</Button>
-                    <Card.Header className="settings-password">Password:</Card.Header>
-                    <Button size="tiny">Change Password</Button>
-                </Card.Content>
-            </Card>
+            <div className="settings">
+                <Card
+                    key={userInfo.id}
+                    user={props.user}
+                    className="settings-container">
+                    <Card.Content className="settings-content">
+                        <Image src={require("./profile-icon.png")} />
+                        <Card.Header className="settings-username">Username: {userInfo.username}</Card.Header>
+                        <Button size="tiny"
+                            onClick={toggleUsernameModal}
+                        >Change Username</Button>
+                        <Card.Header className="settings-email">Email: {userInfo.email}</Card.Header>
+                        <Button size="tiny">Change Email</Button>
+                        <Card.Header className="settings-password">Password:</Card.Header>
+                        <Button size="tiny">Change Password</Button>
+                    </Card.Content>
+                </Card>
             </div>
             <div className="settings-modal-container">
                 <SettingsUsernameModal
                     usernameModalIsOpen={usernameModalIsOpen}
-                    updateSettingsUsername={handleFormSubmit}
+                    updateSettingsUsername={handleUsernameFormSubmit}
                     usernameError={usernameError}
                     handleFieldChange={handleFieldChange}
                     values={values}
                     cancelSettingsUsername={cancelSettingsUsername}
+                    userInfo={userInfo}
                 />
             </div>
         </>

@@ -7,15 +7,15 @@ const SettingsUsernameModal = ({
     updateSettingsUsername,
     usernameError,
     handleFieldChange,
-    values,
+    userInfo,
     cancelSettingsUsername,
     isLoading
 }) => {
     return (
-        <Modal open={usernameModalIsOpen}>
+        <Modal size="mini" open={usernameModalIsOpen}>
             <Modal.Header>Update Username</Modal.Header>
             <Modal.Header className=
-            "current-username">Current Username: {values.username}</Modal.Header>
+            "current-username">Current Username: {userInfo.username}</Modal.Header>
             <Modal.Content>
                 <Form loading={isLoading}>
                     <Form.Input
@@ -24,7 +24,6 @@ const SettingsUsernameModal = ({
                     type="text"
                     label="New Username"
                     onChange={handleFieldChange}
-                    value=""
                     error={usernameError}
                     />
                     <Button onClick={updateSettingsUsername}>Update</Button>
