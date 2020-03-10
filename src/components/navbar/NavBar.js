@@ -31,11 +31,19 @@ const NavBar = ({ history }) => {
           <h1 id="navbar-title">Handy Andy</h1>
         </Menu.Item>
         <Menu.Item
+          id="news-nav-link"
           name="newsArticles"
           active={activeItem === "newsArticles"}
           onClick={handleItemClick}
         >
           News
+        </Menu.Item>
+        <Menu.Item
+          name="events"
+          active={activeItem === "events"}
+          onClick={handleItemClick}
+        >
+          Events
         </Menu.Item>
         <Menu.Item
           name="messages"
@@ -50,20 +58,6 @@ const NavBar = ({ history }) => {
           onClick={handleItemClick}
         >
           Friends
-        </Menu.Item>
-        <Menu.Item
-          name="tasks"
-          active={activeItem === "tasks"}
-          onClick={handleItemClick}
-        >
-          Tasks
-        </Menu.Item>
-        <Menu.Item
-          name="events"
-          active={activeItem === "events"}
-          onClick={handleItemClick}
-        >
-          Events
         </Menu.Item>
       </Menu>
       <Menu inverted>
