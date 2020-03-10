@@ -8,8 +8,14 @@ import NewsArticleList from './news/NewsArticleList';
 import MessagesMain from "./messages/MessageMain";
 import SettingsList from './settings/SettingsList';
 
+const ApplicationViews = props => {
+  let history = useHistory();
+  window.addEventListener("storage", () => {
+    sessionStorage.removeItem("userId");
 
-const ApplicationViews = (props) => {
+    history.push("/");
+  });
+
   return (
     <div id="application-views-container">
       <Switch>
@@ -17,28 +23,34 @@ const ApplicationViews = (props) => {
           exact
           path="/"
           render={props =>
-            sessionStorage.getItem('userId') === null
-              ? <LoginPage {...props} />
-              : <Home />
+            sessionStorage.getItem("userId") === null ? (
+              <LoginPage {...props} />
+            ) : (
+              <Home />
+            )
           }
         />
+
         <Route
           exact
           path="/events"
           render={props =>
-            sessionStorage.getItem('userId') === null
-              ? <Redirect exact to="/" />
-              : <EventList />
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <EventList />
+            )
           }
         />
         <Route
           exact
           path="/newsArticles"
-          render={(props) => 
-            sessionStorage.getItem("userId") === null 
-            ? <Redirect exact to="/" />
-            : <NewsArticleList
-              {...props} />
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <NewsArticleList {...props} />
+            )
           }
         />
         <Route
@@ -54,15 +66,15 @@ const ApplicationViews = (props) => {
         <Route
           exact
           path="/settings"
-          render={(props) => 
-            sessionStorage.getItem("userId") === null 
-            ? <Redirect exact to="/" />
-            : <SettingsList
-              {...props} />
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <SettingsList {...props} />
+            )
           }
-        >
-        </Route>
-        <Route component={Home} />
+        ></Route>
+        <Route render={props => <Redirect exact to="/" />} />
       </Switch>
     </div>
   );
