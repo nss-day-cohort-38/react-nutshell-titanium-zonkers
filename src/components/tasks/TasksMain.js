@@ -23,8 +23,6 @@ const TasksMain = () => {
         changeIsFormVisible(false)
     }, [isSubmitted])
 
-
-
     return (
 
         <div className="tasksContainer">
