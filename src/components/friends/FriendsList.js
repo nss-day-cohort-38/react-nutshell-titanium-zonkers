@@ -50,16 +50,16 @@ const FriendsList = ({ searchQuery, showAll, history }) => {
   return (
     <Card.Group id="friend-cards">
       <Card.Header>
-        {history.location.pathname !== "/friends" &&
+        {history.location.pathname !== "/users" &&
           (searchQuery === ""
             ? showAll
               ? "Showing All Users"
               : "Showing Friends"
             : `Showing results for @${searchQuery}`)}
       </Card.Header>
-      <Dimmer active={isLoading} inverted>
+      {/* <Dimmer active={isLoading} inverted>
         <Loader />
-      </Dimmer>
+      </Dimmer> */}
       {searchQuery === ""
         ? showAll
           ? allUsers.map(user => {

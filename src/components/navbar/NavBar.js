@@ -9,7 +9,6 @@ const NavBar = ({ history }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
  useEffect(() => {
-   console.log(history.location.pathname.split("/")[1])
   setActiveItem(history.location.pathname.split("/")[1])
  }, [])
 
@@ -56,8 +55,8 @@ const NavBar = ({ history }) => {
         : null }
         {sessionStorage.getItem('userId') !== null
         ? <Menu.Item
-          name="friends"
-          active={activeItem === "friends"}
+          name="users"
+          active={activeItem === "users"}
           onClick={handleItemClick}
         >
           Friends

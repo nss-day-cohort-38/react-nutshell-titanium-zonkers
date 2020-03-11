@@ -26,7 +26,7 @@ const MessagesMain = ({history}) => {
                 <Grid.Column className="middleRow" id="mainMessageContainer" width={11}>
                     <MessageList />
                 </Grid.Column>
-                <Grid.Column className="middleRow" width={5}>
+                <Grid.Column id="friends-list-column" className="middleRow" width={5}>
                     <FriendsList history={history} showAll={showAll} searchQuery={searchQuery}/>
                 </Grid.Column>
             </Grid.Row> 

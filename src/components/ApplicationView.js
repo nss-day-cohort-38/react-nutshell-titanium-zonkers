@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Route, Redirect, Switch, useHistory } from "react-router-dom";
 import "./ApplicationView.css";
 import EventList from "./events/EventList";
@@ -71,21 +71,21 @@ const ApplicationViews = props => {
         />
         <Route
           exact
-          path="/friends"
+          path="/users"
           render={props =>
             sessionStorage.getItem("userId") === null ? (
               <Redirect exact to="/" />
             ) : (
               <>
+                <SearchUsers
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />{" "}
                 <FriendsList
                   searchQuery={searchQuery}
                   showAll={true}
                   {...props}
                 />
-                <SearchUsers
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                />{" "}
               </>
             )
           }

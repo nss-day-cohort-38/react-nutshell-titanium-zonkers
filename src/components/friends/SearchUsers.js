@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "semantic-ui-react";
+import './SearchUsers.css'
 
 const SearchUsers = ({setSearchQuery, searchQuery}) => {
 
@@ -8,7 +9,7 @@ const SearchUsers = ({setSearchQuery, searchQuery}) => {
     }
 
   return (
-    <Input icon="at" onChange={handleChange} value={searchQuery} transparent iconPosition="left" placeholder="Search users..." />
+    <Input icon="at" id="search-users" onChange={handleChange} value={searchQuery} transparent iconPosition="left" placeholder="Search users..." />
   );
 };
 
