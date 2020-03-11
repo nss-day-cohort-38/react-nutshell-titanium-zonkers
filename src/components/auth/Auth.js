@@ -47,8 +47,7 @@ const LoginPage = (props) => {
                 window.alert('Wrong email or password. Please try again. If you do not have an account, click the sign up button to create one.');
             } else {
                 sessionStorage.setItem('userId', JSON.stringify(userObject[0].id));
-                
-                // dbAPI.patchObjectByResource('users', userObject[0].id, { "is_active": true })
+                props.setIsActiveUser(true)
             };
         });
         props.history.push('/')

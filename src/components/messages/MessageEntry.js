@@ -49,10 +49,6 @@ const MessageEntry = ({ setMessageChange, forum }) => {
         }
     };
 
-    useEffect(()=>{
-        console.log(imageUrl)
-    }, [imageUrl])
-
     return (
 
         <>

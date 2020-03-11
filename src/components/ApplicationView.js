@@ -9,7 +9,7 @@ import MessagesMain from "./messages/MessageMain";
 import SettingsList from './settings/SettingsList';
 
 
-const ApplicationViews = props => {
+const ApplicationViews = ({props, setIsActiveUser}) => {
   let history = useHistory();
   window.addEventListener("storage", () => {
     sessionStorage.removeItem("userId");
@@ -25,7 +25,7 @@ const ApplicationViews = props => {
           path="/"
           render={props =>
             sessionStorage.getItem("userId") === null ? (
-              <LoginPage {...props} />
+              <LoginPage {...props} setIsActiveUser={setIsActiveUser}/>
             ) : (
               <Home />
             )
