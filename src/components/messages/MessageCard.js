@@ -88,6 +88,14 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
         }
     }
 
+    const handleUserImage = () => {
+        if(message.user.image === undefined || message.user.image === "") {
+            return <img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgflip.com%2F1975nj.jpg&f=1&nofb=1' />
+        } else {
+            return <img src={`${message.user.image}`} />
+        }
+    }
+
     useEffect(()=>{
         checkToSeeIfFriends()
     }, [messageChange])
@@ -95,7 +103,7 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
     return (
         <Feed.Event className={`fullMessage ${messageOwnerClass()}`}>
             <Feed.Label>
-                <img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgflip.com%2F1975nj.jpg&f=1&nofb=1' />
+                {handleUserImage()}
             </Feed.Label>
             <Feed.Content>
                 <Feed.Summary>

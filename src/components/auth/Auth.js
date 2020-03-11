@@ -8,7 +8,7 @@ import dbAPI from "../../modules/dbAPI"
 const LoginPage = (props) => {
 
     const [credentials, setCredentials] = useState({is_active: true})
-    const [newCredentials, setNewCredentials] = useState({ first_name: "", last_name: "", username: "", email: "", password: "", is_active: true })
+    const [newCredentials, setNewCredentials] = useState({ first_name: "", last_name: "", username: "", email: "", password: "", is_active: true, image: "" })
     const [ confirmedPassword, changeConfirmedPassword ] = useState({password_2: ""})
     const [ modalOpen, handleModal ] = useState(false);
 
