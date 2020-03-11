@@ -49,13 +49,15 @@
 #messagesHeaderContainer{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
-#messagesHeaderContainer h1{
+#messagesHeaderContainer:first-child h1{
     color: white;
+    margin-top: 0.6vh;
 }
 .messagesDropDown {
     padding: 11px;
+    margin-bottom: 1.5vh;
     border: 1px solid white;
     border-radius: 3px;
     transition: 0.5s ease ;
@@ -139,4 +141,17 @@ a.user{
 }
 .sendMessage #message{
     margin-right: 1vw;
+    width: 25vw !important;
+}
+.imageUpload {
+    color: white !important;
+    border-radius: 0px !important;
+    background: none !important;
+    border-bottom: 2px solid white !important;
+    padding: 2px !important;
+    margin-right: 2vw !important;
+}
+.imageUpload:hover{
+    color: lightblue !important;
+    border-color: lightblue !important;
 }
