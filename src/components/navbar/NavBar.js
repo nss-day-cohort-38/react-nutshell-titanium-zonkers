@@ -102,7 +102,7 @@ const NavBar = ({ history, setIsActiveUser, isActiveUser }) => {
                 <Image
                   size="mini"
                   circular
-                  src={user.image}
+                  src={user.image === "" ? "https://react.semantic-ui.com/images/wireframe/square-image.png" : user.image}
                   id="user-icon"
                   icon="user circle outline"
                   onClick={() => {

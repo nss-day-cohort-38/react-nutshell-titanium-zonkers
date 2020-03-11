@@ -12,7 +12,7 @@ const ProfileHeader = ({userInfo}) => {
       {" "}
       <div>
         <Image
-          src={userInfo.image}
+          src={userInfo.image === "" ? "https://react.semantic-ui.com/images/wireframe/square-image.png" : userInfo.image}
           size="medium"
           circular
         />
