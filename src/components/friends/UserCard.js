@@ -70,7 +70,7 @@ const UserCard = ({ user, showAll, getEverything, history }) => {
           <Image
             floated="left"
             size="mini"
-            src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
+            src={userInfo.image === "" || !userInfo.image? "https://react.semantic-ui.com/images/wireframe/square-image.png" : userInfo.image}
           />
 
           <Button
