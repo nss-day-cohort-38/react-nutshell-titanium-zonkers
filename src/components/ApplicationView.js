@@ -5,11 +5,11 @@ import EventList from "./events/EventList";
 import LoginPage from "./auth/Auth";
 import Home from "./home/Home";
 import NewsArticleList from "./news/NewsArticleList";
-import SettingsList from "./settings/SettingsList";
-import MessagesMain from "./messages/MessageMain";
 import Profile from "./profile/Profile";
 import FriendsList from "./friends/FriendsList";
 import SearchUsers from "./friends/SearchUsers";
+import SettingsCard from "./settings/SettingsCard";
+import MessagesMain from "./messages/MessageMain";
 
 const ApplicationViews = ({ props, setIsActiveUser }) => {
   let history = useHistory();
@@ -109,7 +109,7 @@ const ApplicationViews = ({ props, setIsActiveUser }) => {
             sessionStorage.getItem("userId") === null ? (
               <Redirect exact to="/" />
             ) : (
-              <SettingsList {...props} />
+              <SettingsCard {...props} />
             )
           }
         ></Route>

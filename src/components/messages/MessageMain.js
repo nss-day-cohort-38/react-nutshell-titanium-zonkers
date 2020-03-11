@@ -23,7 +23,7 @@ const MessagesMain = ({history}) => {
                 <Grid.Column className='topRow' width={11}>
                     <MessageHeader forum={forum} setForum={setForum} />
                 </Grid.Column>
-                <Grid.Column className='topRow' width={5}>
+                <Grid.Column className='topRow friend-column' width={5}>
     <Button onClick={() => setShowAll(!showAll)}>{showAll ? "Show Friends" : "Show All Users"}</Button>
                 </Grid.Column>
             </Grid.Row>
@@ -32,7 +32,7 @@ const MessagesMain = ({history}) => {
                     {/* Where the messages live! */}
                     <MessageList messageChange={messageChange}  setMessageChange={setMessageChange} forum={forum} />
                 </Grid.Column>
-                <Grid.Column id="friends-list-column" className="middleRow" width={5}>
+                <Grid.Column id="friends-list-column" className="middleRow friend-column" width={5}>
                     <FriendsList history={history} showAll={showAll} searchQuery={searchQuery}/>
                 </Grid.Column>
             </Grid.Row> 
@@ -41,7 +41,7 @@ const MessagesMain = ({history}) => {
                 <Grid.Column className='sendMessage bottomRow' width={11}>
                     <MessageEntry setMessageChange={setMessageChange} forum={forum}/>
                 </Grid.Column>
-                <Grid.Column className='bottomRow' width={5}>
+                <Grid.Column className='bottomRow friend-column' width={5}>
                     <SearchUsers  searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
                 </Grid.Column>
             </Grid.Row>
