@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Button, Popup, Feed, Icon } from "semantic-ui-react"
 import dbAPI from "../../modules/dbAPI"
 
-const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, setIsFriend, friendObject}) => {
+const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, setIsFriend, friendObject, handleUserImage}) => {
 
     const activeUserId = parseInt(sessionStorage.getItem('userId'));
     const [ addFriendPop, setAddFriendPop ] = useState(false)
@@ -57,9 +57,11 @@ const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, 
             on="click"
             position='bottom right'
             open={addFriendPop}>
+                <Feed>
                 <Feed.Label>
-                    <img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgflip.com%2F1975nj.jpg&f=1&nofb=1' />
-                </Feed.Label> 
+                    {handleUserImage()}
+                </Feed.Label>
+                </Feed>
                 {friendOrNotMessage()}
                 <Button color="grey" content="Cancel"
                         onClick={() => {

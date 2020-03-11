@@ -90,9 +90,9 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
 
     const handleUserImage = () => {
         if(message.user.image === undefined || message.user.image === "") {
-            return <img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgflip.com%2F1975nj.jpg&f=1&nofb=1' />
+            return <Image className="userImageLabel" src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgflip.com%2F1975nj.jpg&f=1&nofb=1' />
         } else {
-            return <img src={`${message.user.image}`} />
+            return <Image className="userImageLabel" src={`${message.user.image}`} alt="Image Failed To Load"/>
         }
     }
 
@@ -113,7 +113,7 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
                 </Feed.Summary>
                 {convertImageUrl()}
                 <Feed.Meta className={messageOwnerClass()}>
-                {activeUserId!==message.user.id ? <AddOrRemoveFriend message={message} setMessageChange={setMessageChange} isFriend={isFriend} setIsFriend={setIsFriend} friendObject={friendObject}/> : null }
+                {activeUserId!==message.user.id ? <AddOrRemoveFriend message={message} setMessageChange={setMessageChange} isFriend={isFriend} setIsFriend={setIsFriend} friendObject={friendObject} handleUserImage={handleUserImage}/> : null }
                 {messageOwnerButtons()}
                 </Feed.Meta>
             </Feed.Content>

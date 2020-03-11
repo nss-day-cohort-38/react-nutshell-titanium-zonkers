@@ -134,6 +134,11 @@ a.user{
 .nonFriendMessage {
     color: #ff6500 !important;
 }
+.userImageLabel{
+    border-radius: 50px !important;
+    width: 20vw;
+    max-width: 200px !important;
+}
 /* ******* Styling for Message Entry Component *** */
 
 .sendMessage {
