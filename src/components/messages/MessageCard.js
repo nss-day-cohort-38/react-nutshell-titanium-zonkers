@@ -40,6 +40,18 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
         return moment(messageTimestamp).fromNow()
     };
 
+    const addLike = () => {
+        let likesPlusOne = 1
+        if (message.likes === undefined) {
+            likesPlusOne = 1
+        } else {
+            likesPlusOne = (message.likes += 1)
+        }
+
+        return dbAPI.patchObjectByResource('messages', message.id, { 'likes': likesPlusOne })
+                .then(setMessageChange(true))
+    }
+
     const messageOwnerButtons = () => {
         if (activeUserId === message.user.id) {
             return (
@@ -48,7 +60,7 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
         } else {
             return (
                 <Feed.Like>
-                    <Icon name='like' />4 Likes
+                    <Icon name='like' onClick={addLike}/>{message.likes !== undefined ? message.likes : 0} Likes
                 </Feed.Like>
             );
         };
@@ -66,7 +78,6 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
 
     const convertImageUrl = () => {
         if (message.image !== undefined && message.image !== "") {
-            console.log(message.image)
             return (
                 <Feed.Meta>
                     <Image src={message.image} alt='image not showing' />
