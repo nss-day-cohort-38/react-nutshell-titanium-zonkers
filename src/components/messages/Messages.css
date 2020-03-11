@@ -163,3 +163,12 @@ a.user {
   border-color: lightblue !important;
 }
 
+#showFriendsUsersButtonContainer{
+  display: flex !important;
+  justify-content: center !important;
+}
+#showFriendsUsersButtonContainer{
+  margin-top: 3px !important;
+  height: 35px !important;
+}
+

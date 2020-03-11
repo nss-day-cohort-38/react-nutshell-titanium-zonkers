@@ -5,14 +5,32 @@
     width: 100vw;
     margin-left: -5% !important;
     background-color: #1a1b1d;
+    overflow: auto;
 }
 
 #handyAndy {
     margin-top: 15vh;
     margin-left: 3vw;
-    width: 50% !important;
+    width: 40vw !important;
     cursor: pointer;
 }
 #handyAndy:hover {
     transform: rotate(-10deg);
+}
+
+#speechBubble{
+    position: absolute;
+    top: 3vh;
+    right: 15vw;
+    width: 43vw;
+}
+
+#homeMessage{
+    position: absolute;
+    font-size: 3.7vw;
+    color: white;
+    width: 30vw;
+    right: 20vw;
+    top: 10vh;
+    text-align: center;
 }
