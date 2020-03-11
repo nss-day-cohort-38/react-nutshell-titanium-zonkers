@@ -7,5 +7,10 @@
 
 #profile-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+#user-profile-information {
+    width: 25%;
+    padding: 50px 20px;
 }
