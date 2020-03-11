@@ -2,7 +2,7 @@ import React, { useEffect, createRef } from 'react';
 import { Form, Modal, Button } from 'semantic-ui-react';
 import './Settings.css';
 
-function SettingsPasswordModal({
+const SettingsPasswordModal = ({
     passwordModalIsOpen,
     updateSettingsPassword,
     newPasswordError,
@@ -10,22 +10,13 @@ function SettingsPasswordModal({
     handleFieldChange,
     cancelSettingsPassword,
     isLoading,
-    oldPasswordNode
-}) {
-
-    const inputRef = createRef()
-    
-    useEffect(() => {
-        console.log(inputRef.current)
-    }, [])
-    
+}) => {
     return (
         <Modal size="mini" open={passwordModalIsOpen}>
             <Modal.Header>Update Password</Modal.Header>
             <Modal.Content>
                 <Form loading={isLoading}>
                     <Form.Input
-                        ref={inputRef}
                         placeholder="Old Password"
                         id="oldPassword"
                         type="text"
@@ -34,7 +25,6 @@ function SettingsPasswordModal({
                         error={oldPasswordError}
                     />
                     <Form.Input
-                        // ref={ref.newPasswordNode}
                         placeholder="New Password"
                         id="password"
                         type="text"
@@ -43,9 +33,8 @@ function SettingsPasswordModal({
                         error={newPasswordError}
                     />
                     <Form.Input
-                        // ref={ref.newPasswordReEnterNode}
                         placeholder="Re-Enter New Password"
-                        id="passwordReEnter"
+                        id="newPasswordReEnter"
                         type="text"
                         label="Re-Enter New Password"
                         onChange={handleFieldChange}
