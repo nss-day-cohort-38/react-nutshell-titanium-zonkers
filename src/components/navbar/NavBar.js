@@ -119,13 +119,6 @@ const NavBar = ({ history, setIsActiveUser, isActiveUser }) => {
             >
               <Menu size="mini" inverted vertical>
                 <Menu.Item
-                  id="myProfile"
-                  active={activeItem === "myProfile"}
-                  onClick={handleItemClick}
-                >
-                  My Profile
-                </Menu.Item>
-                <Menu.Item
                   id="settings"
                   active={activeItem === "settings"}
                   onClick={() => {
