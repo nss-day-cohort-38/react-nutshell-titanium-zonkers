@@ -13,8 +13,8 @@ const NewsArticleCard = (props) => {
                 <Card.Header className="card-articleSynopsis">{props.newsArticle.synopsis}</Card.Header>
             </Card.Content>
             <Card.Content extra>
-                <div className='ui two buttons'>
-                    <Button onClick={() => {
+            {!props.isFriend && <div className='ui two buttons'>
+                 <Button onClick={() => {
                         props.handleEditNewsArticle(props.newsArticle.id)
                     }}
                         basic color='green'>
@@ -57,7 +57,7 @@ const NewsArticleCard = (props) => {
                             </Grid.Column>
                         </Grid>
                     </Popup>
-                </div>
+                </div>}
             </Card.Content>
         </Card>
     )
