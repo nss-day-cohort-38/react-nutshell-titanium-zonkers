@@ -20,4 +20,6 @@ button {
     margin-bottom: 15px !important;
 }
 
-
+.current-username,.current-email {
+    font-size: 14px !important;
+}
