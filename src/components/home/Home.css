@@ -10,7 +10,7 @@
 #handyAndy {
     margin-top: 15vh;
     margin-left: 3vw;
-    width: 50% !important;
+    width: 40vw !important;
     cursor: pointer;
 }
 #handyAndy:hover {
@@ -19,17 +19,17 @@
 
 #speechBubble{
     position: absolute;
-    top: 20px;
-    right: 2.5vw;
-    width: 50%;
+    top: 3vh;
+    right: 15vw;
+    width: 43vw;
 }
 
 #homeMessage{
     position: absolute;
-    font-size: 2.8em;
+    font-size: 3.7vw;
     color: white;
-    width: 30%;
-    right: 10vw;
+    width: 30vw;
+    right: 20vw;
     top: 10vh;
     text-align: center;
 }
