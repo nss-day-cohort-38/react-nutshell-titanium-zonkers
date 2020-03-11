@@ -103,11 +103,11 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
                         {message.message}
                     <Feed.Date>{timeConvert()}</Feed.Date>
                 </Feed.Summary>
+                {convertImageUrl()}
                 <Feed.Meta className={messageOwnerClass()}>
                 {activeUserId!==message.user.id ? <AddOrRemoveFriend message={message} setMessageChange={setMessageChange} isFriend={isFriend} setIsFriend={setIsFriend} friendObject={friendObject}/> : null }
                 {messageOwnerButtons()}
                 </Feed.Meta>
-                {convertImageUrl()}
             </Feed.Content>
         </Feed.Event>
     );
