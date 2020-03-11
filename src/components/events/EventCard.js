@@ -10,7 +10,7 @@ const EventCard = ({ item, editEvent, deleteEvent, cardNumber }) => {
     <Card id={cardNumber === 0 ? "firstCard" : ""}>
       <Card.Content>
         <Card.Header>
-          {cardNumber == 0 && (
+          {cardNumber === 0 && (
             <Card.Meta>
               <div>Name</div>
             </Card.Meta>
@@ -32,7 +32,7 @@ const EventCard = ({ item, editEvent, deleteEvent, cardNumber }) => {
           </Card.Meta>
         )}
         <Card.Header>
-          {cardNumber == 0 && (
+          {cardNumber === 0 && (
             <Card.Meta>
               <div>Location</div>
             </Card.Meta>

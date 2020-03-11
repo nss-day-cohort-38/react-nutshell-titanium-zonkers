@@ -1,160 +1,165 @@
-
-
-.messagesContainer{
-    margin-top: 3vh !important;
-    height: 80vh;
-    width: 80vw !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    background-color: #efefef;
-    box-shadow: 6px 6px 6px 3px gray !important;
+.messagesContainer {
+  margin-top: 3vh !important;
+  height: 80vh;
+  width: 80vw !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background-color: #efefef;
+  box-shadow: 6px 6px 6px 3px gray !important;
 }
 
-#messagesTopRow{
-    position: static;
-    height: 9vh !important;
-    top: 134px;
-    width: 100%;
-    background-color:#1a1b1d;
-    color: white;
+#messagesTopRow {
+  position: static;
+  height: 9vh !important;
+  top: 134px;
+  width: 100%;
+  background-color: #1a1b1d;
+  color: white;
 }
-.topRow{
-    height: 100% !important;
+.topRow {
+  height: 100% !important;
 }
-#messagesMiddleRow{
-    position: static;
-    height: 60vh !important;
-    top: 205px;
-    width: 100%;
+#messagesMiddleRow {
+  position: static;
+  height: 60vh !important;
+  top: 205px;
+  width: 100%;
 }
-.middleRow{
-    height: 100% !important;
+.middleRow {
+  height: 100% !important;
 }
 .bottomRow {
-   height: 100%;
+  height: 100%;
 }
 
-#messagesBottomRow{
-    position: static;
-    height: 11.5vh !important;
-    bottom: 50px;
-    width: 100%;
-    background-color: #1a1b1d;
+#messagesBottomRow {
+  position: static;
+  height: 11.5vh !important;
+  bottom: 50px;
+  width: 100% !important;
+  background-color: #1a1b1d;
+}
+
+#friends-list-column {
+  width: 100%;
+  overflow: auto;
+  padding-top: 14px;
 }
 
 /* ******** Messages Header Styling ******* */
 
-#messagesHeaderContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#messagesHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-#messagesHeaderContainer:first-child h1{
-    color: white;
-    margin-top: 0.6vh;
+#messagesHeaderContainer:first-child h1 {
+  color: white;
+  margin-top: 0.6vh;
 }
 .messagesDropDown {
-    padding: 11px;
-    margin-bottom: 1.5vh;
-    border: 1px solid white;
-    border-radius: 3px;
-    transition: 0.5s ease ;
+  padding: 11px;
+  margin-bottom: 1.5vh;
+  border: 1px solid white;
+  border-radius: 3px;
+  transition: 0.5s ease;
 }
 
 .messagesDropDown:hover {
-    color: black;
-    background-color: white;
-    transition: 0.5s ease ;
+  color: black;
+  background-color: white;
+  transition: 0.5s ease;
 }
 
 /* ********* Main Message Container Styling ********** */
 
-#mainMessageContainer{
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: right !important;
-    overflow: auto;
+#mainMessageContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: right !important;
+  overflow: auto;
 }
 
 .fullMessage {
-    background-color: lightgray !important;
-    border-radius: 5px;
-    padding-top: 10px !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-    margin-bottom: 10px !important;
-    width: 75% !important;
+  background-color: lightgray !important;
+  border-radius: 5px;
+  padding-top: 10px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-bottom: 10px !important;
+  width: 75% !important;
 }
 
 .activeUserMessage {
-    display: flex !important;
-    flex-direction: row-reverse !important;
-    background-color: white !important;
-    margin-left: 25% !important;
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  background-color: white !important;
+  margin-left: 25% !important;
 }
 .messageButton {
-    border: none;
-    background: none !important;
-    box-shadow: none !important;
-    border-radius: 0px !important;
-    padding: 10px !important;
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
-    transition: 0.5 ease;
-    /* border-bottom: 1px solid gray !important; */
+  border: none;
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+  padding: 10px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  transition: 0.5 ease;
+  /* border-bottom: 1px solid gray !important; */
 }
 .messageButton:hover {
-    color: lightblue !important;
-    cursor: pointer;
-    transition: 0.5 ease;
+  color: lightblue !important;
+  cursor: pointer;
+  transition: 0.5 ease;
 }
-.deleteButton{
-    border-left: 1px solid gray !important;
-    transition: 0.5 ease;
+.deleteButton {
+  border-left: 1px solid gray !important;
+  transition: 0.5 ease;
 }
-.deleteButton:hover{
-    color: red !important;
-    transition: 0.5 ease;
+.deleteButton:hover {
+  color: red !important;
+  transition: 0.5 ease;
 }
-.friendButton{
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
-    background: none;
-    border: none;
-    cursor: pointer;
+.friendButton {
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
-a.user{
-    margin-right: 10px !important;
+a.user {
+  margin-right: 10px !important;
 }
-.friendMessage{
-    color: green !important;
+.friendMessage {
+  color: green !important;
 }
 .nonFriendMessage {
-    color: #ff6500 !important;
+  color: #ff6500 !important;
 }
-.userImageLabel{
-    border-radius: 50px !important;
-    width: 20vw;
-    max-width: 200px !important;
+.userImageLabel {
+  border-radius: 50px !important;
+  width: 20vw;
+  max-width: 200px !important;
 }
 /* ******* Styling for Message Entry Component *** */
 
 .sendMessage {
-    text-align: center !important;
+  text-align: center !important;
 }
-.sendMessage #message{
-    margin-right: 1vw;
-    width: 25vw !important;
+.sendMessage #message {
+  margin-right: 1vw;
+  width: 25vw !important;
 }
 .imageUpload {
-    color: white !important;
-    border-radius: 0px !important;
-    background: none !important;
-    border-bottom: 2px solid white !important;
-    padding: 2px !important;
-    margin-right: 2vw !important;
+  color: white !important;
+  border-radius: 0px !important;
+  background: none !important;
+  border-bottom: 2px solid white !important;
+  padding: 2px !important;
+  margin-right: 2vw !important;
 }
-.imageUpload:hover{
-    color: lightblue !important;
-    border-color: lightblue !important;
+.imageUpload:hover {
+  color: lightblue !important;
+  border-color: lightblue !important;
 }
+
