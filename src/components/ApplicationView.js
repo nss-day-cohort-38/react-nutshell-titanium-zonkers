@@ -6,6 +6,7 @@ import LoginPage from "./auth/Auth";
 import Home from "./home/Home";
 import NewsArticleList from "./news/NewsArticleList";
 import SettingsCard from "./settings/SettingsCard";
+import MessagesMain from "./messages/MessageMain";
 
 
 const ApplicationViews = ({props, setIsActiveUser}) => {

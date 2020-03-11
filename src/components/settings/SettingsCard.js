@@ -23,8 +23,8 @@ const SettingsCard = (props) => {
     const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false);
     const [newPasswordError, setNewPasswordError] = useState(false);
     const [oldPasswordError, setOldPasswordError] = useState(false);
-    const [newPasswordReEnterError, setNewPasswordReEnterError] = useState(false);
     const [passwordFormIsValid, setPasswordFormIsValid] = useState(false, () => passwordFormIsValid);
+
 
     const [values, setValues] = useState({
         "id": activeUserId,
@@ -78,43 +78,24 @@ const SettingsCard = (props) => {
     }
 
     const handlePasswordFormSubmit = () => {
+        setNewPasswordError(false)
+        setOldPasswordError(false)
         const oldPasswordInput = document.getElementById("oldPassword");
-        const newPasswordInput = document.getElementById("password");
+        const newPasswordInput = values.password;
         const newPasswordReEnterInput = document.getElementById("newPasswordReEnter");
-        if (oldPasswordInput.value !== values.password) {
+        if (oldPasswordInput.value !== userInfo.password) {
             setPasswordFormIsValid(false)
             setOldPasswordError({
                 content: "Incorrect Password!",
                 pointing: "below"
             })
-        } else if (newPasswordInput.value !== newPasswordReEnterInput.value) {
+        } else if (newPasswordInput !== newPasswordReEnterInput.value) {
             setPasswordFormIsValid(false)
             setNewPasswordError({
                 content: "Passwords don't match!",
                 pointing: "below"
             })
-        } 
-        // else if (oldPasswordInput.value.trim() === "") {
-        //     setPasswordFormIsValid(false)
-        //     setOldPasswordError({
-        //         content: "Please enter your old password",
-        //         pointing: "below"
-        //     })
-        // } else if (newPasswordInput.value.trim() === "") {
-        //     setPasswordFormIsValid(false)
-        //     setNewPasswordError({
-        //         content: "Please enter a new password",
-        //         pointing: "below"
-        //     })
-        // } else if (newPasswordReEnterInput.value.trim() === "") {
-        //     setPasswordFormIsValid(false)
-        //     setNewPasswordReEnterError({
-        //         content: "Please re-enter your new password",
-        //         pointing: "below"
-        //     })
-        // } 
-        else {
-            setValues(values)
+        }  else {
 
             const editedUserInfo = {
                 "id": activeUserId,
@@ -127,9 +108,9 @@ const SettingsCard = (props) => {
             }
             dbAPI.putObjectByResource("users", editedUserInfo).then(() => {
                 getUser();
-                togglePasswordModal();
                 setNewPasswordError(false);
                 setOldPasswordError(false);
+                togglePasswordModal();
             })
         }
     }
@@ -222,7 +203,7 @@ const SettingsCard = (props) => {
                     user={props.user}
                     className="settings-container">
                     <Card.Content className="settings-content">
-                        <Image src={require("./profile-icon.png")} />
+                        <Image src={userInfo.image} />
                         <Card.Header className="settings-username">Username: {userInfo.username}</Card.Header>
                         <Button size="tiny"
                             onClick={toggleUsernameModal}
