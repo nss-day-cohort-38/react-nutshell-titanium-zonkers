@@ -39,8 +39,8 @@ const ProfileHeader = ({ userInfo }) => {
       </div>
       <div id="user-profile-information">
         <h3>@{userInfo.username}</h3>
-        <h2>Followers {followers.length}</h2>
-        <h2>Following {following.length}</h2>
+        <h2>Has Approved {followers.length} Viewers </h2>
+        <h2>Aproved by {following.length} Users</h2>
       </div>
     </div>
   );
