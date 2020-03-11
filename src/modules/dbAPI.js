@@ -67,6 +67,9 @@ const dbAPI = {
   searchUsers(property, query) {
     return fetch(`${baseUrl}/users?${property}_like=${query}`).then(resp => resp.json());
 
+  },
+  getItemByResource(resourse) {
+    return fetch(`${baseUrl}/${resourse}`).then(resp => resp.json());
   }
 };
 

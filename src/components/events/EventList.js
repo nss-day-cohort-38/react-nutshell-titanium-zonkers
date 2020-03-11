@@ -279,6 +279,7 @@ const EventList = ({ userId, isFriend }) => {
         {events.length > 0 ? (
           events.map((item, i) => (
             <EventCard
+            isFriend={isFriend}
               key={i}
               cardNumber={i}
               item={item}

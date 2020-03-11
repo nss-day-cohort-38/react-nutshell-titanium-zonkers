@@ -3,7 +3,7 @@ import { Card, Button, Popup, Grid } from "semantic-ui-react";
 import * as moment from "moment";
 import "./EventCard.css";
 
-const EventCard = ({ item, editEvent, deleteEvent, cardNumber }) => {
+const EventCard = ({ item, editEvent, deleteEvent, cardNumber, isFriend }) => {
   const [popIsOpen, setPopIsOpen] = useState(false);
   console.log();
   return (
@@ -40,7 +40,8 @@ const EventCard = ({ item, editEvent, deleteEvent, cardNumber }) => {
           <div>{item.location}</div>
         </Card.Header>
       </Card.Content>
-      {item.userId === Number(sessionStorage.getItem("userId")) && (
+
+      {(!isFriend && item.userId === Number(sessionStorage.getItem("userId"))) && (
         <Card.Content extra>
           <div className="ui two buttons">
             <Button basic color="green" onClick={() => editEvent(item.id)}>
