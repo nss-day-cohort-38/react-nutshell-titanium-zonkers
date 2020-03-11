@@ -10,7 +10,7 @@ const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, 
     async function addFriendObject() {
         const friendObject = {
             "userId": message.user.id,
-            "activeUserId": activeUserId
+            "active_userId": activeUserId
         }
 
         await dbAPI.postObjectByResource("friends", friendObject)

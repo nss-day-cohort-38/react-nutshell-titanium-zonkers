@@ -12,9 +12,9 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
     const [ friendObject, setFriendObject] = useState()
 
     async function checkToSeeIfFriends(){
-        await dbAPI.getFriends('friends')
+        await dbAPI.getFriends(activeUserId)
             .then(friends=>{
-                const friendObj = friends.filter(dbFriendObj=>(dbFriendObj.userId === message.user.id && activeUserId === dbFriendObj.activeUserId))
+                const friendObj = friends.filter(dbFriendObj=>(dbFriendObj.userId === message.user.id && activeUserId === (dbFriendObj.active_userId)))
                 if(friendObj.length !== 0){
                     setFriendObject(friendObj[0])
                     setIsFriend(true)

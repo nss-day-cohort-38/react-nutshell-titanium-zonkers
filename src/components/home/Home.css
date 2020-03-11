@@ -1,0 +1,18 @@
+.homeContainer{
+    position: absolute;
+    margin-top: -1vh;
+    height: 86vh;
+    width: 100vw;
+    margin-left: -5% !important;
+    background-color: #1a1b1d;
+}
+
+#handyAndy {
+    margin-top: 15vh;
+    margin-left: 3vw;
+    width: 50% !important;
+    cursor: pointer;
+}
+#handyAndy:hover {
+    transform: rotate(-10deg);
+}
