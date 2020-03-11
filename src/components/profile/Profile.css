@@ -1,0 +1,11 @@
+#profile-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+#profile-header {
+    display: flex;
+    justify-content: space-between;
+}

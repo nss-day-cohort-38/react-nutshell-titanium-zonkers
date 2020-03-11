@@ -6,7 +6,7 @@ import { Button } from "semantic-ui-react";
 import * as moment from "moment";
 import "./EventList.css";
 
-const EventList = () => {
+const EventList = ({ userId, isFriend }) => {
   const [events, setEvents] = useState([]);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -24,7 +24,7 @@ const EventList = () => {
     name: "",
     isoTime: "",
     location: "",
-    userId: Number(sessionStorage.getItem("userId"))
+    userId: userId
   });
   const [formIsValid, setFormIsValid] = useState(false, () => formIsValid);
 
@@ -37,9 +37,9 @@ const EventList = () => {
         return a.isoTime < b.isoTime ? -1 : a.isoTime > b.isoTime ? 1 : 0;
       });
 
-      const filteredDate = sortedData.filter((item) => {
+      const filteredDate = sortedData.filter(item => {
         return item.isoTime > moment().format("YYYY-MM-DD HH:mm");
-      })
+      });
 
       setEvents(filteredDate);
     });
@@ -47,18 +47,18 @@ const EventList = () => {
 
   const togglePast = () => {
     if (showPast) {
-        getEvents();
+      getEvents();
     } else {
-        APIManager.getObjectByResourceNoExpand(
-            "events",
-            Number(sessionStorage.getItem("userId"))
-          ).then(data => {
-            const sortedData = data.sort((a, b) => {
-              return a.isoTime < b.isoTime ? -1 : a.isoTime > b.isoTime ? 1 : 0;
-            });
-    
-            setEvents(sortedData);
-          });
+      APIManager.getObjectByResourceNoExpand(
+        "events",
+        Number(sessionStorage.getItem("userId"))
+      ).then(data => {
+        const sortedData = data.sort((a, b) => {
+          return a.isoTime < b.isoTime ? -1 : a.isoTime > b.isoTime ? 1 : 0;
+        });
+
+        setEvents(sortedData);
+      });
     }
     setShowPast(!showPast);
     // setModalIsOpen(!modalIsOpen);
@@ -249,8 +249,17 @@ const EventList = () => {
 
   return (
     <>
-      <Button onClick={toggleModal} id="test_id">Add Event</Button>
-      <Button onClick={togglePast}>{showPast ? "Hide Past" : "Show Past"}</Button>
+      {!isFriend && (
+        <>
+          <Button onClick={toggleModal} id="test_id">
+            Add Event
+          </Button>
+          <Button onClick={togglePast}>
+            {showPast ? "Hide Past" : "Show Past"}
+          </Button>
+        </>
+      )}
+
       <EventModal
         modalIsOpen={modalIsOpen}
         updateEvents={handleFormSubmit}
@@ -278,7 +287,7 @@ const EventList = () => {
             />
           ))
         ) : (
-          <div>This is empty</div>
+          <h2>{isFriend ? "They have no saved events" : "You Have No Saved Events"}</h2>
         )}
       </div>
     </>

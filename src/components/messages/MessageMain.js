@@ -1,14 +1,18 @@
-import React, { useState } from "react"
+import React, {useState} from "react"
 import { Grid, Image, Button, Input } from "semantic-ui-react"
 import MessageHeader from "./MessagesHeader"
 import MessageList from "./MessageList"
 import FriendsList from "../friends/FriendsList"
 import MessageEntry from "./MessageEntry"
 import "./Messages.css"
+import SearchUsers from "../friends/SearchUsers"
 
 
 
-const MessagesMain = () => {
+const MessagesMain = ({history}) => {
+ const [searchQuery, setSearchQuery] = useState("");
+ const [showAll, setShowAll] = useState(false);
+
 
     const [ messageChange, setMessageChange ] = useState(false)
     const [ forum, setForum ] = useState("general")
@@ -19,8 +23,8 @@ const MessagesMain = () => {
                 <Grid.Column className='topRow' width={11}>
                     <MessageHeader forum={forum} setForum={setForum} />
                 </Grid.Column>
-                <Grid.Column className='topRow' width={5}>
-                    <Button>Toggle Friends</Button>
+                <Grid.Column className='topRow friend-column' width={5}>
+    <Button onClick={() => setShowAll(!showAll)}>{showAll ? "Show Friends" : "Show All Users"}</Button>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row id="messagesMiddleRow">
@@ -28,8 +32,8 @@ const MessagesMain = () => {
                     {/* Where the messages live! */}
                     <MessageList messageChange={messageChange}  setMessageChange={setMessageChange} forum={forum} />
                 </Grid.Column>
-                <Grid.Column className="middleRow" width={5}>
-                    <FriendsList />
+                <Grid.Column id="friends-list-column" className="middleRow friend-column" width={5}>
+                    <FriendsList history={history} showAll={showAll} searchQuery={searchQuery}/>
                 </Grid.Column>
             </Grid.Row> 
             
@@ -37,8 +41,8 @@ const MessagesMain = () => {
                 <Grid.Column className='sendMessage bottomRow' width={11}>
                     <MessageEntry setMessageChange={setMessageChange} forum={forum}/>
                 </Grid.Column>
-                <Grid.Column className='bottomRow' width={5}>
-                    <Button>Toggle Friends</Button>
+                <Grid.Column className='bottomRow friend-column' width={5}>
+                    <SearchUsers  searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
                 </Grid.Column>
             </Grid.Row>
 

@@ -63,6 +63,10 @@ const dbAPI = {
       },
       body: JSON.stringify(resourceObject)
     });
+  },
+  searchUsers(property, query) {
+    return fetch(`${baseUrl}/users?${property}_like=${query}`).then(resp => resp.json());
+
   }
 };
 
