@@ -47,6 +47,10 @@ const SignUpModal = (props) => {
                         <label>Renter Password</label>
                         <Input id="password_2" type='password' onChange={props.handleConfirmedPassword} />
                     </Form.Field>
+                    <Form.Field>
+                        <label>Image Url</label>
+                        <Input id="image" onChange={props.handleSignupFieldChange} placeholder='image url here'/>
+                    </Form.Field>
                 </Form>
                 <div className="login-form=buttons">
                 <Button onClick={props.handleSignup}>Create Account</Button>

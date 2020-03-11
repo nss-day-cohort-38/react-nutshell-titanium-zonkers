@@ -9,7 +9,7 @@ const SearchUsers = ({setSearchQuery, searchQuery}) => {
     }
 
   return (
-    <Input icon="at" id="search-users" onChange={handleChange} value={searchQuery} transparent iconPosition="left" placeholder="Search users..." />
+    <Input inverted icon="at" id="search-users" onChange={handleChange} value={searchQuery} iconPosition="left" placeholder="Search users..." />
   );
 };
 

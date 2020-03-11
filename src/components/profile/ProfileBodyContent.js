@@ -1,8 +1,12 @@
-import React from 'react'
+import React from "react";
+import EventList from "../events/EventList"
 
-const ProfileBodyContent = ({activeItem}) => {
+const ProfileBodyContent = ({ activeItem }) => {
+  return (
+    <div>
+      {activeItem === "events" && <EventList isFriend={true} userId={Number(sessionStorage.getItem("userId"))} />}
+    </div>
+  );
+};
 
-return(<div>{activeItem}</div>)
-}
-
-export default ProfileBodyContent
+export default ProfileBodyContent;

@@ -11,10 +11,10 @@
     right: 0;
     top: 103px;
     height: 86%;
-    width: 260px;
+    width: 280px;
     padding: 7px;
     border-radius: 3px;
-    background-color: black;
+    background-color: #1a1b1d;
     box-shadow: 7px 7px 7px 7px gray;
     border: 2px ridge gray;
 }
@@ -28,6 +28,12 @@
 #tasksSidebarContentContainer{
     height: 83%;
     margin-top: 5%;
+}
+
+.taskHeader{
+    border-bottom: 4px solid white !important;
+    padding-bottom: 5px !important;
+    margin-right: 10px !important;
 }
 
 .description{
@@ -44,7 +50,7 @@
     top: 10%;
     width: 80px;
     color: white;
-    background-color: black;
+    background-color: #1a1b1d;
     border-radius: 0px;
     transition: 0.5s ease;
 }
@@ -102,7 +108,9 @@
     cursor: pointer;
 }
 .createFormButton{
+    position: absolute;
     margin-left: 67px !important;
+    bottom: 3vh !important;
 }
 #formInputs {
     color: white;

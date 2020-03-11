@@ -11,10 +11,9 @@ import Profile from "./profile/Profile";
 import FriendsList from "./friends/FriendsList";
 import SearchUsers from "./friends/SearchUsers";
 
-const ApplicationViews = props => {
-  const [searchQuery, setSearchQuery] = useState("");
-
+const ApplicationViews = ({ props, setIsActiveUser }) => {
   let history = useHistory();
+  const [searchQuery, setSearchQuery] = useState("");
   window.addEventListener("storage", () => {
     sessionStorage.removeItem("userId");
 
@@ -29,7 +28,7 @@ const ApplicationViews = props => {
           path="/"
           render={props =>
             sessionStorage.getItem("userId") === null ? (
-              <LoginPage {...props} />
+              <LoginPage {...props} setIsActiveUser={setIsActiveUser} />
             ) : (
               <Home />
             )
@@ -43,7 +42,7 @@ const ApplicationViews = props => {
             sessionStorage.getItem("userId") === null ? (
               <Redirect exact to="/" />
             ) : (
-              <EventList />
+              <EventList userId={Number(sessionStorage.getItem("userId"))}/>
             )
           }
         />

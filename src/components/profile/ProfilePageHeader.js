@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image } from "semantic-ui-react";
 
 const ProfileHeader = ({userInfo}) => {
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [news, setNews] = useState([]);
+
   return (
     <div id="profile-header">
       {" "}
       <div>
         <Image
-          src="https://react.semantic-ui.com/images/wireframe/square-image.png"
+          src={userInfo.image}
           size="medium"
           circular
         />

@@ -95,9 +95,9 @@ const UserCard = ({ user, showAll, getEverything, history }) => {
               open={popIsOpen}
             />
 
-            <Link id={`user--${userInfo.id}`} ref={contextRef} onClick={handleLinkClick} to={"/messages"}>
+            <a id={`user--${userInfo.id}`} ref={contextRef} onClick={handleLinkClick}>
               {userInfo.first_name} {userInfo.last_name}{" "}
-            </Link>
+            </a>
           </Card.Header>
           <Card.Meta>@{userInfo.username}</Card.Meta>
         </Card.Content>
