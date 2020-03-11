@@ -3,7 +3,7 @@ import { Menu } from "semantic-ui-react";
 import ProfileBodyContent from "./ProfileBodyContent";
 
 const ProfileBody = () => {
-  const [activeItem, setActiveItem] = useState("everything");
+  const [activeItem, setActiveItem] = useState("events");
 
   const handleItemClick = (e, { name }) => {
     setActiveItem(name);
@@ -12,11 +12,7 @@ const ProfileBody = () => {
   return (
     <>
       <Menu pointing secondary>
-        <Menu.Item
-          name="everything"
-          active={activeItem === "everything"}
-          onClick={handleItemClick}
-        />
+        
         <Menu.Item
           name="events"
           active={activeItem === "events"}
@@ -28,7 +24,6 @@ const ProfileBody = () => {
           onClick={handleItemClick}
         />
       </Menu>
-      {activeItem === "everything" && <ProfileBodyContent activeItem={activeItem} /> }
       {activeItem === "events" && <ProfileBodyContent activeItem={activeItem} /> }
       {activeItem === "news" && <ProfileBodyContent activeItem={activeItem} /> }
     </>

@@ -10,8 +10,10 @@ import SearchUsers from "../friends/SearchUsers"
 
 
 const MessagesMain = ({history}) => {
+    
  const [searchQuery, setSearchQuery] = useState("");
  const [showAll, setShowAll] = useState(false);
+ const [refreshAll, setRefreshAll] = useState(false)
 
 
     const [ messageChange, setMessageChange ] = useState(false)

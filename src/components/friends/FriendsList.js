@@ -10,6 +10,7 @@ const FriendsList = ({ searchQuery, showAll, history }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [queryUsers, setQueryUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
 
   const getFriends = () => {
     return APIManager.getFriends(sessionStorage.getItem("userId")).then(
