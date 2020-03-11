@@ -23,8 +23,8 @@ const MessagesMain = ({history}) => {
                 <Grid.Column className='topRow' width={11}>
                     <MessageHeader forum={forum} setForum={setForum} />
                 </Grid.Column>
-                <Grid.Column className='topRow friend-column' width={5}>
-    <Button onClick={() => setShowAll(!showAll)}>{showAll ? "Show Friends" : "Show All Users"}</Button>
+                <Grid.Column id="showFriendsUsersButtonContainer" className='topRow friend-column' width={5}>
+                    <Button id="showFriendsUsersButtonContainer" onClick={() => setShowAll(!showAll)}>{showAll ? "Show Friends" : "Show All Users"}</Button>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row id="messagesMiddleRow">
