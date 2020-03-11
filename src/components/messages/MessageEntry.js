@@ -3,7 +3,7 @@ import { Input, Button } from "semantic-ui-react"
 import dbAPI from "../../modules/dbAPI"
 import moment from "moment"
 
-const MessageEntry = (props) => {
+const MessageEntry = ({setMessageChange, forum}) => {
     
     const activeUserId = parseInt(sessionStorage.getItem('userId'));
 
@@ -19,12 +19,12 @@ const MessageEntry = (props) => {
             "userId": activeUserId,
           "message": newMessage,
           "timestamp": (moment().format()),
-          "forum": "general",
+          "forum": forum,
         }
         
         if (newMessage.trim !== "") {
             dbAPI.postObjectByResource('messages', messageObj)
-                .then(props.setMessageChange(true))
+                .then(setMessageChange(true))
                 .then(document.getElementById('message').value = "")
         }
     };

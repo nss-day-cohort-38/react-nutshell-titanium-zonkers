@@ -6,7 +6,7 @@
     width: 80vw !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    /* background-color: black; */
+    background-color: #efefef;
     box-shadow: 6px 6px 6px 3px gray !important;
     /* border-radius: 4px; */
     border: 2px solid black;
@@ -77,15 +77,20 @@
 }
 
 .fullMessage {
-    color: white !important;
-    width: 50% !important;
+    background-color: lightgray !important;
+    border-radius: 5px;
+    padding-top: 10px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-bottom: 10px !important;
+    width: 75% !important;
 }
 
 .activeUserMessage {
     display: flex !important;
     flex-direction: row-reverse !important;
-    /* justify-content: center !important; */
-    margin-left: 50% !important;
+    background-color: white !important;
+    margin-left: 25% !important;
 }
 .messageButton {
     border: none;
@@ -114,15 +119,18 @@
 .friendButton{
     margin-left: 0.5vw;
     margin-right: 0.5vw;
+    background: none;
+    border: none;
     cursor: pointer;
 }
-
-
+a.user{
+    margin-right: 10px !important;
+}
 .friendMessage{
     color: green !important;
 }
 .nonFriendMessage {
-    color: orange !important;
+    color: #ff6500 !important;
 }
 /* ******* Styling for Message Entry Component *** */
 

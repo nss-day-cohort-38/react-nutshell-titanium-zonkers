@@ -2,21 +2,10 @@ import React, { useState, useEffect } from "react"
 import { Button, Popup, Feed, Icon } from "semantic-ui-react"
 import dbAPI from "../../modules/dbAPI"
 
-const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, setIsFriend, getMessages}) => {
+const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, setIsFriend, friendObject}) => {
 
     const activeUserId = parseInt(sessionStorage.getItem('userId'));
     const [ addFriendPop, setAddFriendPop ] = useState(false)
-    const [ friendObject, setFriendObject] = useState()
-
-    const checkToSeeIfFriends = () => {
-     dbAPI.getFriends('friends')
-            .then(friends=>{
-                const friendObj = friends.filter(dbFriendObj=>(dbFriendObj.userId === message.user.id && activeUserId === dbFriendObj.activeUserId))
-                if(friendObj.length !== 0){ 
-                    setFriendObject(friendObj[0])
-                }
-            })
-    };
 
     async function addFriendObject() {
         const friendObject = {
@@ -25,13 +14,10 @@ const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, 
         }
 
         await dbAPI.postObjectByResource("friends", friendObject)
-            .then(setMessageChange(true))
     };
 
     async function deleteFriendObj () {
         await dbAPI.deleteObjectByResource('friends', friendObject.id)
-            .then(setMessageChange(true))
-            .then(getMessages)
     };
 
     const friendOrNotMessage = () => {
@@ -42,8 +28,9 @@ const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, 
                     <Button color='linkedin' content="Add Friend"
                         onClick={() => {
                             addFriendObject();
+                            setMessageChange(false)
+                            setMessageChange(true)
                             setAddFriendPop(false);
-                            setIsFriend(true)
                         }}/>
                 </>
             ); 
@@ -54,16 +41,13 @@ const AddOrRemoveFriend = ({message, messageChange, setMessageChange, isFriend, 
                     <Button color='red' content="Remove Friend"
                         onClick={() => {
                             deleteFriendObj();
+                            setMessageChange(true)
                             setAddFriendPop(false);
                         }}/>
                 </>
             );
         }
     }
-
-    useEffect(()=>{
-        checkToSeeIfFriends()
-    }, [messageChange])
 
         return (
             <Popup wide 

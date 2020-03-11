@@ -102,7 +102,9 @@
     cursor: pointer;
 }
 .createFormButton{
+    position: absolute;
     margin-left: 67px !important;
+    bottom: 3vh !important;
 }
 #formInputs {
     color: white;
