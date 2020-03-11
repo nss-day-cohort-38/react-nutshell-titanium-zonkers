@@ -33,7 +33,8 @@ const SettingsCard = (props) => {
         "password": "",
         "isActive": true,
         "first_name": "",
-        "last_name": ""
+        "last_name": "",
+        "image": ""
     });
 
     const getUser = () => {
@@ -104,7 +105,8 @@ const SettingsCard = (props) => {
                 "password": values.password,
                 "isActive": true,
                 "first_name": values.first_name,
-                "last_name": values.last_name
+                "last_name": values.last_name,
+                "image": values.image
             }
             dbAPI.putObjectByResource("users", editedUserInfo).then(() => {
                 getUser();
@@ -160,7 +162,8 @@ const SettingsCard = (props) => {
             "password": values.password,
             "isActive": true,
             "first_name": values.first_name,
-            "last_name": values.last_name
+            "last_name": values.last_name,
+            "image": values.image
         });
         setUsernameError(false);
         toggleUsernameModal();
@@ -174,7 +177,8 @@ const SettingsCard = (props) => {
             "password": values.password,
             "isActive": true,
             "first_name": values.first_name,
-            "last_name": values.last_name
+            "last_name": values.last_name,
+            "image": values.image
         });
         setEmailError(false);
         toggleEmailModal();
@@ -188,7 +192,8 @@ const SettingsCard = (props) => {
             "password": values.password,
             "isActive": true,
             "first_name": values.first_name,
-            "last_name": values.last_name
+            "last_name": values.last_name,
+            "image": values.image
         });
         setNewPasswordError(false);
         setOldPasswordError(false);
