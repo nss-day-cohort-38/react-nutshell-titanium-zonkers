@@ -208,7 +208,7 @@ const SettingsCard = (props) => {
                     user={props.user}
                     className="settings-container">
                     <Card.Content className="settings-content">
-                        <Image src={userInfo.image} />
+                        <Image className="user-image" src={userInfo.image} />
                         <Card.Header className="settings-username">Username: {userInfo.username}</Card.Header>
                         <Button size="tiny"
                             onClick={toggleUsernameModal}
