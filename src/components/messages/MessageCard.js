@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Feed, Icon } from "semantic-ui-react"
+import { Feed, Icon, Image } from "semantic-ui-react"
 import moment from "moment"
 import dbAPI from "../../modules/dbAPI";
 import EditAndDeletePops from "./EditAndDeletePops"
@@ -64,6 +64,19 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
         };
     };
 
+    const convertImageUrl = () => {
+        if (message.image !== undefined && message.image !== "") {
+            console.log(message.image)
+            return (
+                <Feed.Meta>
+                    <Image src={message.image} alt='image not showing' />
+                </Feed.Meta>
+            )
+        } else {
+            return null
+        }
+    }
+
     useEffect(()=>{
         checkToSeeIfFriends()
     }, [messageChange])
@@ -83,6 +96,7 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
                 {activeUserId!==message.user.id ? <AddOrRemoveFriend message={message} setMessageChange={setMessageChange} isFriend={isFriend} setIsFriend={setIsFriend} friendObject={friendObject}/> : null }
                 {messageOwnerButtons()}
                 </Feed.Meta>
+                {convertImageUrl()}
             </Feed.Content>
         </Feed.Event>
     );

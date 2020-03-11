@@ -8,6 +8,7 @@ const MessagesHeader = ({forum, setForum}) => {
             <Header as='h1'>Messages</Header>
             <Dropdown text={`Forum:  ${forum.charAt(0).toUpperCase() + forum.slice(1)}`} className="messagesDropDown">
                 <Dropdown.Menu>
+
                     <Dropdown.Item text='General' onClick={()=>setForum('general')}/>
                     <Dropdown.Item text='Programming' onClick={()=>setForum('programming')} />
                     <Dropdown.Item text='Memes' onClick={()=>setForum('memes')} />
