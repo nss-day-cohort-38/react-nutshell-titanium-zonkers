@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Redirect, Switch, useHistory } from "react-router-dom";
 import "./ApplicationView.css";
 import EventList from "./events/EventList";
 import LoginPage from "./auth/Auth";
 import Home from "./home/Home";
 import NewsArticleList from "./news/NewsArticleList";
+import Profile from "./profile/Profile";
+import FriendsList from "./friends/FriendsList";
+import SearchUsers from "./friends/SearchUsers";
 import SettingsCard from "./settings/SettingsCard";
 import MessagesMain from "./messages/MessageMain";
 
-
-const ApplicationViews = ({props, setIsActiveUser}) => {
+const ApplicationViews = ({ props, setIsActiveUser }) => {
   let history = useHistory();
+  const [searchQuery, setSearchQuery] = useState("");
   window.addEventListener("storage", () => {
     sessionStorage.removeItem("userId");
 
@@ -25,7 +28,7 @@ const ApplicationViews = ({props, setIsActiveUser}) => {
           path="/"
           render={props =>
             sessionStorage.getItem("userId") === null ? (
-              <LoginPage {...props} setIsActiveUser={setIsActiveUser}/>
+              <LoginPage {...props} setIsActiveUser={setIsActiveUser} />
             ) : (
               <Home />
             )
@@ -39,7 +42,7 @@ const ApplicationViews = ({props, setIsActiveUser}) => {
             sessionStorage.getItem("userId") === null ? (
               <Redirect exact to="/" />
             ) : (
-              <EventList />
+              <EventList userId={Number(sessionStorage.getItem("userId"))}/>
             )
           }
         />
@@ -57,13 +60,48 @@ const ApplicationViews = ({props, setIsActiveUser}) => {
         <Route
           exact
           path="/messages"
-          render={(props) => 
-            sessionStorage.getItem("userId") === null 
-            ? <Redirect exact to="/" />
-            : <MessagesMain
-              {...props} />
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <MessagesMain {...props} />
+            )
           }
         />
+        <Route
+          exact
+          path="/users"
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <>
+                <SearchUsers
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />{" "}
+                <FriendsList
+                  searchQuery={searchQuery}
+                  showAll={true}
+                  {...props}
+                />
+              </>
+            )
+          }
+        />
+
+        <Route
+          exact
+          path="/profile/:username"
+          render={props =>
+            sessionStorage.getItem("userId") === null ? (
+              <Redirect exact to="/" />
+            ) : (
+              <Profile user={props.match.params.username} />
+            )
+          }
+        />
+
         <Route
           exact
           path="/settings"
@@ -75,6 +113,7 @@ const ApplicationViews = ({props, setIsActiveUser}) => {
             )
           }
         ></Route>
+
         <Route render={props => <Redirect exact to="/" />} />
       </Switch>
     </div>

@@ -10,7 +10,7 @@ function App(props) {
 
   return (
     <Router>
-      <NavBar setIsActiveUser={setIsActiveUser}/>
+      <NavBar isActiveUser={isActiveUser} setIsActiveUser={setIsActiveUser}/>
       <ApplicationViews {...props} setIsActiveUser={setIsActiveUser}/>
       <TasksMain isActiveUser={isActiveUser} setIsActiveUser={setIsActiveUser}/>
     </Router>
