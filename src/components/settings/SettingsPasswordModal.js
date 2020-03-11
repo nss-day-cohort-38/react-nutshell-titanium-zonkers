@@ -1,44 +1,55 @@
-import React from 'react';
+import React, { useEffect, createRef } from 'react';
 import { Form, Modal, Button } from 'semantic-ui-react';
 import './Settings.css';
 
-const SettingsPasswordModal = ({
+function SettingsPasswordModal({
     passwordModalIsOpen,
     updateSettingsPassword,
     newPasswordError,
     oldPasswordError,
     handleFieldChange,
     cancelSettingsPassword,
-    isLoading
-}) => {
+    isLoading,
+    oldPasswordNode
+}) {
+
+    const inputRef = createRef()
+    
+    useEffect(() => {
+        console.log(inputRef.current)
+    }, [])
+    
     return (
         <Modal size="mini" open={passwordModalIsOpen}>
             <Modal.Header>Update Password</Modal.Header>
             <Modal.Content>
                 <Form loading={isLoading}>
-                <Form.Input
-                    placeholder="Old Password"
-                    id="oldPassword"
-                    type="text"
-                    label="Old Password"
-                    onChange={handleFieldChange}
-                    error={oldPasswordError}
+                    <Form.Input
+                        ref={inputRef}
+                        placeholder="Old Password"
+                        id="oldPassword"
+                        type="text"
+                        label="Old Password"
+                        onChange={handleFieldChange}
+                        error={oldPasswordError}
                     />
                     <Form.Input
-                    placeholder="New Password"
-                    id="password"
-                    type="text"
-                    label="New Password"
-                    onChange={handleFieldChange}
-                    error={newPasswordError}
+                        // ref={ref.newPasswordNode}
+                        placeholder="New Password"
+                        id="password"
+                        type="text"
+                        label="New Password"
+                        onChange={handleFieldChange}
+                        error={newPasswordError}
                     />
                     <Form.Input
-                    placeholder="Re-Enter New Password"
-                    id="passwordReEnter"
-                    type="text"
-                    label="Re-Enter New Password"
-                    onChange={handleFieldChange}
-                    error={newPasswordError}
+                        // ref={ref.newPasswordReEnterNode}
+                        placeholder="Re-Enter New Password"
+                        id="passwordReEnter"
+                        type="text"
+                        label="Re-Enter New Password"
+                        onChange={handleFieldChange}
+                        error={newPasswordError}
                     />
                     <Button onClick={updateSettingsPassword}>Update</Button>
                     <Button onClick={cancelSettingsPassword}>Cancel</Button>
@@ -47,5 +58,6 @@ const SettingsPasswordModal = ({
         </Modal>
     )
 }
+
 
 export default SettingsPasswordModal;

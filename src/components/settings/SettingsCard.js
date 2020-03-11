@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 import SettingsUsernameModal from './SettingsUsernameModal';
 import SettingsEmailModal from './SettingsEmailModal';
@@ -24,6 +24,10 @@ const SettingsCard = (props) => {
     const [newPasswordError, setNewPasswordError] = useState(false);
     const [oldPasswordError, setOldPasswordError] = useState(false);
     const [passwordFormIsValid, setPasswordFormIsValid] = useState(false, () => passwordFormIsValid);
+
+    const [oldPasswordNode, setOldPasswordNode] = useState(createRef(null))
+    // const newPasswordNode = createRef();
+    // const newPasswordReEnterNode = createRef();
 
 
     const [values, setValues] = useState({
@@ -77,8 +81,26 @@ const SettingsCard = (props) => {
         }
     }
 
-    const handlePasswordFormSubmit = () => {
-
+    const handlePasswordFormSubmit = (evt) => {
+        console.log("outside all if statements")
+        console.log(oldPasswordNode.current)
+        console.log(evt.target)
+            if (evt.target.id === "oldPassword") {
+                console.log("yes")
+                if (evt.target.value !== userInfo.password) {
+                    console.log(evt.target.value)
+                    setPasswordFormIsValid(false);
+                    setOldPasswordError({
+                        content: "Incorrect password!",
+                        pointing: "below"
+                    })
+                } 
+        }
+        
+        // else if (fieldId === "password") {
+        //     setNewPasswordError(false)
+        //     setPasswordFormIsValid(true)
+        // }
     }
 
     const handleFieldChange = evt => {
@@ -115,9 +137,7 @@ const SettingsCard = (props) => {
                     }
                 });
             })
-        } else if (fieldId === "oldPassword") {
-            
-        }
+        } 
     }
 
     const cancelSettingsUsername = () => {
@@ -218,6 +238,7 @@ const SettingsCard = (props) => {
                     handleFieldChange={handleFieldChange}
                     values={values}
                     cancelSettingsPassword={cancelSettingsPassword}
+                    ref={oldPasswordNode}
                 />
             </div>
         </>
