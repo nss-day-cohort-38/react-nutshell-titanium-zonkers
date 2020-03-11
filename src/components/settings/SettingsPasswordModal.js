@@ -19,7 +19,7 @@ const SettingsPasswordModal = ({
                     <Form.Input
                         placeholder="Old Password"
                         id="oldPassword"
-                        type="text"
+                        type="password"
                         label="Old Password"
                         onChange={handleFieldChange}
                         error={oldPasswordError}
@@ -27,7 +27,7 @@ const SettingsPasswordModal = ({
                     <Form.Input
                         placeholder="New Password"
                         id="password"
-                        type="text"
+                        type="password"
                         label="New Password"
                         onChange={handleFieldChange}
                         error={newPasswordError}
@@ -35,7 +35,7 @@ const SettingsPasswordModal = ({
                     <Form.Input
                         placeholder="Re-Enter New Password"
                         id="newPasswordReEnter"
-                        type="text"
+                        type="password"
                         label="Re-Enter New Password"
                         onChange={handleFieldChange}
                         error={newPasswordError}
