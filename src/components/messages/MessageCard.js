@@ -59,8 +59,8 @@ const MessageCard = ({ message, messageChange, setMessageChange }) => {
             );
         } else {
             return (
-                <Feed.Like>
-                    <Icon name='like' onClick={addLike}/>{message.likes !== undefined ? message.likes : 0} Likes
+                <Feed.Like onClick={addLike}>
+                    <Icon name='like'/>{message.likes !== undefined ? message.likes : 0} Likes
                 </Feed.Like>
             );
         };
