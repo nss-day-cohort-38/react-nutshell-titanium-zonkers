@@ -45,17 +45,17 @@ const NewsArticleList = (props) => {
             if (!isEditing) {
 
                 let validUrl = values.url;
-            if (!validUrl.startsWith("https://")) {
-                validUrl = `https://${validUrl}`
-            }
+                if (!validUrl.startsWith("https://")) {
+                    validUrl = `https://${validUrl}`
+                }
 
-            const newArticle = {
-                userId: values.userId,
-                title: values.title,
-                url: validUrl,
-                synopsis: values.synopsis,
-                created_at: new Date()
-            }
+                const newArticle = {
+                    userId: values.userId,
+                    title: values.title,
+                    url: validUrl,
+                    synopsis: values.synopsis,
+                    created_at: new Date()
+                }
 
                 dbAPI.postObjectByResource("newsArticles", newArticle)
                     .then(() => {
@@ -75,7 +75,7 @@ const NewsArticleList = (props) => {
                 if (!validUrl.startsWith("https://")) {
                     validUrl = `https://${validUrl}`
                 }
-    
+
                 const editedArticle = {
                     id: values.id,
                     userId: values.userId,
@@ -84,7 +84,7 @@ const NewsArticleList = (props) => {
                     synopsis: values.synopsis,
                     created_at: new Date()
                 }
-            
+
                 dbAPI.putObjectByResource("newsArticles", editedArticle).then(() => {
                     getNewsArticles();
                     toggleModal();
@@ -137,14 +137,14 @@ const NewsArticleList = (props) => {
         } else if (fieldId === "url") {
             if (fieldValue.length >= 1) {
                 setUrlError(false);
-            } 
+            }
         } else if (fieldId === "synopsis") {
             if (fieldValue.length >= 1) {
                 setSynopsisError(false);
             }
         }
         if (!values.url.startsWith("https//")) {
-            const validUrl = `https//${values.url}` 
+            const validUrl = `https//${values.url}`
         }
         setValues(changeValue);
     };
@@ -202,11 +202,11 @@ const NewsArticleList = (props) => {
         return (
             <>
                 <section className="news-content-container">
-                    <div className="add-news-button-container">
-                        <Button
+                {!props.isFriend && <div className="add-news-button-container">
+                         <Button
                             onClick={toggleModal}
                         >Add News Article</Button>
-                    </div>
+                    </div>}
                     <div className="news-modal-container">
                         <NewsArticleModal
                             modalIsOpen={modalIsOpen}
@@ -232,11 +232,11 @@ const NewsArticleList = (props) => {
         return (
             <>
                 <section className="news-content-container">
-                    <div className="add-news-button-container">
+                {!props.isFriend && <div className="add-news-button-container">
                         <Button
                             onClick={toggleModal}
                         >Add News Article</Button>
-                    </div>
+                    </div>}
                     <div className="news-modal-container">
                         <NewsArticleModal
                             modalIsOpen={modalIsOpen}
