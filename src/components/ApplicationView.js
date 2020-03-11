@@ -7,7 +7,8 @@ import Home from "./home/Home";
 import NewsArticleList from "./news/NewsArticleList";
 import SettingsCard from "./settings/SettingsCard";
 
-const ApplicationViews = props => {
+
+const ApplicationViews = ({props, setIsActiveUser}) => {
   let history = useHistory();
   window.addEventListener("storage", () => {
     sessionStorage.removeItem("userId");
@@ -23,7 +24,7 @@ const ApplicationViews = props => {
           path="/"
           render={props =>
             sessionStorage.getItem("userId") === null ? (
-              <LoginPage {...props} />
+              <LoginPage {...props} setIsActiveUser={setIsActiveUser}/>
             ) : (
               <Home />
             )
@@ -51,7 +52,17 @@ const ApplicationViews = props => {
               <NewsArticleList {...props} />
             )
           }
-        ></Route>
+        />
+        <Route
+          exact
+          path="/messages"
+          render={(props) => 
+            sessionStorage.getItem("userId") === null 
+            ? <Redirect exact to="/" />
+            : <MessagesMain
+              {...props} />
+          }
+        />
         <Route
           exact
           path="/settings"

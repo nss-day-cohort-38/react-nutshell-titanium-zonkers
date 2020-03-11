@@ -3,7 +3,7 @@ import { Menu, Segment, Button, Popup } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import "./NavBar.css";
 
-const NavBar = ({ history }) => {
+const NavBar = ({ history, setIsActiveUser }) => {
   const [activeItem, setActiveItem] = useState("home");
 
   const [menuIsOpen, setMenuIsOpen] = useState(false)
@@ -21,6 +21,7 @@ const NavBar = ({ history }) => {
     sessionStorage.clear();
     history.push("/");
     toggleMenu();
+    setIsActiveUser(false)
   }
 
   return (

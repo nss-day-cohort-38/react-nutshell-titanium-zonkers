@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Card, Form, Input, Button } from 'semantic-ui-react'
+import { Card, Form, Input, Button, Header } from 'semantic-ui-react'
 import SignUpModal from "./SignUpModal"
 import "./Auth.css"
 import dbAPI from "../../modules/dbAPI"
@@ -8,7 +8,7 @@ import dbAPI from "../../modules/dbAPI"
 const LoginPage = (props) => {
 
     const [credentials, setCredentials] = useState({is_active: true})
-    const [newCredentials, setNewCredentials] = useState({ first_name: "", last_name: "", username: "", email: "", password: "", is_active: true })
+    const [newCredentials, setNewCredentials] = useState({ first_name: "", last_name: "", username: "", email: "", password: "", is_active: true, image: "" })
     const [ confirmedPassword, changeConfirmedPassword ] = useState({password_2: ""})
     const [ modalOpen, handleModal ] = useState(false);
 
@@ -20,6 +20,10 @@ const LoginPage = (props) => {
         const stateToChange = { ...credentials };
         stateToChange[evt.target.id] = evt.target.value;
         setCredentials(stateToChange);
+
+        if(evt.key === 'Enter'){
+            handleLogin()
+        }
       };
 
     const handleConfirmedPassword = (evt) => {
@@ -47,8 +51,7 @@ const LoginPage = (props) => {
                 window.alert('Wrong email or password. Please try again. If you do not have an account, click the sign up button to create one.');
             } else {
                 sessionStorage.setItem('userId', JSON.stringify(userObject[0].id));
-                
-                // dbAPI.patchObjectByResource('users', userObject[0].id, { "is_active": true })
+                props.setIsActiveUser(true)
             };
         });
         props.history.push('/')
@@ -91,7 +94,8 @@ const LoginPage = (props) => {
     }
 
     return (
-
+        <>
+        <Header id="loginHeader" as='h1'>Welcome to Handy Andy</Header>
         <Card id="login-form-card">
             <Card.Content>
                 <Card.Header>Login</Card.Header>
@@ -111,9 +115,7 @@ const LoginPage = (props) => {
                         <Input id="password" type='password' placeholder="password" onChange={handleFieldChange}/>
                     </Form.Field>
                     <div className="login-form-buttons">
-                        <Form.Field
-                            id='form-button-control-public'
-                            control={Button}
+                        <Button
                             content='Login'
                             onClick={handleLogin}
                         />
@@ -122,6 +124,7 @@ const LoginPage = (props) => {
                 </Form>
             </Card.Content>
         </Card>
+        </>
     );
 
 }
