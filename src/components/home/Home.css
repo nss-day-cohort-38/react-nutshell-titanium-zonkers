@@ -5,6 +5,7 @@
     width: 100vw;
     margin-left: -5% !important;
     background-color: #1a1b1d;
+    overflow: auto;
 }
 
 #handyAndy {
