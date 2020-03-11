@@ -8,8 +8,6 @@
     margin-right: auto !important;
     background-color: #efefef;
     box-shadow: 6px 6px 6px 3px gray !important;
-    /* border-radius: 4px; */
-    border: 2px solid black;
 }
 
 #messagesTopRow{
@@ -17,7 +15,7 @@
     height: 9vh !important;
     top: 134px;
     width: 100%;
-    background-color: black;
+    background-color:#1a1b1d;
     color: white;
 }
 .topRow{
@@ -41,7 +39,7 @@
     height: 11.5vh !important;
     bottom: 50px;
     width: 100%;
-    background-color: black;
+    background-color: #1a1b1d;
 }
 
 /* ******** Messages Header Styling ******* */

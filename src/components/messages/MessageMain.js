@@ -14,7 +14,7 @@ const MessagesMain = () => {
     const [ forum, setForum ] = useState("general")
 
     return (
-        <Grid celled className="messagesContainer">
+        <Grid className="messagesContainer">
         <Grid.Row id='messagesTopRow'>
                 <Grid.Column className='topRow' width={11}>
                     <MessageHeader forum={forum} setForum={setForum} />

@@ -47,7 +47,7 @@ const TasksMain = ({isActiveUser, setIsActiveUser}) => {
                                 <Sidebar.Pushable>
                                     <TaskFormTransition visible={isFormVisible} toggleSubmitted={toggleSubmitted} toggleFormVisibility={toggleFormVisibility} />
                                     <Sidebar.Pusher >
-                                        <Header as='h3' style={{ color: 'white', textAlign: 'right' }} color="yellow" dividing>Tasks</Header>
+                                        <Header className="taskHeader" as='h3' style={{ color: 'white', textAlign: 'right' }} dividing>Tasks</Header>
                                         <TasksList isSubmitted={isSubmitted} toggleSubmitted={toggleSubmitted} />
                                     </Sidebar.Pusher>
                                 </Sidebar.Pushable>

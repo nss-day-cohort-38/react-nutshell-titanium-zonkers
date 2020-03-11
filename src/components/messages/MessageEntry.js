@@ -34,6 +34,7 @@ const MessageEntry = ({ setMessageChange, forum }) => {
                 .then(()=>{
                     setMessageChange(true)
                     setImagePopIsOpen(false)
+                    setImageUrl("")
                     document.getElementById('message').value = ""
                 });
         } else {
