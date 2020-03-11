@@ -5,29 +5,34 @@ A dashboard for people to use to organize their daily tasks, events, news articl
 ***
 
 ## Initialization Instructions
-1. Install [http-server](https://www.npmjs.com/package/http-server) & json-server
+1. Install json-server
     ```shell session
     $ npm install -g json-server
     ```
+
+2. Install package.json
+    ```shell session
+    $ npm install pkg.json
+    ```
     
-2. Select 'Clone or Download' in GitHub Repo, copy the SSH key, and type the following into your terminal:
+3. Select 'Clone or Download' in GitHub Repo, copy the SSH key, and type the following into your terminal:
     
     ex.
      ```shell session
-    $ git clone git@github.com:nss-day-cohort-38/nutshell-keen-kit-kats.git
+    $ git clone git@github.com:nss-day-cohort-38/react-nutshell-titanium-zonkers.git
 
      ```
-3. In the root directory, create an api directory and make a file 'database.json'
+4. In the root directory, create an api directory and make a file 'database.json'
     ```shell session
     $ mkdir api
     $ cd api
     $ touch database.json
     ```
-4. Then cd back to the root directory and open your code editor
+5. Then cd back to the root directory and open your code editor
     ```shell session
     $ code .
     ```
-5. Open database.json and paste this into the file:
+6. Open database.json and paste this into the file:
     ```json
         {
             "users": [],
@@ -37,31 +42,29 @@ A dashboard for people to use to organize their daily tasks, events, news articl
             "tasks": [],
             "events": []
         }
-6. The database.json file follows the following ERD:
-![Photo of ERD](src/images/ERD.png "ERD")    
+7. The database.json file follows the following ERD:
+![Photo of ERD](src/ERD.png "ERD")    
 
-7. Go back to your terminal and open a new tab, cd to the src directory, then:
+8. Go back to your terminal and open a new tab, cd to the src directory, then:
     ```shell session
     $ npm start
     ```
-8. Open another new tab in your terminal and cd to the api directory, then:
+9. Open another new tab in your terminal and cd to the api directory, then:
     ```shell session
     $ json-server -p 5002 -w database.json
     ```
 ***
 ## USING THE APP
 
-### Sign Up or Log In
+### Sign Up or Login
 
-If you are a new user, click the 'sign up' button and enter a username, your email, and password.
+If you are a new user, click the 'sign up' button and enter in your information. Once an accout is created, enter your email and password into the login fields and click 'login.' 
 
-If you are a returning user, click the 'log in' button and enter in your email and password. 
+If you are a returning user, enter in your email and password and click 'login.'
 
 ### News
 
-In the news tab, you can click 'create new article' to create and save a news article that interests you. Once saved, you have the ability to edit and delete the saved article. 
-
-Once you have added friends to your account, you will see your friends' saved news articles displayed under your news articles. 
+In the news tab, you can click 'create new article' to create and save a news article that interests you. Once saved, you have the ability to edit and delete the article. Articles are ordered by the date they were created (or edited) with the most recent showing first. If you click the article title, a new window will open and take you to the article link. 
 
 ### Events
 
@@ -75,7 +78,7 @@ In the tasks right sidebar, you can click 'create new tasks' to create and save 
 
 ### Settings
 
-If you click on your profile picture in the top right corner and go to the settings tab, you can change your username, email, and password. 
+If you click on the profile icon in the top right corner and go to the settings tab, you can see your user image and change your username, email, and password. 
 
 ### Your Friends
 
